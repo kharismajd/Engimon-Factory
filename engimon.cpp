@@ -182,6 +182,7 @@ void engimon::learnMove(string move)
 
     auto element1_checker = find(move_elements.begin(), move_elements.end(), this->element1);
     auto element2_checker = find(move_elements.begin(), move_elements.end(), this->element2);
+
     if (element1_checker == move_elements.end() && element2_checker == move_elements.end())
     {
     	throw "Error, skill tidak compatible dengan engimon";
@@ -218,9 +219,13 @@ string engimon::getName()
 
 void engimon::IntializeSpecies()
 {
-	all_species.insert(make_tuple("Enmander", "Fire", string_null));
-	all_species.insert(make_tuple("Engikarp", "Water", string_null));
-	all_species.insert(make_tuple("Enkachu", "Electric", string_null));
-	all_species.insert(make_tuple("Endude", "Ground", string_null));
-	all_species.insert(make_tuple("Enstrier", "Ice", string_null));
+	all_species.insert(make_tuple("Charmander", "Fire", string_null));
+	all_species.insert(make_tuple("Magikarp", "Water", string_null));
+	all_species.insert(make_tuple("Pikachu", "Electric", string_null));
+	all_species.insert(make_tuple("Geodude", "Ground", string_null));
+	all_species.insert(make_tuple("Glastrier", "Ice", string_null));
+	all_species.insert(make_tuple("Vulpichu", "Fire", "Electric"));
+	all_species.insert(make_tuple("Lapras", "Water", "Ice"));
+	all_species.insert(make_tuple("Wooper", "Water", "Ground"));
+	//all_species.insert(make_tuple("Volcanion", "Water", "Fire"));
 }

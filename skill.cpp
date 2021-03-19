@@ -86,4 +86,16 @@ void skill::InitializeSkillDatabase()
 	string element_bubble[5] = {"Water"};
 	skill bubble("bubble", 80, 0, element_bubble, "0");
 	skill_database.push_back(bubble);
+
+	string element_rock_smash[5] = {"Ground"};
+	skill rock_smash("rock_smash", 80, 0, element_bubble, "0");
+	skill_database.push_back(rock_smash);
+
+	string element_thunderbolt[5] = {"Electric"};
+	skill thunderbolt("thunderbolt", 80, 0, element_bubble, "0");
+	skill_database.push_back(thunderbolt);
+
+	string element_ice_beam[5] = {"Ice"};
+	skill ice_beam("ice_beam", 80, 0, element_bubble, "0");
+	skill_database.push_back(ice_beam);
 }

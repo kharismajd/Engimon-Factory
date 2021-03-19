@@ -28,10 +28,10 @@ int main()
 
 	try
 	{
-		engimon Gab("Gab", "null", "null", "Enmander", nullSkill, 4, 0);
+		engimon Gab("Gab", "null", "null", "Wooper", nullSkill, 4, 0);
 		engimon test;
 		test = Gab;
-		Gab.learnMove("ember");
+		Gab.learnMove("bubble");
 		Gab.showAttributes();
 		cout << endl;
 		test.showAttributes();
