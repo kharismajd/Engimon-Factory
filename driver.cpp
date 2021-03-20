@@ -7,6 +7,8 @@
 #include <set>
 using namespace std;
 
+/*Compile dengan*/
+/*g++ driver.cpp engimon.cpp skill.cpp*/
 int main()
 {
 	string elem[5] = {"Fire", "Water", "Electric", "Ice"};
@@ -24,7 +26,7 @@ int main()
 	// for (auto i = skill::skill_database.begin(); i != skill::skill_database.end(); ++i)
  //        (*i).printAll();
 
-	engimon::IntializeSpecies();
+	engimon::IntializeDatabase();
 
 	try
 	{
@@ -32,9 +34,10 @@ int main()
 		engimon test;
 		test = Gab;
 		Gab.learnMove("bubble");
-		Gab.showAttributes();
+		//Gab.showAttributes();
 		cout << endl;
-		test.showAttributes();
+		//test.showAttributes();
+		Gab.cry();
 	}
 	catch (char const* e)
 	{

@@ -4,6 +4,7 @@
 #include <set> 
 #include <tuple>
 #include "skill.hpp"
+#include <map>
 using namespace std;
 
 #ifndef ENGIMON
@@ -24,10 +25,16 @@ public:
 	void printMoves();
 	void gainExp(int);
 	void learnMove(string);
+	void cry();
+
+	void setActive();
+	void setInactive();
+	bool isActive();
 
 	string getName();
 
-	static void IntializeSpecies();
+
+	static void IntializeDatabase();
 protected:
 	string name;
 	string parent1;
@@ -39,9 +46,11 @@ protected:
 	int level;
 	int experience;
 	int cummulative_experience;
+	bool active;
 
 	//Isi: Nama, element1, element2
 	//Jika ada 1 element saja, element2 diisi "null"
 	static set<tuple<string,string,string>> all_species;
+	static map<string,string> engimon_cry;
 };
 #endif

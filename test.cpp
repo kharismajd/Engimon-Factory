@@ -17,7 +17,8 @@ int main(int argc, char const *argv[])
 
 	//set<tuple<string,string,string>>:: iterator i;
 
-	auto i = all_species.begin();
+	//auto i = all_species.begin();
+	set<tuple<string,string,string>>::iterator i = all_species.begin();
 
 	for (i = all_species.begin(); i != all_species.end(); ++i)
 	{

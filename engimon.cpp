@@ -5,11 +5,12 @@
 #include <tuple>
 #include <vector>
 #include <algorithm>
+#include <map>
 #include "engimon.hpp"
 using namespace std;
 
 set<tuple<string,string,string>> engimon::all_species;
-
+map<string,string> engimon::engimon_cry;
 engimon::engimon()//Null
 {
 	name = name_null;
@@ -27,6 +28,7 @@ engimon::engimon()//Null
 	level = 0;
 	experience = 0;
 	cummulative_experience = 0;
+	active = false;
 }
 engimon::engimon(string nm, string pr1, string pr2, string sp, skill skill_bawaan, int lvl, int exp)
 {
@@ -63,6 +65,7 @@ engimon::engimon(string nm, string pr1, string pr2, string sp, skill skill_bawaa
 	level = lvl;
 	experience = exp;
 	cummulative_experience = (lvl-1)*100 + exp;
+	active = false;
 }
 
 engimon::engimon(const engimon& e)
@@ -82,6 +85,7 @@ engimon::engimon(const engimon& e)
 	this->level = e.level;
 	this->experience = e.experience;
 	this->cummulative_experience = e.cummulative_experience;
+	this->active = e.active;
 }
 engimon& engimon::operator=(const engimon& e)
 {
@@ -101,6 +105,7 @@ engimon& engimon::operator=(const engimon& e)
 	this->level = e.level;
 	this->experience = e.experience;
 	this->cummulative_experience = e.cummulative_experience;
+	this->active = e.active;
 	return *this;
 }
 
@@ -212,12 +217,36 @@ void engimon::learnMove(string move)
     cout << (*itr).getSkillName() <<" berhasil dipelajari "<< this->name << endl;
 }
 
+void engimon::cry()
+{
+	map<string,string>::iterator i = engimon_cry.find(this->species);
+	if (i == engimon_cry.end())
+	{
+		throw "Cry engimon tidak ditemukan";
+	}
+	cout << "[" << this->name << "]: " << i->second << endl;
+}
+
+void engimon::setActive()
+{
+	this->active = true;
+}
+void engimon::setInactive()
+{
+	this->active = false;
+}
+bool engimon::isActive()
+{
+	return this->active;
+}
+
+
 string engimon::getName()
 {
 	return name;
 }
 
-void engimon::IntializeSpecies()
+void engimon::IntializeDatabase()
 {
 	all_species.insert(make_tuple("Charmander", "Fire", string_null));
 	all_species.insert(make_tuple("Magikarp", "Water", string_null));
@@ -228,4 +257,13 @@ void engimon::IntializeSpecies()
 	all_species.insert(make_tuple("Lapras", "Water", "Ice"));
 	all_species.insert(make_tuple("Wooper", "Water", "Ground"));
 	//all_species.insert(make_tuple("Volcanion", "Water", "Fire"));
+	engimon_cry.insert(pair<string,string>("Charmander","Char!"));
+	engimon_cry.insert(pair<string,string>("Magikarp","Splash"));
+	engimon_cry.insert(pair<string,string>("Pikachu","Pika Pika"));
+	engimon_cry.insert(pair<string,string>("Geodude","Grunt"));
+	engimon_cry.insert(pair<string,string>("Glastrier","Neigh"));
+	engimon_cry.insert(pair<string,string>("Vulpichu","Vulka!"));
+	engimon_cry.insert(pair<string,string>("Lapras","Phwargh"));
+	engimon_cry.insert(pair<string,string>("Wooper","Chomp!"));
+
 }
