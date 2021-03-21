@@ -246,6 +246,16 @@ string engimon::getName()
 	return name;
 }
 
+string engimon::getSpecies()
+{
+	return species;
+}
+
+int engimon::getLevel()
+{
+	return level;
+}
+
 void engimon::IntializeDatabase()
 {
 	all_species.insert(make_tuple("Charmander", "Fire", string_null));

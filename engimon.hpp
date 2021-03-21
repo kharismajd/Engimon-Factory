@@ -32,6 +32,8 @@ public:
 	bool isActive();
 
 	string getName();
+	string getSpecies();
+	int getLevel();
 
 
 	static void IntializeDatabase();
