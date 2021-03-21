@@ -307,12 +307,15 @@ void inventory<skill>::addItem(skill skill)
 	{
 		if (skill.getSkillName() == (*i).getSkillName())
 		{
-			skill.setAmountInInventory(skill.getAmountInInventory() + 1);
 			break;
 		}
 	}
 
 	if (i != this->contents.end())
+	{
+		(*i).setAmountInInventory((*i).getAmountInInventory() + 1);
+	}
+	else
 	{
 		skill.setAmountInInventory(1);
 		this->contents.push_back(skill);
