@@ -30,7 +30,8 @@ int main()
 
 	try
 	{
-		engimon Gab("Gab", "null", "null", "Magikarp", nullSkill, 4, 0);
+		engimon nullEngimon;
+		engimon Gab("Gab", &nullEngimon, &nullEngimon, "Magikarp", nullSkill, 4, 0);
 		engimon test;
 		test = Gab;
 		Gab.learnMove("tackle");

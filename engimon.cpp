@@ -14,8 +14,8 @@ map<string,string> engimon::engimon_cry;
 engimon::engimon()//Null
 {
 	name = name_null;
-	parent1 = name_null;
-	parent2 = name_null;
+	parent1 = this;
+	parent2 = this;
 	species = "null";
 	moves = new skill[4];
 	skill nullSkill;
@@ -30,7 +30,7 @@ engimon::engimon()//Null
 	cummulative_experience = 0;
 	active = false;
 }
-engimon::engimon(string nm, string pr1, string pr2, string sp, skill skill_bawaan, int lvl, int exp)
+engimon::engimon(string nm, engimon* pr1, engimon* pr2, string sp, skill skill_bawaan, int lvl, int exp)
 {
 	name = nm;
 	parent1 = pr1;
@@ -117,14 +117,14 @@ engimon::~engimon()
 void engimon::showAttributes()
 {
 	cout << "Engimon name: " << name << endl;
-	if (parent1 != name_null)
+	if ((*parent1).getName() != name_null)
 	{
-		cout << "Parent 1: " <<parent1 << endl;
+		cout << "Parent 1: " <<(*parent1).getName() << endl;
 	}
 
-	if (parent2 != name_null)
+	if ((*parent2).getName() != name_null)
 	{
-		cout << "Parent 2: " << parent2 << endl;
+		cout << "Parent 2: " << (*parent2).getName() << endl;
  	}
 	cout << "Species: " << species << endl;
 

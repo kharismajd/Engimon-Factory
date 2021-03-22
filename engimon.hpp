@@ -16,7 +16,7 @@ class engimon
 {
 public:
 	engimon();//Null
-	engimon(string nm, string pr1, string pr2, string sp, skill skill_bawaan, int lvl, int exp);
+	engimon(string nm, engimon* pr1, engimon* pr2, string sp, skill skill_bawaan, int lvl, int exp);
 	engimon(const engimon& e);
 	engimon& operator=(const engimon& e);
 	~engimon();
@@ -37,8 +37,8 @@ public:
 	static void IntializeDatabase();
 protected:
 	string name;
-	string parent1;
-	string parent2;
+	engimon* parent1;
+	engimon* parent2;
 	string species;
 	skill* moves;
 	string element1;
