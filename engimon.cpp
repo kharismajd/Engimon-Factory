@@ -240,7 +240,6 @@ bool engimon::isActive()
 	return this->active;
 }
 
-
 string engimon::getName()
 {
 	return name;
@@ -254,6 +253,21 @@ string engimon::getSpecies()
 int engimon::getLevel()
 {
 	return level;
+}
+
+void engimon::setLevel(int x) {
+	this->level = x;
+}
+
+string engimon::getElmt1() {
+	return element1;
+}
+string engimon::getElmt2() {
+	return element2;
+}
+
+skill engimon::getMove(int x) {
+	return this->moves[x];
 }
 
 void engimon::IntializeDatabase()

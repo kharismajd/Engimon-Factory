@@ -34,7 +34,11 @@ public:
 	string getName();
 	string getSpecies();
 	int getLevel();
+	void setLevel(int);
 
+	string getElmt1();
+	string getElmt2();
+	skill getMove(int);
 
 	static void IntializeDatabase();
 protected:
