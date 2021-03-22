@@ -30,7 +30,7 @@ template<class T>
 inventory<T>::~inventory()
 {
 	this->contents.clear();
-	vector<engimon>().swap(this->contents);
+	vector<T>().swap(this->contents);
 }
 
 void inventory<engimon>::addItem(engimon engimon)
