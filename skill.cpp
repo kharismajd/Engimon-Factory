@@ -12,6 +12,7 @@ skill::skill()
 	this->skillName = "null";
 	this->base_power = 0;
 	this->mastery_level = 0;
+	this->amount_in_inventory = 0;
 }
 
 skill::skill(string nm, int bp, int mastery_lvl, string elem[5], string engimon_name /*Isi "0", jika tidak unik*/)
@@ -19,6 +20,7 @@ skill::skill(string nm, int bp, int mastery_lvl, string elem[5], string engimon_
 	this->skillName = nm;
 	this->base_power = bp;
 	this->mastery_level = mastery_lvl;
+	this->amount_in_inventory = 0;
 
 	//Elements yang dapat mempelajari skill ini
 	//Hanya bisa berupa Fire, Water, Electric, Ground, Ice
@@ -48,6 +50,12 @@ string skill::getSkillName()
 {
 	return skillName;
 }
+
+int skill::getAmountInInventory() 
+{
+	return amount_in_inventory;
+}
+
 vector<string> skill::getElements()
 {
 	return elements;
@@ -71,6 +79,11 @@ void skill::printAll()
 	}
 	cout << endl;
 
+}
+
+void skill::setAmountInInventory(int amount)
+{
+	amount_in_inventory = amount;
 }
 
 void skill::InitializeSkillDatabase()

@@ -15,10 +15,12 @@ public:
 	//skill& operator= (const skill &s); Bitwise copy
 	~skill(); //String dan vector akan destruct sendiri
 
-
+	
 	string getSkillName();
+	int getAmountInInventory();
 	vector<string> getElements();
 	void printAll();
+	void setAmountInInventory(int);
 	static void InitializeSkillDatabase();
 
 	static vector<skill> skill_database;
@@ -27,6 +29,7 @@ protected:
 	string skillName;
 	int base_power;
 	int mastery_level;
+	int amount_in_inventory;
 
 	//Elements yang dapat mempelajari skill ini
 	//Hanya bisa berupa Fire, Water, Electric, Ground, Ice
