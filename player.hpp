@@ -4,6 +4,7 @@
 #include <vector>
 #include "engimon.hpp"
 #include "skill.hpp"
+#include "inventory.hpp"
 using namespace std;
 
 #ifndef PLAYER
@@ -18,62 +19,56 @@ public:
 	player& operator=(const player& play);
 	~player();
 
+	//Mengambil engimon yang sedang aktif. Jika tidak ada, mengembalikan nullEngimon.
+	engimon& getActiveEngimon();
+	//Menghapus engimon yang sedang aktif. Jika tidak ada, mengeluarkan pesan.
+	void deleteActiveEngimon();
+
 	void moveUp();
 	void moveDown();
 	void moveLeft();
 	void moveRight();
 
+	// Menambahkan engimon ke engimon_inventory
 	void addEngimon(engimon);
-	void deleteEngimon(engimon);
+	// Menghapus engimon yang direferensi di inventory
+	void deleteEngimon(engimon&);
+	// Menambahkan skill item ke skill_inventory
 	void addSkillItem(string);
+	// Menghapus skill item di skill_inventory
 	void deleteSkillItem(string);
 
-	void showEngimonDetails();
+	// Memperlihatkan list engimon di inventory
 	void showEngimonList();
+	// Memperlihatkan list skill item di inventory
 	void showSkillItemList();
 
+	// Menghapus engimon yang dipilih
+	void deleteEngimonSelect();
+	// Memperlihatkan detail engimon yang dipilih
+	void showEngimonDetails();
+	// Mengganti pokemon yang aktif
 	void switchOutEngimon(); 
+	
+	// Berinteraksi dengan engimon yang sedang aktif
 	void interact();
 
+	// Menggunakan skill item
 	void useSkillItem();
 	
 	//breeding()
 	//battle()
 
+	// Mengecek jika inventory full
 	bool isInventoryFull();
 protected:
 	string name;
-	engimon* active_engimon;
 	int max_inventory_capacity;
 	int player_x;
 	int player_y;
-	int active_engimon_x;
-	int active_engimon_y;
 
 	inventory<engimon> engimon_inventory;
 	inventory<skill> skill_inventory;
 };
 
-#endif
-
-#ifndef INVENTORY
-#define INVENTORY
-
-template<class T>
-class inventory
-{
-public:
-	inventory();
-	inventory(const inventory& inv);
-	inventory& operator=(const inventory& inv);
-	~inventory();
-
-	friend class player;
-private:
-	void addItem(T);
-	void deleteItem(T);
-	int countItem();
-
-	vector<T> contents;
-};
 #endif

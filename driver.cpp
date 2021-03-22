@@ -4,11 +4,13 @@
 #include <vector>
 #include "skill.hpp"
 #include "engimon.hpp"
+#include "player.hpp"
+#include "inventory.hpp"
 #include <set>
 using namespace std;
 
 /*Compile dengan*/
-/*g++ driver.cpp engimon.cpp skill.cpp*/
+/*g++ driver.cpp engimon.cpp skill.cpp, player.cpp, inventory.cpp*/
 int main()
 {
 	string elem[5] = {"Fire", "Water", "Electric", "Ice"};
@@ -40,6 +42,20 @@ int main()
 		cout << endl;
 		//test.showAttributes();
 		Gab.cry();
+
+		engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 10, 50);
+		engimon Pulu2("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 13, 20);
+        player newPlayer("coba", Gab, 50, 0, 0, 0, 1);
+
+		newPlayer.interact();
+
+        newPlayer.addEngimon(Pulu);
+        newPlayer.addEngimon(Pulu2);         
+
+        newPlayer.deleteEngimonSelect();
+        newPlayer.showEngimonDetails();
+
+        newPlayer.showEngimonList();
 	}
 	catch (char const* e)
 	{
