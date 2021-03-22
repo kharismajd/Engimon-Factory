@@ -61,6 +61,14 @@ vector<string> skill::getElements()
 	return elements;
 }
 
+int skill :: getBasePower(){
+	return this->base_power;
+}
+
+int skill :: getMasteryLv(){
+	return this->mastery_level;
+}
+
 void skill::printAll()
 {
 	cout << "Name: " << skillName << endl;

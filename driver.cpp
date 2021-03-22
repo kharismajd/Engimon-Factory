@@ -2,10 +2,8 @@
 #include <string>
 #include <iterator> 
 #include <vector>
-#include "skill.hpp"
-#include "engimon.hpp"
-#include "player.hpp"
 #include "inventory.hpp"
+#include "battle.hpp"
 #include <set>
 using namespace std;
 
@@ -30,38 +28,34 @@ int main()
 
 	engimon::IntializeDatabase();
 
-	try
-	{
-		engimon nullEngimon;
-		engimon Gab("Gab", &nullEngimon, &nullEngimon, "Magikarp", nullSkill, 4, 0);
-		engimon test;
-		test = Gab;
-		Gab.learnMove("tackle");
-		Gab.learnMove("bubble");
-		Gab.showAttributes();
-		cout << endl;
-		//test.showAttributes();
-		Gab.cry();
 
-		engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 10, 50);
-		engimon Pulu2("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 13, 20);
-        player newPlayer("coba", Gab, 50, 0, 0, 0, 1);
+	engimon nullEngimon;
+	engimon Gab("Gab", &nullEngimon, &nullEngimon, "Magikarp", nullSkill, 4, 0);
+	engimon test;
+	test = Gab;
+	Gab.learnMove("tackle");
+	Gab.learnMove("bubble");
+	Gab.showAttributes();
+	cout << endl;
+	//test.showAttributes();
+	Gab.cry();
 
-		newPlayer.interact();
+	engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 10, 50);
+	engimon Pulu2("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 13, 20);
+	player newPlayer("coba", Gab, 50, 0, 0, 0, 1);
 
-        newPlayer.addEngimon(Pulu);
-        newPlayer.addEngimon(Pulu2);         
+	newPlayer.addEngimon(Pulu);
+	// Battle b1(Pulu,Pulu2,newPlayer);
+	// cout << "sini?" <<endl;
+	// b1.initiateBattle();
+	newPlayer.addEngimon(Pulu2);  
 
-        newPlayer.deleteEngimonSelect();
-        newPlayer.showEngimonDetails();
+	newPlayer.interact();       
 
-        newPlayer.showEngimonList();
-	}
-	catch (char const* e)
-	{
-		cout << e << endl;
-	}
-	
+	newPlayer.deleteEngimonSelect();
+	newPlayer.showEngimonDetails();
+
+	newPlayer.showEngimonList();
 
 	return 0;
 }

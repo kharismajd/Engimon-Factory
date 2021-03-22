@@ -19,6 +19,8 @@ public:
 	string getSkillName();
 	int getAmountInInventory();
 	vector<string> getElements();
+	int getBasePower();
+	int getMasteryLv();
 	void printAll();
 	void setAmountInInventory(int);
 	static void InitializeSkillDatabase();
