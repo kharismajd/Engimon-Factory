@@ -16,9 +16,11 @@ player::player()
 	this->max_inventory_capacity = 50;
 	this->player_x = 0;
 	this->player_y = 0;
+	this->activeEngimon_x = -1;
+	this->activeEngimon_y = -1;
 }
 
-player::player(string name, engimon starting_engimon, int max_inventory_capacity, int player_x, int player_y)
+player::player(string name, engimon starting_engimon, int max_inventory_capacity, int player_x, int player_y, int activeEngimon_x, int activeEngimon_y)
 {
 	starting_engimon.setActive();
 
@@ -26,6 +28,8 @@ player::player(string name, engimon starting_engimon, int max_inventory_capacity
 	this->max_inventory_capacity = max_inventory_capacity;
 	this->player_x = player_x;
 	this->player_y = player_y;
+	this->activeEngimon_x = activeEngimon_x;
+	this->activeEngimon_y = activeEngimon_y;
 	this->addEngimon(starting_engimon);
 }
 
@@ -35,6 +39,8 @@ player::player(const player& play)
 	this->max_inventory_capacity = max_inventory_capacity;
 	this->player_x = play.player_x;
 	this->player_y = play.player_y;
+	this->activeEngimon_x = play.activeEngimon_x;
+	this->activeEngimon_y = play.activeEngimon_y;
 	copy(play.engimon_inventory.contents.begin(), play.engimon_inventory.contents.end(), back_inserter(this->engimon_inventory.contents)); 
 	copy(play.skill_inventory.contents.begin(), play.skill_inventory.contents.end(), back_inserter(this->skill_inventory.contents)); 
 }
@@ -45,6 +51,8 @@ player& player::operator=(const player& play)
 	this->max_inventory_capacity = max_inventory_capacity;
 	this->player_x = play.player_x;
 	this->player_y = play.player_y;
+	this->activeEngimon_x = play.activeEngimon_x;
+	this->activeEngimon_y = play.activeEngimon_y;
 	copy(play.engimon_inventory.contents.begin(), play.engimon_inventory.contents.end(), back_inserter(this->engimon_inventory.contents)); 
 	copy(play.skill_inventory.contents.begin(), play.skill_inventory.contents.end(), back_inserter(this->skill_inventory.contents)); 
 	return *this;
@@ -82,6 +90,8 @@ void player::deleteActiveEngimon()
 	if (this->getActiveEngimon().getName() != "null")
 	{
 		deleteEngimon(this->getActiveEngimon());
+		this->activeEngimon_x = -1;
+		this->activeEngimon_y = -1;
 	}
 	else
 	{
@@ -91,22 +101,38 @@ void player::deleteActiveEngimon()
 
 void player::moveUp()
 {
-	//TODO
+	if (player_y != 0){
+		int oldPosY = player_y;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		player_y += 1;
+		activeEngimon_y = oldPosY;
+	}
 }
 
 void player::moveDown()
 {
-	//TODO
+	if (player_y != 9){
+		int oldPosY = player_y;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		player_y -= 1;
+		activeEngimon_y = oldPosY;
+	}
 }
 
 void player::moveLeft()
 {
-	//TODO
+	if (player_x != 0){
+		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		player_x -= 1;
+		activeEngimon_x = oldPosX;
+	}
 }
 
 void player::moveRight()
 {
-	//TODO
+	if (player_x != 11){
+		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		player_x += 1;
+		activeEngimon_x = oldPosX;
+	}
 }
 
 void player::addEngimon(engimon engimon)
@@ -220,7 +246,7 @@ void player::showSkillItemList()
 
 void player::deleteEngimonSelect()
 {
-	int i;
+	unsigned int i;
 	if (this->engimon_inventory.countItem() > 0) {
 		this->showEngimonList();
 		cout << "Ketik nomor engimon yang ingin dibuang: ";
@@ -238,7 +264,7 @@ void player::deleteEngimonSelect()
 
 void player::showEngimonDetails()
 {
-	int i;
+	unsigned int i;
 	if (this->engimon_inventory.countItem() > 0) {
 		this->showEngimonList();
 		cout << "Ketik nomor yang ada untuk melihat detail engimon: ";
@@ -256,9 +282,41 @@ void player::showEngimonDetails()
 
 void player::switchOutEngimon()
 {
-	//TODO
-	//showengimonlist -> pilih engimon di engimon_inventory -> set engimon yang dipilih jadi aktif
-	//->set active_engimon jadi ngga aktif
+	unsigned int i;
+	if (this->engimon_inventory.countItem() > 0) {
+		this->showEngimonList();
+		cout << "Ketik nomor engimon yang ingin dibuat aktif: ";
+		cin >> i;
+		if (i >= 1 && i <= this->engimon_inventory.contents.size())
+		{
+			if (getActiveEngimon().getName() != "null"){
+				if (this->engimon_inventory.contents[i-1].isActive()){
+					cout << "Engimon tersebut sedang aktif" << endl;
+				}
+				else{
+					cout << "Replace active Engimon " << getActiveEngimon().getName() << " dengan Engimon " << this->engimon_inventory.contents[i-1].getName() << endl;
+					getActiveEngimon().setInactive();
+					this->engimon_inventory.contents[i-1].setActive();
+				}
+			}
+			else{
+				this->engimon_inventory.contents[i-1].setActive();
+				cout << "Set " << this->engimon_inventory.contents[i-1].getName() << " sebagai active Engimon" << endl;
+				if (player_x != 0){
+					activeEngimon_x = player_x - 1;
+					activeEngimon_y = player_y;
+				}
+				else{
+					activeEngimon_x = player_x + 1;
+					activeEngimon_y = player_y;
+				}
+			}
+		}
+	}
+	else
+	{
+		cout << "Anda tidak memiliki engimon" << endl;
+	}
 }
 
 void player::interact()
@@ -266,12 +324,41 @@ void player::interact()
 	this->getActiveEngimon().cry();
 }
 
-void player::useSkillItem()
+void player::useSkillItem()				//////// useSkillItem belum sepenuhnya benar, pakai try & catch agar tidak ada kondisi skill tetap dihapus meskipun tidak terpakai karena masuk throw
 {
-	//TODO
-	//showSkillItemList -> pilih skillitem yang ingin dipakai -> showengimonlist -> pilih engimon yang ingin learn
-	//cek kalau elemen kompatibel -> kalau kompatibel, learnMove dan deleteSkillItem
+	unsigned int i;
+	unsigned int j;
+	if (this->skill_inventory.countItem() > 0 && this->engimon_inventory.countItem() > 0 ) {
+		this->showSkillItemList();
+		cout << "Ketik nomor skill yang ingin dipakai: ";
+		cin >> i;
+		if (i >= 1 && i <= this->skill_inventory.contents.size())
+		{
+			this->showEngimonList();
+			cout << "Ketik nomor engimon yang ingin learn skill " << this->skill_inventory.contents[i-1].getSkillName() << " : ";
+			cin >> j;
+			if (j >= 1 && j <= this->engimon_inventory.contents.size())
+			{
+				/*
+				try
+				{
+					e.learnMove("tackle")
+				}
 
+				catch (int e)
+				{
+				//handler
+				}
+				*/
+				this->engimon_inventory.contents[j-1].learnMove(this->skill_inventory.contents[i-1].getSkillName());
+				deleteSkillItem(this->skill_inventory.contents[i-1].getSkillName());
+			}
+		}
+	}
+	else
+	{
+		cout << "Anda harus memiliki minimal 1 engimon dan item skill" << endl;
+	}
 }
 
 bool player::isInventoryFull()

@@ -14,7 +14,7 @@ class player
 {
 public:
 	player();
-	player(string name, engimon starting_engimon, int max_inventory_capacity, int player_x, int player_y);
+	player(string name, engimon starting_engimon, int max_inventory_capacity, int player_x, int player_y, int activeEngimon_x, int activeEngimon_y);
 	player(const player& play);
 	player& operator=(const player& play);
 	~player();
@@ -66,6 +66,8 @@ protected:
 	int max_inventory_capacity;
 	int player_x;
 	int player_y;
+	int activeEngimon_x;
+	int activeEngimon_y;
 
 	inventory<engimon> engimon_inventory;
 	inventory<skill> skill_inventory;
