@@ -365,3 +365,8 @@ bool player::isInventoryFull()
 {
 	return (this->engimon_inventory.countItem() + this->skill_inventory.countItem() >= this->max_inventory_capacity);
 }
+
+// Posisi activeEngimon_x
+int player::getActivePetPosX() {return activeEngimon_x;}
+// Posisi activeEngimon_y
+int player::getActivePetPosY() {return activeEngimon_y;}
