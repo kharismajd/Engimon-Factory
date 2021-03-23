@@ -30,7 +30,7 @@ int main()
 
 
 	engimon nullEngimon;
-	engimon Gab("Gab", &nullEngimon, &nullEngimon, "Magikarp", nullSkill, 4, 0);
+	engimon Gab("Gab", &nullEngimon, &nullEngimon, "Magikarp", 4, 0);
 	engimon test;
 	test = Gab;
 	Gab.learnMove("tackle");
@@ -40,9 +40,9 @@ int main()
 	//test.showAttributes();
 	Gab.cry();
 
-	engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 10, 50);
-	engimon Pulu2("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 13, 20);
-	player newPlayer("coba", Pulu, 50, 0, 0, 0, 1);
+	engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", 10, 50);
+	engimon Pulu2("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", 13, 20);
+	player newPlayer("coba", Pulu, 50, 0, 1);
 
 	Battle b1(&Pulu,&Pulu2,&newPlayer);
 	cout << "sini?" <<endl;
