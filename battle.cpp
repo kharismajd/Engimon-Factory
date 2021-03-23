@@ -207,7 +207,7 @@ void Battle :: printTotalPowLv(float mymonpower, float yourmonpower){
 
 void Battle :: win(){
     int diffLv = yourmon->getLevel() - mymon->getLevel();
-    float exp = 5 + diffLv;
+    float exp = (10*diffLv + 600)/(80-diffLv)+5;
 
     mymon->gainExp(exp);
     character->addEngimon(*this->yourmon);
@@ -217,7 +217,7 @@ void Battle :: win(){
     this->~Battle();
 }
 
-void Battle :: lose(){;
+void Battle :: lose(){
     character->deleteActiveEngimon();
     cout << "lose?" <<endl;
     // this->~Battle();
