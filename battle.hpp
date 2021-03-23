@@ -18,13 +18,13 @@ using namespace std;
 /*MENENTUKAN PEMENANG BERDASARKAN POWER LEVEL COMPARISON */
 class Battle {
     private:
-        engimon mymon;
-        engimon yourmon;
-        player character;
+        engimon* mymon;
+        engimon* yourmon;
+        player* character;
         float attrAdv[5][5] = {{1,0,1,0.5,2}, {2,1,0,1,1}, {1,2,1,0,1.5}, {1.5,1,2,1,0}, {0,1,0.5,2,1}};
                                      
     public:
-        Battle(engimon a, engimon b, player character);
+        Battle(engimon* a, engimon* b, player* character);
         Battle(const Battle& battle);
         ~Battle();
         Battle& operator=(const Battle& battle);

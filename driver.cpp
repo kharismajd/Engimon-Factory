@@ -42,18 +42,18 @@ int main()
 
 	engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 10, 50);
 	engimon Pulu2("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 13, 20);
-	player newPlayer("coba", Gab, 50, 0, 0, 0, 1);
+	player newPlayer("coba", Pulu, 50, 0, 0, 0, 1);
 
-	newPlayer.addEngimon(Pulu);
-	// Battle b1(Pulu,Pulu2,newPlayer);
-	// cout << "sini?" <<endl;
-	// b1.initiateBattle();
-	newPlayer.addEngimon(Pulu2);  
+	Battle b1(&Pulu,&Pulu2,&newPlayer);
+	cout << "sini?" <<endl;
+	b1.initiateBattle();
+	cout << "masuk kah?" <<endl;
+	// newPlayer.addEngimon(Pulu2);  
 
-	newPlayer.interact();       
+	// newPlayer.interact();       
 
-	newPlayer.deleteEngimonSelect();
-	newPlayer.showEngimonDetails();
+	// newPlayer.deleteEngimonSelect();
+	// newPlayer.showEngimonDetails();
 
 	newPlayer.showEngimonList();
 

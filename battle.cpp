@@ -7,11 +7,10 @@
 
 using namespace std;
 
-Battle::Battle(engimon a, engimon b, player character){
-    this->mymon = a;
-    this->yourmon = b;
-    this->character = character;
-    cout << "sini?" <<endl;
+Battle::Battle(engimon* a, engimon* b, player* character){
+    this->mymon = new engimon(*a);
+    this->yourmon = new engimon(*b);
+    this->character = new player (*character);
 }
 
 Battle::Battle(const Battle& battle){
@@ -28,18 +27,19 @@ Battle& Battle::operator=(const Battle& battle){
     this->mymon = battle.mymon;
     this->yourmon = battle.yourmon;
     this->character = battle.character;
+    return *this;
 }
 
 engimon Battle :: getMyEngimon(){
-    return this->mymon;
+    return *this->mymon;
 }
 
 engimon Battle :: getYourEngimon(){
-    return this->yourmon;
+    return *this->yourmon;
 }
 
 player Battle :: getPlayer(){
-    return this->character;
+    return *this->character;
 }
 
 float Battle :: elmtAdvantage(string* elmtEngimonFrom, string* elmtEngimonTo){
@@ -167,17 +167,20 @@ float* Battle :: power(){
     float elmtComp2;
     float elmtComp1;
 
-    int mylv = this->mymon.getLevel();
-    int yourlv = this->yourmon.getLevel();
+    engimon mymon = *this->mymon;
+    engimon yourmon = *this->yourmon;
 
-    string myelmt[2] = {this->mymon.getElmt1(), this->mymon.getElmt2()};
-    string yourelmt[2] = {this->yourmon.getElmt1(), this->yourmon.getElmt2()};
+    int mylv = mymon.getLevel();
+    int yourlv = yourmon.getLevel();
+
+    string myelmt[2] = {mymon.getElmt1(), mymon.getElmt2()};
+    string yourelmt[2] = {yourmon.getElmt1(), yourmon.getElmt2()};
 
     skill* myskill = new skill[4];
     skill* yourskill = new skill[4];
     for (i=0;i<4;i++){
-        myskill[i] = this->mymon.getMove(i);
-        yourskill[i] = this->yourmon.getMove(i);
+        myskill[i] = mymon.getMove(i);
+        yourskill[i] = yourmon.getMove(i);
     }
 
     int sumofmyskill = 0;
@@ -190,8 +193,8 @@ float* Battle :: power(){
 
     float* power = new float[2];
 
-    power[0] = this->mymon.getLevel()*elmtAdvantage(myelmt,yourelmt) + sumofmyskill;
-    power[1] = this->yourmon.getLevel()*elmtAdvantage(yourelmt,myelmt) + sumofyourskill;
+    power[0] = mymon.getLevel()*elmtAdvantage(myelmt,yourelmt) + sumofmyskill;
+    power[1] = yourmon.getLevel()*elmtAdvantage(yourelmt,myelmt) + sumofyourskill;
 
     return power;
 }
@@ -203,20 +206,27 @@ void Battle :: printTotalPowLv(float mymonpower, float yourmonpower){
 }
 
 void Battle :: win(){
-    int diffLv = this->yourmon.getLevel() - this->mymon.getLevel();
+    engimon mymon = *this->mymon;
+    engimon yourmon = *this->yourmon;
+    player character = *this->character;
+
+    int diffLv = yourmon.getLevel() - mymon.getLevel();
     float exp = 5 + diffLv;
 
-    this->mymon.gainExp(exp);
-    this->character.addEngimon(this->yourmon);
+    mymon.gainExp(exp);
+    character.addEngimon(yourmon);
     
     int idxSkill = rand() % 4;
-    this->character.addSkillItem(this->yourmon.getMove(idxSkill).getSkillName());
+    character.addSkillItem(yourmon.getMove(idxSkill).getSkillName());
     this->~Battle();
 }
 
 void Battle :: lose(){
-    this->character.deleteActiveEngimon();
-    this->~Battle();
+    player character = *this->character;
+    character.deleteActiveEngimon();
+    cout << "lose?" <<endl;
+    // this->~Battle();
+    
 }
 
 void Battle ::initiateBattle(){
@@ -231,5 +241,6 @@ void Battle ::initiateBattle(){
     } else {
         cout << "You Lose!!" << endl;
         lose();
+        cout<<"test";
     }
 }
