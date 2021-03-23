@@ -16,7 +16,7 @@ class engimon
 {
 public:
 	engimon();//Null
-	engimon(string nm, engimon* pr1, engimon* pr2, string sp, skill skill_bawaan, int lvl, int exp);
+	engimon(string nm, engimon* pr1, engimon* pr2, string sp, int lvl, int exp);
 	engimon(const engimon& e);
 	engimon& operator=(const engimon& e);
 	~engimon();
@@ -25,12 +25,15 @@ public:
 	void printMoves();
 	void gainExp(int);
 	void learnMove(string);
-	void cry();
+	void setSkill (skill x, int idx, int mastery_level);
+	// sets moves[idx] of engimon to a copy of skill a, with corresponding mastery_level
 
+	void addSkill(skill);
+	void cry();
+	
 	void setActive();
 	void setInactive();
 	bool isActive();
-
 	string getName();
 	string getSpecies();
 	int getLevel();
@@ -40,7 +43,11 @@ public:
 	string getElmt2();
 	skill getMove(int);
 
+	bool isNull();
+
 	static void IntializeDatabase();
+	static set<tuple<string,string,string>> all_species;
+	static map<string,string> engimon_cry;
 protected:
 	string name;
 	engimon* parent1;
@@ -56,7 +63,6 @@ protected:
 
 	//Isi: Nama, element1, element2
 	//Jika ada 1 element saja, element2 diisi "null"
-	static set<tuple<string,string,string>> all_species;
-	static map<string,string> engimon_cry;
+	
 };
 #endif

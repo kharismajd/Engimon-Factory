@@ -30,7 +30,7 @@ engimon::engimon()//Null
 	cummulative_experience = 0;
 	active = false;
 }
-engimon::engimon(string nm, engimon* pr1, engimon* pr2, string sp, skill skill_bawaan, int lvl, int exp)
+engimon::engimon(string nm, engimon* pr1, engimon* pr2, string sp, int lvl, int exp)
 {
 	name = nm;
 	parent1 = pr1;
@@ -52,7 +52,20 @@ engimon::engimon(string nm, engimon* pr1, engimon* pr2, string sp, skill skill_b
 	}
 
 	moves = new skill[4];
-	moves[0] = skill_bawaan;
+
+	auto j = skill::skill_database.begin();
+	for (j = skill::skill_database.begin(); j != skill::skill_database.end(); ++j)
+	{
+		if ((*j).getEngimonSpecies() == sp)
+		{
+			break;
+		}
+	}
+	if (j == skill::skill_database.end())
+	{
+		throw "Skill engimon tidak ditemukan";
+	}
+	moves[0] = (*j);
 
 	skill nullSkill;
 	for (int j = 1; j < 4; ++j)
@@ -183,6 +196,11 @@ void engimon::learnMove(string move)
     	throw "Error, skill tidak ditemukan";
     }
 
+    if ((*itr).getEngimonSpecies() != this->species && (*itr).getEngimonSpecies() != "0")
+    {
+    	throw "Error, engimon tidak sesuai";
+    }
+
     vector<string> move_elements = (*itr).getElements();
 
     auto element1_checker = find(move_elements.begin(), move_elements.end(), this->element1);
@@ -190,7 +208,7 @@ void engimon::learnMove(string move)
 
     if (element1_checker == move_elements.end() && element2_checker == move_elements.end())
     {
-    	throw "Error, skill tidak compatible dengan engimon";
+    	throw "Error, skill tidak compatible dengan elemen engimon";
     }
 
     int i = 0;
@@ -217,6 +235,11 @@ void engimon::learnMove(string move)
     cout << (*itr).getSkillName() <<" berhasil dipelajari "<< this->name << endl;
 }
 
+void engimon::setSkill(skill x, int idx, int mastery_level)
+{
+	x.setMasteryLv(mastery_level);
+	this->moves[idx] = x;
+}
 void engimon::cry()
 {
 	map<string,string>::iterator i = engimon_cry.find(this->species);
@@ -268,6 +291,18 @@ string engimon::getElmt2() {
 
 skill engimon::getMove(int x) {
 	return this->moves[x];
+}
+
+bool engimon::isNull()
+{
+	if (this->name == name_null)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void engimon::IntializeDatabase()

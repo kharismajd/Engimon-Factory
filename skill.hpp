@@ -5,7 +5,9 @@
 using namespace std;
 
 #ifndef SKILL
-#define SKILL 
+#define SKILL
+
+// #define NULL_UNIQUE_ENGIMON "0"
 class skill
 {
 public:
@@ -17,10 +19,12 @@ public:
 
 	
 	string getSkillName();
+	string getEngimonSpecies();
 	int getAmountInInventory();
 	vector<string> getElements();
 	int getBasePower();
 	int getMasteryLv();
+	void setMasteryLv(int);
 	void printAll();
 	void setAmountInInventory(int);
 	static void InitializeSkillDatabase();
