@@ -18,7 +18,7 @@ player::player()
 	this->player_y = 0;
 }
 
-player::player(string name, engimon starting_engimon, int max_inventory_capacity, int player_x, int player_y, int active_engimon_x, int active_engimon_y)
+player::player(string name, engimon starting_engimon, int max_inventory_capacity, int player_x, int player_y)
 {
 	starting_engimon.setActive();
 
@@ -111,13 +111,16 @@ void player::moveRight()
 
 void player::addEngimon(engimon engimon)
 {
-	if(!this->isInventoryFull())
+	if (engimon.getName() != "null")
 	{
-		this->engimon_inventory.addItem(engimon);
-	}
-	else
-	{
-		cout << "Inventory sudah penuh" << endl;
+		if(!this->isInventoryFull())
+		{
+			this->engimon_inventory.addItem(engimon);
+		}
+		else
+		{
+			cout << "Inventory sudah penuh" << endl;
+		}
 	}
 }
 
@@ -128,26 +131,28 @@ void player::deleteEngimon(engimon& engimon)
 
 void player::addSkillItem(string skillName)
 {
-	
-	if(!this->isInventoryFull())
-	{
-		auto itr = skill::skill_database.begin();
-		for (itr = skill::skill_database.begin(); itr != skill::skill_database.end(); ++itr)
-			if ((*itr).getSkillName() == skillName)	
-			{
-				break;
-			}
-		
-		if (itr == skill::skill_database.end())
+	if (skillName != "null")
+	{	
+		if (!this->isInventoryFull())
 		{
-			throw "Error, skill tidak ditemukan";
+			auto itr = skill::skill_database.begin();
+			for (itr = skill::skill_database.begin(); itr != skill::skill_database.end(); ++itr)
+				if ((*itr).getSkillName() == skillName)	
+				{
+					break;
+				}
+			
+			if (itr == skill::skill_database.end())
+			{
+				throw "Error, skill tidak ditemukan";
+			}
+			
+			this->skill_inventory.addItem((*itr));
 		}
-		
-		this->skill_inventory.addItem((*itr));
-	}
-	else
-	{
-		cout << "Inventory sudah penuh" << endl;
+		else
+		{
+			cout << "Inventory sudah penuh" << endl;
+		}
 	}
 }
 
