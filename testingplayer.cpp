@@ -18,13 +18,16 @@ int main()
         engimon nullEngimon;
         engimon Gab("Gab", &nullEngimon, &nullEngimon, "Magikarp", nullSkill, 4, 0);
         engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 10, 50);
-        player newPlayer;
-
-        newPlayer.deleteActiveEngimon();
-        newPlayer.deleteEngimonSelect();
-        newPlayer.showEngimonDetails();
+        player newPlayer("nama", Gab, 50, 0, 0);
+        newPlayer.addEngimon(Gab);
+        newPlayer.addEngimon(Pulu);
+        newPlayer.addEngimon(nullEngimon);
+        newPlayer.addSkillItem("null");
 
         newPlayer.showEngimonList();
+        newPlayer.showSkillItemList();
+
+        delete &newPlayer;
     }
     catch (char const* e)
 	{

@@ -7,30 +7,48 @@
 #include "inventory.hpp"
 using namespace std;
 
-template<class T>
-inventory<T>::inventory() 
+inventory<engimon>::inventory() 
 {
 	//Inventory kosong
 }
 
-template<class T>
-inventory<T>::inventory(const inventory<T>& inv)
+inventory<engimon>::inventory(const inventory<engimon>& inv)
 {
 	copy(inv.contents.begin(), inv.contents.end(), back_inserter(this->contents)); 
 }
 
-template<class T>
-inventory<T>& inventory<T>::operator=(const inventory<T>& inv)
+inventory<engimon>& inventory<engimon>::operator=(const inventory<engimon>& inv)
 {
 	copy(inv.contents.begin(), inv.contents.end(), back_inserter(this->contents)); 
 	return *this;
 }
 
-template<class T>
-inventory<T>::~inventory()
+inventory<engimon>::~inventory()
 {
 	this->contents.clear();
-	vector<T>().swap(this->contents);
+	vector<engimon>().swap(this->contents);
+}
+
+inventory<skill>::inventory() 
+{
+	//Inventory kosong
+}
+
+inventory<skill>::inventory(const inventory<skill>& inv)
+{
+	copy(inv.contents.begin(), inv.contents.end(), back_inserter(this->contents)); 
+}
+
+inventory<skill>& inventory<skill>::operator=(const inventory<skill>& inv)
+{
+	copy(inv.contents.begin(), inv.contents.end(), back_inserter(this->contents)); 
+	return *this;
+}
+
+inventory<skill>::~inventory()
+{
+	this->contents.clear();
+	vector<skill>().swap(this->contents);
 }
 
 void inventory<engimon>::addItem(engimon engimon)
