@@ -18,11 +18,15 @@ int main()
         engimon nullEngimon;
         engimon Gab("Gab", &nullEngimon, &nullEngimon, "Magikarp", nullSkill, 4, 0);
         engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 10, 50);
-        player newPlayer;
+        player newPlayer("nama", Gab, 50, 0, 0);
+        newPlayer.addEngimon(Gab);
+        newPlayer.addEngimon(Pulu);
 
+        newPlayer.getActiveEngimon().cry();
         newPlayer.deleteActiveEngimon();
-        newPlayer.deleteEngimonSelect();
-        newPlayer.showEngimonDetails();
+        newPlayer.showEngimonList();
+
+        delete &newPlayer;
 
         newPlayer.showEngimonList();
     }

@@ -31,6 +31,11 @@ template<>
 class inventory<engimon>
 {
 public:
+	inventory();
+	inventory(const inventory& inv);
+	inventory& operator=(const inventory& inv);
+	~inventory();
+
 	friend class player;
 private:
 	void addItem(engimon);
@@ -44,6 +49,11 @@ template<>
 class inventory<skill>
 {
 public:
+	inventory();
+	inventory(const inventory& inv);
+	inventory& operator=(const inventory& inv);
+	~inventory();
+	
 	friend class player;
 private:
 	void addItem(skill);

@@ -18,7 +18,7 @@ player::player()
 	this->player_y = 0;
 }
 
-player::player(string name, engimon starting_engimon, int max_inventory_capacity, int player_x, int player_y, int active_engimon_x, int active_engimon_y)
+player::player(string name, engimon starting_engimon, int max_inventory_capacity, int player_x, int player_y)
 {
 	starting_engimon.setActive();
 
