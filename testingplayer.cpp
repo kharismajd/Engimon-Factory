@@ -21,14 +21,13 @@ int main()
         player newPlayer("nama", Gab, 50, 0, 0);
         newPlayer.addEngimon(Gab);
         newPlayer.addEngimon(Pulu);
+        newPlayer.addEngimon(nullEngimon);
+        newPlayer.addSkillItem("null");
 
-        newPlayer.getActiveEngimon().cry();
-        newPlayer.deleteActiveEngimon();
         newPlayer.showEngimonList();
+        newPlayer.showSkillItemList();
 
         delete &newPlayer;
-
-        newPlayer.showEngimonList();
     }
     catch (char const* e)
 	{
