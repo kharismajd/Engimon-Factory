@@ -193,12 +193,12 @@ void engimon::learnMove(string move)
     
     if (itr == skill::skill_database.end())
     {
-    	throw -1;
+    	throw -1; //"Error, skill tidak ditemukan"
     }
 
     if ((*itr).getEngimonSpecies() != this->species && (*itr).getEngimonSpecies() != "0")
     {
-    	throw -2;
+    	throw -2; //"Error, engimon tidak sesuai"
     }
 
     vector<string> move_elements = (*itr).getElements();
@@ -208,7 +208,7 @@ void engimon::learnMove(string move)
 
     if (element1_checker == move_elements.end() && element2_checker == move_elements.end())
     {
-    	throw -3;
+    	throw -3; //"Error, skill tidak compatible dengan elemen engimon"
     }
 
     int i = 0;
@@ -216,7 +216,7 @@ void engimon::learnMove(string move)
     {
     	if (this->moves[i].getSkillName() == move)
     	{
-    		throw -4;
+    		throw -4; //"Error, skill sudah ada"
     	}
     	if (this->moves[i].getSkillName() == "null")
     	{
