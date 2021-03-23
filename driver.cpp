@@ -42,9 +42,15 @@ int main()
 
 	engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", 10, 50);
 	engimon Pulu2("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", 13, 20);
+	engimon Pulu3("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", 2, 3);
 	player newPlayer("coba", Pulu, 50, 0, 1);
 
-	Battle b1(&Pulu,&Pulu2,&newPlayer);
+	Battle b2(&newPlayer.getActiveEngimon(), &Pulu3, &newPlayer);
+	b2.initiateBattle();
+
+	newPlayer.showEngimonList();
+
+	Battle b1(&Pulu, &Pulu2, &newPlayer);
 	cout << "sini?" <<endl;
 	b1.initiateBattle();
 	cout << "masuk kah?" <<endl;

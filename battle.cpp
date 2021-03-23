@@ -8,9 +8,9 @@
 using namespace std;
 
 Battle::Battle(engimon* a, engimon* b, player* character){
-    this->mymon = new engimon(*a);
-    this->yourmon = new engimon(*b);
-    this->character = new player (*character);
+    this->mymon = a;
+    this->yourmon = b;
+    this->character = character;
 }
 
 Battle::Battle(const Battle& battle){
@@ -206,24 +206,19 @@ void Battle :: printTotalPowLv(float mymonpower, float yourmonpower){
 }
 
 void Battle :: win(){
-    engimon mymon = *this->mymon;
-    engimon yourmon = *this->yourmon;
-    player character = *this->character;
-
-    int diffLv = yourmon.getLevel() - mymon.getLevel();
+    int diffLv = yourmon->getLevel() - mymon->getLevel();
     float exp = 5 + diffLv;
 
-    mymon.gainExp(exp);
-    character.addEngimon(yourmon);
+    mymon->gainExp(exp);
+    character->addEngimon(*this->yourmon);
     
     int idxSkill = rand() % 4;
-    character.addSkillItem(yourmon.getMove(idxSkill).getSkillName());
+    character->addSkillItem(yourmon->getMove(idxSkill).getSkillName());
     this->~Battle();
 }
 
-void Battle :: lose(){
-    player character = *this->character;
-    character.deleteActiveEngimon();
+void Battle :: lose(){;
+    character->deleteActiveEngimon();
     cout << "lose?" <<endl;
     // this->~Battle();
     
@@ -241,6 +236,5 @@ void Battle ::initiateBattle(){
     } else {
         cout << "You Lose!!" << endl;
         lose();
-        cout<<"test";
     }
 }
