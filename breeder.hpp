@@ -24,7 +24,7 @@ class breeder {
         int rng (int max);
         static engimon breed (engimon *parent1, engimon *parent2, string name);
         string inheritSpecies (engimon *parent1, engimon *parent2);
-        void inheritSkill (engimon child, engimon *parent1, engimon *parent2);
+        void inheritSkill (engimon *child, engimon *parent1, engimon *parent2);
 
         // Misc functions
         int indexOfElmt (string elmt);

@@ -16,18 +16,15 @@ int main() {
 	engimon::IntializeDatabase();
 
     engimon A;
-    engimon B;
-    engimon C;
-    engimon D;
-    engimon parent1("Mona", &A, &B, "Charmander", 35, 100);
-    engimon parent2("Lisa", &C, &D, "Magikarp", 30, 200);
+    engimon parent1("Mona", &A, &A, "Charmander", 36, 10);
+    engimon parent2("Lisa", &A, &A, "Pikachu", 31, 50);
 
     // Parent Skills
     try {
         parent1.learnMove("tackle");
         parent1.learnMove("ember");
         parent2.learnMove("tackle");
-        // parent2.learnMove("thunderbolt");
+        parent2.learnMove("thunderbolt");
     } catch (int x) {
         cout << x << endl;
     }
@@ -41,11 +38,18 @@ int main() {
     cout << "BREEDING CHILD..." << endl << endl;
 
     engimon child = breeder::breed(&parent1, &parent2, "da Vinci");
-    child.showAttributes();
     cout << endl << endl;
+
+    cout << "CHILD SKILLS..." << endl << endl;
+    child.getMove(0).printAll();
+    child.getMove(1).printAll();
+    child.getMove(2).printAll();
+    child.getMove(3).printAll();
+    cout << endl;
 
     cout << "PARENTS FINAL STATE" << endl << endl;
     parent1.showAttributes();
+    cout << endl;
     parent2.showAttributes();
     cout << endl << endl;
 

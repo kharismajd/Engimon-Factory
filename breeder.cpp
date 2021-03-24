@@ -24,18 +24,19 @@ int breeder::rng(int max) {
 
 // Main breeder function
 engimon breeder::breed (engimon *parent1, engimon *parent2, string name) {
-    if (parent1->getLevel() >= 30 && parent2->getLevel() >= 30) {
+    if (parent1->getLevel() > 30 && parent2->getLevel() > 30) {
         breeder a;
         
         string sp = a.inheritSpecies(parent1, parent2);
-        engimon child(name, parent1, parent2, sp, 0, 0);
+        engimon child(name, parent1, parent2, sp, 1, 0);
 
-        a.inheritSkill(child, parent1, parent2);
+        a.inheritSkill(&child, parent1, parent2);
 
         parent1->setLevel(parent1->getLevel() - 30);
         parent2->setLevel(parent2->getLevel() - 30);
 
-        cout << "Breeding berhasil dilakukan" << endl;
+        cout << "Breeding berhasil dilakukan" << endl << endl;
+        child.showAttributes();
         return child;
     } else {
         throw "Error, salah satu atau kedua parent memiliki level di bawah 30";
@@ -78,7 +79,7 @@ string breeder::inheritSpecies (engimon *parent1, engimon *parent2) {
 }
 
 // Method to get skill of child engimon
-void breeder::inheritSkill (engimon child, engimon *parent1, engimon *parent2) {
+void breeder::inheritSkill (engimon *child, engimon *parent1, engimon *parent2) {
     int iter1[4] = {0, 0, 0, 0};
     int iter2[4] = {0, 0, 0, 0};
     int max, idxmax;
@@ -93,7 +94,7 @@ void breeder::inheritSkill (engimon child, engimon *parent1, engimon *parent2) {
         // Find skill with max mastery level
         for (int j = 0; j < 4; j++) {
             if (iter1[j] != 1) {
-                if (!isLearnable(parent1->getMove(j), child)) {
+                if (!isLearnable(parent1->getMove(j), *child)) {
                     iter1[j] = 1;
                 } else if (parent1->getMove(j).getMasteryLv() > max) {
                     max = parent1->getMove(j).getMasteryLv();
@@ -101,7 +102,7 @@ void breeder::inheritSkill (engimon child, engimon *parent1, engimon *parent2) {
                 }
             }
             if (iter2[j] != 1) {
-                if (!isLearnable(parent2->getMove(j), child)) {
+                if (!isLearnable(parent2->getMove(j), *child)) {
                     iter2[j] = 1;
                 } else if (parent2->getMove(j).getMasteryLv() > max) {
                     max = parent2->getMove(j).getMasteryLv();
@@ -110,25 +111,24 @@ void breeder::inheritSkill (engimon child, engimon *parent1, engimon *parent2) {
             }
         }
 
-        cout << iter1[0] << iter1[1] << iter1[2] << iter1[3] << endl;
-        cout << iter2[0] << iter2[1] << iter2[2] << iter2[3] << endl;
+        //cout << iter1[0] << iter1[1] << iter1[2] << iter1[3] << endl;
+        //cout << iter2[0] << iter2[1] << iter2[2] << iter2[3] << endl;
 
         if (idxmax == -1) {
             // No skills to learn, exit function
-            cout << "Ended early due to lack of skills to learn" << endl << endl;
             end = true;
         } else {
             // There are still skills to be learned
             int mastery;
             skill chosen_skill; // Filled when skill is chosen to be learned
-            cout << "Max is ..." << max << "... and idxmax is ..." << idxmax << endl;
+            // cout << "Max is " << max << " and idxmax is " << idxmax << endl;
 
             // Check 1st parent's skills
             if (idxmax < 4) {
                 iter1[idxmax] = 1;
                 chosen_skill = parent1->getMove(idxmax);
                 mastery = chosen_skill.getMasteryLv();
-                chosen_skill.printAll();
+                // chosen_skill.printAll();
 
                 // Mark skills that both parents have
                 for (int j = 0; j < 4; j++) {
@@ -146,7 +146,7 @@ void breeder::inheritSkill (engimon child, engimon *parent1, engimon *parent2) {
                 iter2[idxmax - 4] = 1;
                 chosen_skill = parent2->getMove(idxmax - 4);
                 mastery = chosen_skill.getMasteryLv();
-                chosen_skill.printAll();
+                // chosen_skill.printAll();
 
                 // Mark skills that both parents have
                 for (int j = 0; j < 4; j++) {
@@ -156,8 +156,8 @@ void breeder::inheritSkill (engimon child, engimon *parent1, engimon *parent2) {
                     break;
                 }
             }
-            child.setSkill(chosen_skill, i, mastery);
-            cout << chosen_skill.getSkillName() << " has been learned with mastery = " << mastery << endl << endl;
+            child->setSkill(chosen_skill, i, mastery);
+            // cout << chosen_skill.getSkillName() << " has been learned with mastery = " << mastery << endl << endl;
         }
         i++;
     }
