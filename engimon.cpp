@@ -239,6 +239,7 @@ void engimon::setSkill(skill x, int idx, int mastery_level)
 {
 	x.setMasteryLv(mastery_level);
 	this->moves[idx] = x;
+
 }
 void engimon::cry()
 {
