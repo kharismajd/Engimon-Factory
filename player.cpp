@@ -332,7 +332,7 @@ void player::interact()
 	this->getActiveEngimon().cry();
 }
 
-void player::useSkillItem()				//////// useSkillItem belum sepenuhnya benar, pakai try & catch agar tidak ada kondisi skill tetap dihapus meskipun tidak terpakai karena masuk throw
+void player::useSkillItem()
 {
 	unsigned int i;
 	unsigned int j;
@@ -347,19 +347,21 @@ void player::useSkillItem()				//////// useSkillItem belum sepenuhnya benar, pak
 			cin >> j;
 			if (j >= 1 && j <= this->engimon_inventory.contents.size())
 			{
-				/*
 				try
 				{
-					e.learnMove("tackle")
+					engimon dummy = this->engimon_inventory.contents[j-1];	// hapus ini
+					//engimon dummy = new engimon(this->engimon_inventory.contents[j-1]);	// perbaiki ini
+					dummy.learnMove(this->skill_inventory.contents[i-1].getSkillName());
+					this->engimon_inventory.contents[j-1].learnMove(this->skill_inventory.contents[i-1].getSkillName());
+					deleteSkillItem(this->skill_inventory.contents[i-1].getSkillName());
 				}
-
 				catch (int e)
 				{
-				//handler
+					if (e == -1) cout << "Error, skill tidak ditemukan" << endl;
+					if (e == -2) cout << "Error, engimon tidak sesuai" << endl;
+					if (e == -3) cout << "Error, skill tidak compatible dengan elemen engimon" << endl;
+					if (e == -4) cout << "Error, skill sudah ada" << endl;
 				}
-				*/
-				this->engimon_inventory.contents[j-1].learnMove(this->skill_inventory.contents[i-1].getSkillName());
-				deleteSkillItem(this->skill_inventory.contents[i-1].getSkillName());
 			}
 		}
 	}
