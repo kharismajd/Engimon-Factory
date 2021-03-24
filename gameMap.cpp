@@ -62,13 +62,29 @@ void gameMap::printMap()
 void gameMap::printLegend()
 {
 	cout << "Legend:" << endl;
+	cout << "W/w: Water engimon" << endl;
+	cout << "I/i : Ice engimon" << endl;
+	cout << "F/f: Fire engimon" << endl;
+	cout << "G/g: Ground engimon" << endl;
+	cout << "E/e: Electric engimon" << endl;
+	cout << "L/l: Fire/Electric engimon" << endl;
+	cout << "S/s: Water/Ice engimon" << endl;
+	cout << "N/n: Water/Ground engimon" << endl;
+
+	cout << endl;
+	cout << "P: Player" << endl;
+	cout << "X: Active Engimon" << endl;
+
+	cout << endl;
+	cout << "- : Grassland" << endl;
+	cout << "o : Sea" << endl;
 }
 
 void moveTileEngimon(tile &tile1, tile &tile2)
 {
 	/*Menggerakan pokemon dari tile1 ke tile2*/
 
-	if (tile2.haveWildPokemon() == false && tile2.isTileValid(tile1.getEngimon()))
+	if (tile2.haveWildEngimon() == false && tile2.isTileValid(tile1.getEngimon()) && tile2.isPlayerHere() == false && tile2.isactiveEngimonHere() == false)
 	{
 		engimon nullEngimon;
 
@@ -95,7 +111,7 @@ void gameMap::moveWildEngimon()
 	{
 		for (j = 0; j < MAP_LENGTH; ++j)
 		{
-			if (tile_map[i][j].haveWildPokemon() == false)
+			if (tile_map[i][j].haveWildEngimon() == false)
 			{
 				tile_map[i][j].passed();
 			}
@@ -107,7 +123,7 @@ void gameMap::moveWildEngimon()
 	{
 		for (j = 0; j < MAP_LENGTH	; ++j)
 		{
-			if (tile_map[i][j].haveWildPokemon() && tile_map[i][j].isPass() == false)
+			if (tile_map[i][j].haveWildEngimon() && tile_map[i][j].isPass() == false)
 			{
 				// cout << j << "," << i << " ";
 
@@ -165,9 +181,9 @@ void gameMap::generateEngimon()
 		srand(seed);
 		randomY = rand() % MAP_WIDTH;
 
-		cout << randomX << "," << randomY << endl;
+		//cout << randomX << "," << randomY << endl;
 
-		if (tile_map[randomY][randomX].haveWildPokemon() == false)
+		if (tile_map[randomY][randomX].haveWildEngimon() == false)
 		{
 			tile_map[randomY][randomX].spawn();
 			gameMap::engimon_count++;
@@ -176,3 +192,41 @@ void gameMap::generateEngimon()
 	}
 }
 	
+void gameMap::updateMap(int player_x, int player_y, int active_x, int active_y)
+{
+	/*y itu baris, x itu column*/
+	for (int i = 0; i < MAP_WIDTH; ++i)
+	{
+		for (int j = 0; j < MAP_LENGTH; ++j)
+		{
+			tile_map[i][j].playerIsNotHere();
+			tile_map[i][j].activeEngimonIsNotHere();
+		}
+	}
+	this->tile_map[player_y][player_x].playerIsHere();
+	this->tile_map[active_y][active_x].activeEngimonIsHere();
+	gameMap::map_move_count--;
+
+	if (gameMap::map_move_count <= 0)
+	{
+		moveWildEngimon();
+		gameMap::map_move_count = 5;
+	}
+	this->tile_map[player_y][player_x].playerIsHere();
+	this->tile_map[active_y][active_x].activeEngimonIsHere();
+}
+
+void gameMap::deleteTileEngimon(int x, int y)
+{
+	engimon nullEngimon;
+	if (!(tile_map[y][x].isPlayerHere() || tile_map[y][x].isactiveEngimonHere()) && tile_map[y][x].haveWildEngimon())
+	{
+		this->tile_map[y][x].setEngimon(nullEngimon);
+		gameMap::engimon_count--;
+		if (gameMap::engimon_count < 3)
+		{
+			generateEngimon();
+		}
+	}
+	
+}

@@ -99,18 +99,18 @@ void player::deleteActiveEngimon()
 	}
 }
 
-void player::moveUp()
+void player::moveDown()
 {
-	if (player_y != 0){
+	if (player_y != 9){
 		int oldPosY = player_y;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
 		player_y += 1;
 		activeEngimon_y = oldPosY;
 	}
 }
 
-void player::moveDown()
+void player::moveUp()
 {
-	if (player_y != 9){
+	if (player_y != 0){
 		int oldPosY = player_y;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
 		player_y -= 1;
 		activeEngimon_y = oldPosY;
@@ -370,3 +370,10 @@ bool player::isInventoryFull()
 int player::getActivePetPosX() {return activeEngimon_x;}
 // Posisi activeEngimon_y
 int player::getActivePetPosY() {return activeEngimon_y;}
+// Posisi activeEngimon_x
+int player::getPlayerPosX() {return player_x;}
+// Posisi activeEngimon_y
+int player::getPlayerPosY() {return player_y;}
+
+//Nama player
+string player::getName() {return name;}

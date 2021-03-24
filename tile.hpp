@@ -17,7 +17,7 @@ public:
 	~tile();
 
 	bool isTileValid(engimon);
-	bool haveWildPokemon();
+	bool haveWildEngimon();
 
 	void passed();
 	void resetPass();
@@ -25,9 +25,19 @@ public:
 	void spawn();
 	void printTile();
 	
-	void setEngimon(engimon &e);
+	void setEngimon(engimon e);
 	engimon& getEngimon();
 	void setSymbol(char);
+
+	void playerIsHere();
+	void playerIsNotHere();
+	bool isPlayerHere();
+
+	void activeEngimonIsHere();
+	void activeEngimonIsNotHere();
+	bool isactiveEngimonHere();
+
+	void updateCharacter();
 
 	static int random_seed;
 	static engimon universal_nullEngimon;
@@ -38,8 +48,9 @@ protected:
 	engimon wild_engimon;
 	char symbol;
 	string tile_type; //Hanya berupa grassland atau sea
-	bool tilePass;
-
+	bool tilePass;	
+	bool isPlayer = false;
+	bool isActivePokemon = false;
 
 	
 };

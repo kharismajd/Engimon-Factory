@@ -67,6 +67,13 @@ public:
 	// Posisi activeEngimon_x
 	int getActivePetPosY();
 
+	int getPlayerPosX();
+	// Posisi activeEngimon_x
+	int getPlayerPosY();
+
+	// Mengambil name
+	string getName();
+
 protected:
 	string name;
 	int max_inventory_capacity;
