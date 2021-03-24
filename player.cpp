@@ -102,8 +102,10 @@ void player::deleteActiveEngimon()
 void player::moveDown()
 {
 	if (player_y != 9){
-		int oldPosY = player_y;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		int oldPosY = player_y;
 		player_y += 1;
+		activeEngimon_x = oldPosX;
 		activeEngimon_y = oldPosY;
 	}
 }
@@ -111,8 +113,10 @@ void player::moveDown()
 void player::moveUp()
 {
 	if (player_y != 0){
-		int oldPosY = player_y;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		int oldPosY = player_y;
 		player_y -= 1;
+		activeEngimon_x = oldPosX;
 		activeEngimon_y = oldPosY;
 	}
 }
@@ -121,8 +125,10 @@ void player::moveLeft()
 {
 	if (player_x != 0){
 		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		int oldPosY = player_y;
 		player_x -= 1;
 		activeEngimon_x = oldPosX;
+		activeEngimon_y = oldPosY;
 	}
 }
 
@@ -130,8 +136,10 @@ void player::moveRight()
 {
 	if (player_x != 11){
 		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		int oldPosY = player_y;
 		player_x += 1;
 		activeEngimon_x = oldPosX;
+		activeEngimon_y = oldPosY;
 	}
 }
 
