@@ -40,10 +40,13 @@ int main()
 	//test.showAttributes();
 	Gab.cry();
 
-	engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", 10, 50);
+	engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Magikarp", 10, 50);
 	engimon Pulu2("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", 13, 20);
 	engimon Pulu3("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", 2, 3);
-	player newPlayer("coba", Pulu, 50, 0, 1);
+	Pulu.learnMove("bubble");
+	Pulu3.learnMove("tackle");
+	Pulu3.printMoves();
+	player newPlayer("coba", Pulu, 50, 0, 1, 0, 0);
 
 	newPlayer.showEngimonDetails();
 	Battle b2(&newPlayer.getActiveEngimon(), &Pulu3, &newPlayer);
