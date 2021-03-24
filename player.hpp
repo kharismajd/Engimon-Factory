@@ -61,6 +61,12 @@ public:
 
 	// Mengecek jika inventory full
 	bool isInventoryFull();
+
+	// Posisi activeEngimon_x
+	int getActivePetPosX();
+	// Posisi activeEngimon_x
+	int getActivePetPosY();
+
 protected:
 	string name;
 	int max_inventory_capacity;

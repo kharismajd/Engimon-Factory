@@ -70,6 +70,10 @@ int skill :: getBasePower(){
 	return this->base_power;
 }
 
+string skill :: getUniqueName(){
+	return this->engimon_unique;
+}
+
 int skill :: getMasteryLv(){
 	return this->mastery_level;
 }
@@ -108,59 +112,59 @@ void skill::setAmountInInventory(int amount)
 void skill::InitializeSkillDatabase()
 {
 	string element_tackle[5] = {"Fire", "Water", "Electric", "Ground", "Ice"};
-	skill tackle("tackle", 50, 0, element_tackle, "0");
+	skill tackle("tackle", 50, 1, element_tackle, "0");
 	skill_database.push_back(tackle);
 
 	string element_ember[5] = {"Fire"};
-	skill ember("ember", 80, 0, element_ember, "0");
+	skill ember("ember", 80, 1, element_ember, "0");
 	skill_database.push_back(ember);
 
 	string element_bubble[5] = {"Water"};
-	skill bubble("bubble", 80, 0, element_bubble, "0");
+	skill bubble("bubble", 80, 1, element_bubble, "0");
 	skill_database.push_back(bubble);
 
 	string element_rock_smash[5] = {"Ground"};
-	skill rock_smash("rock_smash", 80, 0, element_rock_smash, "0");
+	skill rock_smash("rock_smash", 80, 1, element_rock_smash, "0");
 	skill_database.push_back(rock_smash);
 
 	string element_thunderbolt[5] = {"Electric"};
-	skill thunderbolt("thunderbolt", 80, 0, element_thunderbolt, "0");
+	skill thunderbolt("thunderbolt", 80, 1, element_thunderbolt, "0");
 	skill_database.push_back(thunderbolt);
 
 	string element_ice_beam[5] = {"Ice"};
-	skill ice_beam("ice_beam", 80, 0, element_ice_beam, "0");
+	skill ice_beam("ice_beam", 80, 1, element_ice_beam, "0");
 	skill_database.push_back(ice_beam);
 
 	string element_charred[5] = {"Fire"};
-	skill charred("charred", 80, 0, element_charred, "Charmander");
+	skill charred("charred", 80, 1, element_charred, "Charmander");
 	skill_database.push_back(charred);
 
 	string element_splash[5] = {"Water"};
-	skill splash("splash", 5, 0, element_splash, "Magikarp");
+	skill splash("splash", 5, 1, element_splash, "Magikarp");
 	skill_database.push_back(splash);
 
 	string element_electrified_tail[5] = {"Electric"};
-	skill electrified_tail("electrified_tail", 80, 0, element_electrified_tail, "Pikachu");
+	skill electrified_tail("electrified_tail", 80, 1, element_electrified_tail, "Pikachu");
 	skill_database.push_back(electrified_tail);
 
 	string element_rock_punch[5] = {"Ground"};
-	skill rock_punch("rock_punch", 80, 0, element_rock_punch, "Geodude");
+	skill rock_punch("rock_punch", 80, 1, element_rock_punch, "Geodude");
 	skill_database.push_back(rock_punch);
 
 	string element_snowball[5] = {"Ice"};
-	skill snowball("snowball", 80, 0, element_snowball, "Glastrier");
+	skill snowball("snowball", 80, 1, element_snowball, "Glastrier");
 	skill_database.push_back(snowball);
 
 	string element_overload[5] = {"Fire", "Electric"};
-	skill overload("overload", 80, 0, element_overload, "Vulpichu");
+	skill overload("overload", 80, 1, element_overload, "Vulpichu");
 	skill_database.push_back(overload);
 
 	string element_ice_breath[5] = {"Water", "Ice"};
-	skill ice_breath("ice_breath", 80, 0, element_ice_breath, "Lapras");
+	skill ice_breath("ice_breath", 80, 1, element_ice_breath, "Lapras");
 	skill_database.push_back(ice_breath);
 
 	string element_mudball[5] = {"Water", "Ground"};
-	skill mudball("mudball", 80, 0, element_mudball, "Wooper");
+	skill mudball("mudball", 80, 1, element_mudball, "Wooper");
 	skill_database.push_back(mudball);
 
 }

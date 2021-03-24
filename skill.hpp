@@ -23,6 +23,7 @@ public:
 	int getAmountInInventory();
 	vector<string> getElements();
 	int getBasePower();
+	string getUniqueName();
 	int getMasteryLv();
 	void setMasteryLv(int);
 	void printAll();

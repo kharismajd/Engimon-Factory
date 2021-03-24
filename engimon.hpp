@@ -28,7 +28,6 @@ public:
 	void setSkill (skill x, int idx, int mastery_level);
 	// sets moves[idx] of engimon to a copy of skill a, with corresponding mastery_level
 
-	void addSkill(skill);
 	void cry();
 	
 	void setActive();

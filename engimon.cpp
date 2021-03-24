@@ -173,14 +173,14 @@ void engimon::printMoves()
 }
 void engimon::gainExp(int exp)
 {
-	experience = exp;
+	experience += exp;
 	if (experience > 100)
 	{
 		level = experience/100+ level;
 		experience = experience % 100;
 	}
 
-	cummulative_experience = (level-1)*100 + exp;
+	cummulative_experience = cummulative_experience + exp;
 }
 void engimon::learnMove(string move)
 {
@@ -239,6 +239,7 @@ void engimon::setSkill(skill x, int idx, int mastery_level)
 {
 	x.setMasteryLv(mastery_level);
 	this->moves[idx] = x;
+
 }
 void engimon::cry()
 {
