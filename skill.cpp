@@ -70,6 +70,10 @@ int skill :: getBasePower(){
 	return this->base_power;
 }
 
+string skill :: getUniqueName(){
+	return this->engimon_unique;
+}
+
 int skill :: getMasteryLv(){
 	return this->mastery_level;
 }
