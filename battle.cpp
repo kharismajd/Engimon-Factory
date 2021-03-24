@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <ctime>
 #include "engimon.hpp"
 #include "player.hpp"
 #include "skill.hpp"
@@ -206,22 +207,35 @@ void Battle :: printTotalPowLv(float mymonpower, float yourmonpower){
 }
 
 void Battle :: win(){
+    int countSkill;
+    int isNull;
     int diffLv = yourmon->getLevel() - mymon->getLevel();
     float exp = (10*diffLv + 600)/(80-diffLv)+5;
 
     mymon->gainExp(exp);
     character->addEngimon(*this->yourmon);
     
-    int idxSkill = rand() % 4;
-    character->addSkillItem(yourmon->getMove(idxSkill).getSkillName());
+    isNull = 0;
+    countSkill = 0;
+    while (!isNull && countSkill<4){
+        if (yourmon->getMove(countSkill).getSkillName()=="null"){
+            isNull = 1;
+        } else {
+            countSkill++;
+        }
+    }
+    srand(time(0));
+    int idxSkill = rand() % (countSkill);
+    string newSkill = yourmon->getMove(idxSkill).getSkillName();
+    character->addSkillItem(newSkill);
+    cout << "Berhasil mendapatkan skill item \""<< newSkill << "\" dari Wild Engimon" <<endl;
+    cout << "Berhasil mendapatkan engimon "<< yourmon->getSpecies() << " [Lv " << yourmon->getLevel() << "]" <<endl;
     this->~Battle();
 }
 
 void Battle :: lose(){
     character->deleteActiveEngimon();
-    cout << "lose?" <<endl;
     // this->~Battle();
-    
 }
 
 void Battle ::initiateBattle(){
