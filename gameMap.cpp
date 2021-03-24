@@ -203,6 +203,12 @@ void gameMap::updateMap(int player_x, int player_y, int active_x, int active_y)
 			tile_map[i][j].activeEngimonIsNotHere();
 		}
 	}
+
+	if (tile_map[active_y][active_x].haveWildEngimon())
+	{
+		throw "Active Engimon menabrak Wild Engimon";
+	}
+
 	this->tile_map[player_y][player_x].playerIsHere();
 	this->tile_map[active_y][active_x].activeEngimonIsHere();
 	gameMap::map_move_count--;
