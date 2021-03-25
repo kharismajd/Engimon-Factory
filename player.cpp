@@ -91,8 +91,10 @@ void player::deleteActiveEngimon()
 	if (this->getActiveEngimon().getName() != "null")
 	{
 		deleteInventoryContent(this->getActiveEngimon());
-		this->activeEngimon_x = -1;
-		this->activeEngimon_y = -1;
+		if (this->engimon_inventory.countItem() > 0)
+		{
+			this->engimon_inventory.contents[0].setActive();
+		}
 	}
 	else
 	{
@@ -441,10 +443,19 @@ bool player::isInventoryFull()
 int player::getActivePetPosX() {return activeEngimon_x;}
 // Posisi activeEngimon_y
 int player::getActivePetPosY() {return activeEngimon_y;}
-// Posisi activeEngimon_x
+// Set posisi activeEngimon_x
+void player::setActivePetPosX(int x) {this->activeEngimon_x = x;}
+// Set posisi activeEngimon_x
+void player::setActivePetPosY(int y) {this->activeEngimon_y = y;}
+
+// Posisi player x
 int player::getPlayerPosX() {return player_x;}
-// Posisi activeEngimon_y
+// Posisi player y
 int player::getPlayerPosY() {return player_y;}
+// Set posisi player x
+void player::setPlayerPosX(int x) {this->player_x = x;}
+// Set posisi player y
+void player::setPlayerPosY(int y) {this->player_y = y;}
 
 //Nama player
 string player::getName() {return name;}

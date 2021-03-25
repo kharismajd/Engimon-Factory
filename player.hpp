@@ -53,23 +53,23 @@ public:
 	
 	// Berinteraksi dengan engimon yang sedang aktif
 	void interact();
-
 	// Menggunakan skill item
 	void useSkillItem();
-	
+	// Melakukan breeding
 	void breeding();
 
 	// Mengecek jika inventory full
 	bool isInventoryFull();
 
-	// Posisi activeEngimon_x
 	int getActivePetPosX();
-	// Posisi activeEngimon_x
 	int getActivePetPosY();
+	void setActivePetPosX(int);
+	void setActivePetPosY(int);
 
 	int getPlayerPosX();
-	// Posisi activeEngimon_x
 	int getPlayerPosY();
+	void setPlayerPosX(int);
+	void setPlayerPosY(int);
 
 	// Mengambil name
 	string getName();
