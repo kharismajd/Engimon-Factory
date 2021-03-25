@@ -3,11 +3,12 @@
 #include <cctype>
 #include <algorithm>
 #include "gameMap.hpp"
+#include "battle.hpp"
 #include "player.hpp"
 using namespace std;
 
 /*
-g++ main.cpp tile.cpp gameMap.cpp engimon.cpp skill.cpp player.cpp inventory.cpp
+g++ main.cpp tile.cpp gameMap.cpp engimon.cpp skill.cpp player.cpp inventory.cpp battle.cpp
 */
 
 void printHelp()
@@ -15,6 +16,34 @@ void printHelp()
 	cout << "Commands: " << endl;
 	cout << "Move: w/a/s/d" << endl;
 	cout << "Legend: l" << endl;
+	cout << "Interact: z" << endl;
+	cout << "Show Map: m" << endl;
+	cout << "Battle: b" << endl;
+	cout << "Show Engimon: e" << endl;
+	cout << "Show Item: i" << endl;
+	cout << "Use Skill Item: u" << endl;
+	cout << "Switch Active Engimon: x" << endl;
+}
+
+void resolveMove(player &P, gameMap &g)
+{
+	if (g.isTileOccupied(P.getPlayerPosX(),P.getPlayerPosY()))
+	{
+		cout << "Battle" << endl;
+		Battle b(&(P.getActiveEngimon()), &(g.getTileEngimon(P.getPlayerPosX(),P.getPlayerPosY())), &P);
+		b.initiateBattle();
+	}
+
+	try
+	{
+		g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
+	}
+	catch(const char* error)
+	{
+		cout << error << endl;
+	}
+	
+	g.printMap();
 }
 
 int main()
@@ -32,7 +61,7 @@ int main()
 	gameMap g;
 	
 
-	//Program jalan
+	// /*Program jalan*/
 	// cout << "... Compile Success!" << endl;
 
 	// cout << "Pilih engimon pertama anda" << endl;
@@ -61,7 +90,7 @@ int main()
 
 	// try
 	// {
-	// 	starter_engimon = engimon(starter_engimon_name, &nullEngimon, &nullEngimon, userInput, 1, 0);
+	// 	starter_engimon = engimon(starter_engimon_name, &nullEngimon, &nullEngimon, userInput, 20, 0);
 	// }
 	// catch (char const* e)
 	// {
@@ -93,9 +122,10 @@ int main()
 	// cin >> userInput;
 	// cout << endl;
 
-	//player P(userInput, starter_engimon, 50, 5, 4, 5, 5);
-	starter_engimon = engimon("Gab", &nullEngimon, &nullEngimon, "Pikachu", 1, 0);
-	player P("Ash", starter_engimon, 50, 5, 4, 5, 5);
+	// player P(userInput, starter_engimon, 50, 5, 4, 5, 5);
+	starter_engimon = engimon("Gab", &nullEngimon, &nullEngimon, "Pikachu", 100, 0);
+	starter_engimon.showAttributes();
+	player P("Ash", starter_engimon, 50, 5, 6, 5, 5);
 	cout << endl;
 	cout << P.getName() << ", you are now ready, step in to the world of engimon" << endl;
 
@@ -121,34 +151,55 @@ int main()
 		else if (userInput == "w")
 		{
 			P.moveUp();
-			g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
-			g.printMap();
+			resolveMove(P, g);
+			
 		}
 		else if (userInput == "a")
 		{
 			P.moveLeft();
-			g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
-			g.printMap();
+			resolveMove(P, g);
 		}
 		else if (userInput == "s")
 		{
 			P.moveDown();
-			g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
-			g.printMap();
+			resolveMove(P, g);
 		}
 		else if (userInput == "d")
 		{
 			P.moveRight();
-			g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
-			g.printMap();
+			resolveMove(P, g);
 		}
 		else if (userInput == "z")
 		{
 			P.interact();
 		}
+		else if (userInput == "m")
+		{
+			g.printMap();
+		}
+		else if (userInput == "b")
+		{
+			//Breeding
+		}
+		else if (userInput == "e")
+		{
+			P.showEngimonList();
+		}
+		else if (userInput == "i")
+		{
+			P.showSkillItemList();
+		}
+		else if (userInput == "u")
+		{
+			P.useSkillItem();
+		}
+		else if (userInput == "x")
+		{
+			P.switchOutEngimon();
+		}
 		else
 		{
-			cout << "Invalid Command: " << endl;
+			cout << "Invalid Command, type 'h' to list all commands" << endl;
 		}
 		cin >> userInput;
 	}

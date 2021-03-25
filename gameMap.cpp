@@ -236,3 +236,41 @@ void gameMap::deleteTileEngimon(int x, int y)
 	}
 	
 }
+
+
+engimon& gameMap::getTileEngimon(int x, int y)
+{
+	return tile_map[y][x].getEngimon();
+}
+string gameMap::findNearbyEngimon(int x, int y)
+{
+	if (y > 0 && tile_map[y-1][x].haveWildEngimon())
+	{
+		return "up";
+	}
+	else if (x > 0 && tile_map[y][x-1].haveWildEngimon())
+	{
+		return "left";
+	}
+	else if (y < MAP_WIDTH-1 &&tile_map[y+1][x].haveWildEngimon())
+	{
+		return "up";
+	}
+	else if (x < MAP_LENGTH-1 && tile_map[y][x+1].haveWildEngimon())
+	{
+		return "right";
+	}
+	else if (tile_map[y][x].haveWildEngimon())
+	{
+		return "center";
+	}
+	else
+	{
+		return "null";
+	}
+}
+
+bool gameMap::isTileOccupied(int x, int y)
+{
+	return (tile_map[y][x].haveWildEngimon());
+}

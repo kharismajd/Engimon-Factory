@@ -27,7 +27,9 @@ public:
 	void updateMap(int player_x, int player_y, int active_x, int active_y);
 
 	void deleteTileEngimon(int x, int y);
-	
+	engimon& getTileEngimon(int x, int y);
+	string findNearbyEngimon(int x, int y);
+	bool isTileOccupied(int x, int y);
 
 protected:
 	tile** tile_map;
