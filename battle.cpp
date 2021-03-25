@@ -61,7 +61,7 @@ float Battle :: elmtAdvantage(string* elmtEngimonFrom, string* elmtEngimonTo){
                     elmtComp2 = this->attrAdv[FIRE_IDX][FIRE_IDX];
                 } else if (elmtEngimonTo[j]=="Water"){
                     elmtComp2 = this->attrAdv[FIRE_IDX][WATER_IDX];
-                } else if (elmtEngimonTo[j]=="Electro"){
+                } else if (elmtEngimonTo[j]=="Electric"){
                     elmtComp2 = this->attrAdv[FIRE_IDX][ELEC_IDX];
                 } else if (elmtEngimonTo[j]=="Ground"){
                     elmtComp2 = this->attrAdv[FIRE_IDX][GROUND_IDX];
@@ -81,7 +81,7 @@ float Battle :: elmtAdvantage(string* elmtEngimonFrom, string* elmtEngimonTo){
                     elmtComp2 = this->attrAdv[WATER_IDX][FIRE_IDX];
                 } else if (elmtEngimonTo[j]=="Water"){
                     elmtComp2 = this->attrAdv[WATER_IDX][WATER_IDX];
-                } else if (elmtEngimonTo[j]=="Electro"){
+                } else if (elmtEngimonTo[j]=="Electric"){
                     elmtComp2 = this->attrAdv[WATER_IDX][ELEC_IDX];
                 } else if (elmtEngimonTo[j]=="Ground"){
                     elmtComp2 = this->attrAdv[WATER_IDX][GROUND_IDX];
@@ -93,7 +93,7 @@ float Battle :: elmtAdvantage(string* elmtEngimonFrom, string* elmtEngimonTo){
                     elmtComp1 = elmtComp2;
                 }
             }
-        } else if (elmtEngimonFrom[i]=="Electro"){
+        } else if (elmtEngimonFrom[i]=="Electric"){
             for (j=0;j<2;j++){
                 if (elmtEngimonTo[j]=="null"){
                     //Do nothing
@@ -101,7 +101,7 @@ float Battle :: elmtAdvantage(string* elmtEngimonFrom, string* elmtEngimonTo){
                     elmtComp2 = this->attrAdv[ELEC_IDX][FIRE_IDX];
                 } else if (elmtEngimonTo[j]=="Water"){
                     elmtComp2 = this->attrAdv[ELEC_IDX][WATER_IDX];
-                } else if (elmtEngimonTo[j]=="Electro"){
+                } else if (elmtEngimonTo[j]=="Electric"){
                     elmtComp2 = this->attrAdv[ELEC_IDX][ELEC_IDX];
                 } else if (elmtEngimonTo[j]=="Ground"){
                     elmtComp2 = this->attrAdv[ELEC_IDX][GROUND_IDX];
@@ -121,7 +121,7 @@ float Battle :: elmtAdvantage(string* elmtEngimonFrom, string* elmtEngimonTo){
                     elmtComp2 = this->attrAdv[GROUND_IDX][FIRE_IDX];
                 } else if (elmtEngimonTo[j]=="Water"){
                     elmtComp2 = this->attrAdv[GROUND_IDX][WATER_IDX];
-                } else if (elmtEngimonTo[j]=="Electro"){
+                } else if (elmtEngimonTo[j]=="Electric"){
                     elmtComp2 = this->attrAdv[GROUND_IDX][ELEC_IDX];
                 } else if (elmtEngimonTo[j]=="Ground"){
                     elmtComp2 = this->attrAdv[GROUND_IDX][GROUND_IDX];
@@ -141,7 +141,7 @@ float Battle :: elmtAdvantage(string* elmtEngimonFrom, string* elmtEngimonTo){
                     elmtComp2 = this->attrAdv[ICE_IDX][FIRE_IDX];
                 } else if (elmtEngimonTo[j]=="Water"){
                     elmtComp2 = this->attrAdv[ICE_IDX][WATER_IDX];
-                } else if (elmtEngimonTo[j]=="Electro"){
+                } else if (elmtEngimonTo[j]=="Electric"){
                     elmtComp2 = this->attrAdv[ICE_IDX][ELEC_IDX];
                 } else if (elmtEngimonTo[j]=="Ground"){
                     elmtComp2 = this->attrAdv[ICE_IDX][GROUND_IDX];
@@ -194,11 +194,8 @@ float* Battle :: power(){
 
     float* power = new float[2];
 
-    //power[0] = 
-    cout << "MYMON" << mymon.getLevel()<< endl << elmtAdvantage(myelmt,yourelmt) <<endl<< sumofmyskill <<endl;
-    //power[1] = 
-    cout << "YOURMON" << yourmon.getLevel()<<endl<<elmtAdvantage(yourelmt,myelmt)<<endl<< sumofyourskill << endl;
-
+    power[0] = mymon.getLevel()*elmtAdvantage(myelmt,yourelmt)+ sumofmyskill;
+    power[1] = yourmon.getLevel()*elmtAdvantage(yourelmt,myelmt)+ sumofyourskill;
     
     return power;
 }
@@ -238,11 +235,10 @@ void Battle :: win(){
 
 void Battle :: lose(){
     character->deleteActiveEngimon();
-    character->switchOutEngimon();
     // this->~Battle();
 }
 
-void Battle ::initiateBattle(){
+bool Battle ::initiateBattle(){
     float* pow = new float[2];
     pow = power();
 
@@ -251,8 +247,10 @@ void Battle ::initiateBattle(){
     if (pow[0]>pow[1]){
         cout << "You Win!!" << endl;
         win();
+        return true;
     } else {
         cout << "You Lose!!" << endl;
         lose();
+        return false;
     }
 }
