@@ -247,6 +247,7 @@ void player::showSkillItemList()
 		for (i = this->skill_inventory.contents.begin(); i != this->skill_inventory.contents.end(); ++i)
 		{
 			cout << count << ". " << (*i).getSkillName() << " (" << (*i).getAmountInInventory() << ")" << endl;
+			count++;
 		}
 	}
 	else
