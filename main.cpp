@@ -8,7 +8,7 @@
 using namespace std;
 
 /*
-g++ main.cpp tile.cpp gameMap.cpp engimon.cpp skill.cpp player.cpp inventory.cpp battle.cpp
+g++ main.cpp tile.cpp gameMap.cpp engimon.cpp skill.cpp player.cpp inventory.cpp battle.cpp breeder.cpp wildEngimon.cpp
 */
 
 void printHelp()
@@ -18,21 +18,37 @@ void printHelp()
 	cout << "Legend: l" << endl;
 	cout << "Interact: z" << endl;
 	cout << "Show Map: m" << endl;
-	cout << "Battle: b" << endl;
+	cout << "Breed: b" << endl;
 	cout << "Show Engimon: e" << endl;
 	cout << "Show Item: i" << endl;
 	cout << "Use Skill Item: u" << endl;
 	cout << "Switch Active Engimon: x" << endl;
+	cout << "Inspect Active Engimon: n" << endl;
 }
 
-void resolveMove(player &P, gameMap &g)
+void resolveMove(player &P, gameMap &g, player &tempP)
 {
+	bool winBattle;
 	if (g.isTileOccupied(P.getPlayerPosX(),P.getPlayerPosY()))
 	{
 		cout << "Battle" << endl;
 		Battle b(&(P.getActiveEngimon()), &(g.getTileEngimon(P.getPlayerPosX(),P.getPlayerPosY())), &P);
-		b.initiateBattle();
+		winBattle = b.initiateBattle();
+		if (winBattle)
+		{
+			g.deleteTileEngimon(P.getPlayerPosX(), P.getPlayerPosY());
+		}
+		
+		else
+		{
+			P.setPlayerPosX(tempP.getPlayerPosX());
+			P.setPlayerPosY(tempP.getPlayerPosY());
+			P.setActivePetPosX(tempP.getActivePetPosX());
+			P.setActivePetPosY(tempP.getActivePetPosY());
+		}
 	}
+
+
 
 	try
 	{
@@ -58,6 +74,7 @@ int main()
 	string userInput;
 	string starter_engimon_name;
 	engimon starter_engimon;
+	player tempP;
 	gameMap g;
 	
 
@@ -124,8 +141,11 @@ int main()
 
 	// player P(userInput, starter_engimon, 50, 5, 4, 5, 5);
 	starter_engimon = engimon("Gab", &nullEngimon, &nullEngimon, "Pikachu", 100, 0);
-	starter_engimon.showAttributes();
+
+	engimon	starter_engimon2("Glastrier", &nullEngimon, &nullEngimon, "Glastrier", 100, 0);
+
 	player P("Ash", starter_engimon, 50, 5, 6, 5, 5);
+	P.addInventoryContent(starter_engimon2);
 	cout << endl;
 	cout << P.getName() << ", you are now ready, step in to the world of engimon" << endl;
 
@@ -150,24 +170,28 @@ int main()
 		}
 		else if (userInput == "w")
 		{
+			tempP = P;
 			P.moveUp();
-			resolveMove(P, g);
+			resolveMove(P, g, tempP);
 			
 		}
 		else if (userInput == "a")
 		{
+			tempP = P;
 			P.moveLeft();
-			resolveMove(P, g);
+			resolveMove(P, g, tempP);
 		}
 		else if (userInput == "s")
 		{
+			tempP = P;
 			P.moveDown();
-			resolveMove(P, g);
+			resolveMove(P, g, tempP);
 		}
 		else if (userInput == "d")
 		{
+			tempP = P;
 			P.moveRight();
-			resolveMove(P, g);
+			resolveMove(P, g, tempP);
 		}
 		else if (userInput == "z")
 		{
@@ -179,7 +203,7 @@ int main()
 		}
 		else if (userInput == "b")
 		{
-			//Breeding
+			P.breeding();
 		}
 		else if (userInput == "e")
 		{
@@ -196,6 +220,10 @@ int main()
 		else if (userInput == "x")
 		{
 			P.switchOutEngimon();
+		}
+		else if (userInput == "n")
+		{
+			P.showEngimonDetails();
 		}
 		else
 		{

@@ -186,10 +186,12 @@ void engimon::learnMove(string move)
 {
 	auto itr = skill::skill_database.begin();
 	for (itr = skill::skill_database.begin(); itr != skill::skill_database.end(); ++itr)
+	{
 		if ((*itr).getSkillName() == move)	
 		{
 			break;
 		}
+	}
     
     if (itr == skill::skill_database.end())
     {
@@ -283,6 +285,9 @@ void engimon::setLevel(int x) {
 	this->level = x;
 }
 
+int engimon::getCummulativeExp(){
+	return cummulative_experience;
+}
 string engimon::getElmt1() {
 	return element1;
 }

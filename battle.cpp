@@ -230,6 +230,13 @@ void Battle :: win(){
     character->addInventoryContent(newSkill);
     cout << "Berhasil mendapatkan skill item \""<< newSkill << "\" dari Wild Engimon" <<endl;
     cout << "Berhasil mendapatkan engimon "<< yourmon->getSpecies() << " [Lv " << yourmon->getLevel() << "]" <<endl;
+
+    if (mymon->getCummulativeExp() > cummulative_experience_limit)
+    {
+        cout << mymon->getName() << " meninggal karena tua" << endl;
+        character->deleteActiveEngimon();
+
+    }
     this->~Battle();
 }
 

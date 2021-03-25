@@ -114,7 +114,11 @@ void tile::spawn()
 
 	/*Pembuatan Engimon*/
 	skill nullSkill;
-	engimon potentialEngimon(get<0>(*idx), &universal_nullEngimon, &universal_nullEngimon, get<0>(*idx), randomLevel, 0);
+	//engimon potentialEngimon(get<0>(*idx), &universal_nullEngimon, &universal_nullEngimon, get<0>(*idx), randomLevel, 0);
+
+
+	wildEngimon potentialEngimon(get<0>(*idx), randomLevel);
+		//get<0>(*idx) == nama species engimon
 
 	while(!this->isTileValid(potentialEngimon))
 	{
@@ -132,7 +136,8 @@ void tile::spawn()
 			idx = i;
 		}
 
-		potentialEngimon = engimon(get<0>(*idx), &universal_nullEngimon, &universal_nullEngimon, get<0>(*idx), randomLevel, 0);
+		//potentialEngimon = engimon(get<0>(*idx), &universal_nullEngimon, &universal_nullEngimon, get<0>(*idx), randomLevel, 0);
+		potentialEngimon = wildEngimon(get<0>(*idx), randomLevel);
 	}
 
 	this->setEngimon(potentialEngimon);

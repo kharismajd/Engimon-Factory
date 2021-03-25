@@ -12,6 +12,7 @@ using namespace std;
 
 #define string_null "null"
 #define name_null "null"
+#define cummulative_experience_limit 100000
 class engimon
 {
 public:
@@ -19,7 +20,7 @@ public:
 	engimon(string nm, engimon* pr1, engimon* pr2, string sp, int lvl, int exp);
 	engimon(const engimon& e);
 	engimon& operator=(const engimon& e);
-	~engimon();
+	virtual ~engimon();
 
 	void showAttributes();
 	void printMoves();
@@ -37,6 +38,7 @@ public:
 	string getSpecies();
 	int getLevel();
 	void setLevel(int);
+	int getCummulativeExp();
 
 	string getElmt1();
 	string getElmt2();

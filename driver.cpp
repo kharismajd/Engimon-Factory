@@ -4,11 +4,15 @@
 #include <vector>
 #include "inventory.hpp"
 #include "battle.hpp"
+#include "wildEngimon.hpp"
 #include <set>
 using namespace std;
 
 /*Compile dengan*/
-/*g++ driver.cpp engimon.cpp skill.cpp, player.cpp, inventory.cpp*/
+/*
+g++ driver.cpp engimon.cpp skill.cpp wildEngimon.cpp
+
+, player.cpp, inventory.cpp*/
 int main()
 {
 	string elem[5] = {"Fire", "Water", "Electric", "Ice"};
@@ -46,12 +50,17 @@ int main()
 	Pulu.learnMove("bubble");
 	Pulu3.learnMove("tackle");
 	Pulu3.printMoves();
-	player newPlayer("coba", Pulu, 50, 0, 1, 0, 0);
 
-	newPlayer.showEngimonDetails();
-	cout << endl <<Pulu3.getLevel();
-	Battle b2(&newPlayer.getActiveEngimon(), &Pulu3, &newPlayer);
-	b2.initiateBattle();
+	cout << endl;
+	wildEngimon WILDE("Pikachu",20);
+	WILDE.showAttributes();
+	
+	// player newPlayer("coba", Pulu, 50, 0, 1, 0, 0);
+
+	// newPlayer.showEngimonDetails();
+	// cout << endl <<Pulu3.getLevel();
+	// Battle b2(&newPlayer.getActiveEngimon(), &Pulu3, &newPlayer);
+	// b2.initiateBattle();
 	//newPlayer.getActiveEngimon().getName();
 
 	// Battle b1(&Pulu, &Pulu2, &newPlayer);

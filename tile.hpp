@@ -3,6 +3,7 @@
 #include <iterator> 
 #include <vector>
 #include "engimon.hpp"
+#include "wildEngimon.hpp"
 using namespace std;
 
 #define HGIH_LEVEL_CAP 20

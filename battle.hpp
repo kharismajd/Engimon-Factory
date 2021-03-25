@@ -37,7 +37,7 @@ class Battle {
         void printTotalPowLv(float mymonpower, float yourmonpower);
         void win(); //add exp, add random skill item, add engimon
         void lose(); //mati
-        boolean initiateBattle();
+        bool initiateBattle();
 };
 
 #endif
