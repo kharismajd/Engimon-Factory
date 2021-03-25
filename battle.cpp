@@ -213,7 +213,7 @@ void Battle :: win(){
     float exp = (10*diffLv + 600)/(80-diffLv)+5;
 
     mymon->gainExp(exp);
-    character->addEngimon(*this->yourmon);
+    character->addInventoryContent(*this->yourmon);
     
     isNull = 0;
     countSkill = 0;
@@ -227,7 +227,7 @@ void Battle :: win(){
     srand(time(0));
     int idxSkill = rand() % (countSkill);
     string newSkill = yourmon->getMove(idxSkill).getSkillName();
-    character->addSkillItem(newSkill);
+    character->addInventoryContent(newSkill);
     cout << "Berhasil mendapatkan skill item \""<< newSkill << "\" dari Wild Engimon" <<endl;
     cout << "Berhasil mendapatkan engimon "<< yourmon->getSpecies() << " [Lv " << yourmon->getLevel() << "]" <<endl;
     this->~Battle();

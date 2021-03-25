@@ -6,6 +6,7 @@
 #include "engimon.hpp"
 #include "skill.hpp"
 #include "inventory.hpp"
+#include "breeder.hpp"
 using namespace std;
 
 engimon nullEngimon;
@@ -30,7 +31,7 @@ player::player(string name, engimon starting_engimon, int max_inventory_capacity
 	this->player_y = player_y;
 	this->activeEngimon_x = activeEngimon_x;
 	this->activeEngimon_y = activeEngimon_y;
-	this->addEngimon(starting_engimon);
+	this->addInventoryContent(starting_engimon);
 }
 
 player::player(const player& play)
@@ -89,9 +90,11 @@ void player::deleteActiveEngimon()
 {
 	if (this->getActiveEngimon().getName() != "null")
 	{
-		deleteEngimon(this->getActiveEngimon());
-		this->activeEngimon_x = -1;
-		this->activeEngimon_y = -1;
+		deleteInventoryContent(this->getActiveEngimon());
+		if (this->engimon_inventory.countItem() > 0)
+		{
+			this->engimon_inventory.contents[0].setActive();
+		}
 	}
 	else
 	{
@@ -143,7 +146,7 @@ void player::moveRight()
 	}
 }
 
-void player::addEngimon(engimon engimon)
+void player::addInventoryContent(engimon engimon)
 {
 	if (engimon.getName() != "null")
 	{
@@ -158,12 +161,12 @@ void player::addEngimon(engimon engimon)
 	}
 }
 
-void player::deleteEngimon(engimon& engimon)
+void player::deleteInventoryContent(engimon& engimon)
 {
 	this->engimon_inventory.deleteItem(engimon);
 }
 
-void player::addSkillItem(string skillName)
+void player::addInventoryContent(string skillName)
 {
 	if (skillName != "null")
 	{	
@@ -190,7 +193,7 @@ void player::addSkillItem(string skillName)
 	}
 }
 
-void player::deleteSkillItem(string skillName)
+void player::deleteInventoryContent(string skillName)
 {
 	auto itr = skill::skill_database.begin();
 	for (itr = skill::skill_database.begin(); itr != skill::skill_database.end(); ++itr)
@@ -261,7 +264,7 @@ void player::deleteEngimonSelect()
 		cin >> i;
 		if (i >= 1 && i <= this->engimon_inventory.contents.size())
 		{
-			deleteEngimon(this->engimon_inventory.contents[i-1]);
+			deleteInventoryContent(this->engimon_inventory.contents[i-1]);
 		}
 	}
 	else
@@ -329,7 +332,14 @@ void player::switchOutEngimon()
 
 void player::interact()
 {
-	this->getActiveEngimon().cry();
+	if (this->getActiveEngimon().getName() != "null")
+	{
+		this->getActiveEngimon().cry();
+	}
+	else
+	{
+		cout << "Tidak ada engimon yang sedang aktif" << endl;
+	}
 }
 
 void player::useSkillItem()
@@ -353,7 +363,7 @@ void player::useSkillItem()
 					//engimon dummy = new engimon(this->engimon_inventory.contents[j-1]);	// perbaiki ini
 					dummy.learnMove(this->skill_inventory.contents[i-1].getSkillName());
 					this->engimon_inventory.contents[j-1].learnMove(this->skill_inventory.contents[i-1].getSkillName());
-					deleteSkillItem(this->skill_inventory.contents[i-1].getSkillName());
+					deleteInventoryContent(this->skill_inventory.contents[i-1].getSkillName());
 				}
 				catch (int e)
 				{
@@ -371,6 +381,59 @@ void player::useSkillItem()
 	}
 }
 
+void player::breeding()
+{
+	try {
+		unsigned int i;
+		unsigned int j;
+		string name;
+		if (!this->isInventoryFull())
+		{
+			if (this->engimon_inventory.countItem() >= 2)
+			{
+				this->showEngimonList();
+				cout << "Ketik nomor engimon pertama yang ingin breeding" << endl;
+				cin >> i;
+				cout << endl;
+				if (i >= 1 && i <= this->engimon_inventory.contents.size())
+				{
+					this->showEngimonList();
+					cout << "Ketik nomor engimon kedua yang ingin breeding" << endl;
+					cin >> j;
+					cout << endl;
+					if (j >= 1 && j <= this->engimon_inventory.contents.size())
+					{
+						if (i == j)
+						{
+							throw "Tidak bisa breeding engimon yang sama";
+						}
+						else
+						{
+							cout << "Ketik nama engimon hasil breeding" << endl;
+							cin >> name;
+							cout << endl;
+							engimon newEngimon = breeder::breed(&this->engimon_inventory.contents[i-1], &this->engimon_inventory.contents[j-1], name);
+							this->addInventoryContent(newEngimon);
+						}
+					}
+				}
+			}
+			else
+			{
+				throw "Kamu tidak memiliki engimon yang cukup untuk breeding";
+			}
+		}
+		else
+		{
+			throw "Inventory kamu sudah penuh";
+		}
+	}
+	catch (char const* e)
+	{
+		cout << e << endl << endl;
+	}
+}
+
 bool player::isInventoryFull()
 {
 	return (this->engimon_inventory.countItem() + this->skill_inventory.countItem() >= this->max_inventory_capacity);
@@ -380,10 +443,19 @@ bool player::isInventoryFull()
 int player::getActivePetPosX() {return activeEngimon_x;}
 // Posisi activeEngimon_y
 int player::getActivePetPosY() {return activeEngimon_y;}
-// Posisi activeEngimon_x
+// Set posisi activeEngimon_x
+void player::setActivePetPosX(int x) {this->activeEngimon_x = x;}
+// Set posisi activeEngimon_x
+void player::setActivePetPosY(int y) {this->activeEngimon_y = y;}
+
+// Posisi player x
 int player::getPlayerPosX() {return player_x;}
-// Posisi activeEngimon_y
+// Posisi player y
 int player::getPlayerPosY() {return player_y;}
+// Set posisi player x
+void player::setPlayerPosX(int x) {this->player_x = x;}
+// Set posisi player y
+void player::setPlayerPosY(int y) {this->player_y = y;}
 
 //Nama player
 string player::getName() {return name;}
