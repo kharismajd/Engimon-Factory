@@ -5,6 +5,7 @@
 #include "engimon.hpp"
 #include "skill.hpp"
 #include "inventory.hpp"
+#include "breeder.hpp"
 using namespace std;
 
 #ifndef PLAYER
@@ -30,13 +31,13 @@ public:
 	void moveRight();
 
 	// Menambahkan engimon ke engimon_inventory
-	void addEngimon(engimon);
+	void addInventoryContent(engimon);
 	// Menghapus engimon yang direferensi di inventory
-	void deleteEngimon(engimon&);
+	void deleteInventoryContent(engimon&);
 	// Menambahkan skill item ke skill_inventory
-	void addSkillItem(string);
+	void addInventoryContent(string);
 	// Menghapus skill item di skill_inventory
-	void deleteSkillItem(string);
+	void deleteInventoryContent(string);
 
 	// Memperlihatkan list engimon di inventory
 	void showEngimonList();
@@ -56,8 +57,7 @@ public:
 	// Menggunakan skill item
 	void useSkillItem();
 	
-	//breeding()
-	//battle()
+	void breeding();
 
 	// Mengecek jika inventory full
 	bool isInventoryFull();

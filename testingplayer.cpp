@@ -16,14 +16,11 @@ int main()
     {
         skill nullSkill;
         engimon nullEngimon;
-        engimon Gab("Gab", &nullEngimon, &nullEngimon, "Magikarp", nullSkill, 4, 0);
-        engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", nullSkill, 10, 50);
-        player newPlayer("nama", Gab, 50, 0, 0);
-        newPlayer.addEngimon(Gab);
-        newPlayer.addEngimon(Pulu);
-        newPlayer.addEngimon(nullEngimon);
-        newPlayer.addSkillItem("null");
-
+        engimon Gab("Gab", &nullEngimon, &nullEngimon, "Magikarp", 34, 0);
+        engimon Pulu("Pulu", &nullEngimon, &nullEngimon, "Vulpichu", 3, 50);
+        player newPlayer("nama", Gab, 50, 0, 0, 0, 0);
+        newPlayer.addInventoryContent(Pulu);
+        newPlayer.breeding();
         newPlayer.showEngimonList();
         newPlayer.showSkillItemList();
 
