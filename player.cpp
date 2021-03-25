@@ -99,20 +99,24 @@ void player::deleteActiveEngimon()
 	}
 }
 
-void player::moveUp()
+void player::moveDown()
 {
-	if (player_y != 0){
-		int oldPosY = player_y;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+	if (player_y != 9){
+		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		int oldPosY = player_y;
 		player_y += 1;
+		activeEngimon_x = oldPosX;
 		activeEngimon_y = oldPosY;
 	}
 }
 
-void player::moveDown()
+void player::moveUp()
 {
-	if (player_y != 9){
-		int oldPosY = player_y;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+	if (player_y != 0){
+		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		int oldPosY = player_y;
 		player_y -= 1;
+		activeEngimon_x = oldPosX;
 		activeEngimon_y = oldPosY;
 	}
 }
@@ -121,8 +125,10 @@ void player::moveLeft()
 {
 	if (player_x != 0){
 		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		int oldPosY = player_y;
 		player_x -= 1;
 		activeEngimon_x = oldPosX;
+		activeEngimon_y = oldPosY;
 	}
 }
 
@@ -130,8 +136,10 @@ void player::moveRight()
 {
 	if (player_x != 11){
 		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
+		int oldPosY = player_y;
 		player_x += 1;
 		activeEngimon_x = oldPosX;
+		activeEngimon_y = oldPosY;
 	}
 }
 
@@ -324,7 +332,7 @@ void player::interact()
 	this->getActiveEngimon().cry();
 }
 
-void player::useSkillItem()				//////// useSkillItem belum sepenuhnya benar, pakai try & catch agar tidak ada kondisi skill tetap dihapus meskipun tidak terpakai karena masuk throw
+void player::useSkillItem()
 {
 	unsigned int i;
 	unsigned int j;
@@ -339,19 +347,21 @@ void player::useSkillItem()				//////// useSkillItem belum sepenuhnya benar, pak
 			cin >> j;
 			if (j >= 1 && j <= this->engimon_inventory.contents.size())
 			{
-				/*
 				try
 				{
-					e.learnMove("tackle")
+					engimon dummy = this->engimon_inventory.contents[j-1];	// hapus ini
+					//engimon dummy = new engimon(this->engimon_inventory.contents[j-1]);	// perbaiki ini
+					dummy.learnMove(this->skill_inventory.contents[i-1].getSkillName());
+					this->engimon_inventory.contents[j-1].learnMove(this->skill_inventory.contents[i-1].getSkillName());
+					deleteSkillItem(this->skill_inventory.contents[i-1].getSkillName());
 				}
-
 				catch (int e)
 				{
-				//handler
+					if (e == -1) cout << "Error, skill tidak ditemukan" << endl;
+					if (e == -2) cout << "Error, engimon tidak sesuai" << endl;
+					if (e == -3) cout << "Error, skill tidak compatible dengan elemen engimon" << endl;
+					if (e == -4) cout << "Error, skill sudah ada" << endl;
 				}
-				*/
-				this->engimon_inventory.contents[j-1].learnMove(this->skill_inventory.contents[i-1].getSkillName());
-				deleteSkillItem(this->skill_inventory.contents[i-1].getSkillName());
 			}
 		}
 	}
@@ -370,3 +380,10 @@ bool player::isInventoryFull()
 int player::getActivePetPosX() {return activeEngimon_x;}
 // Posisi activeEngimon_y
 int player::getActivePetPosY() {return activeEngimon_y;}
+// Posisi activeEngimon_x
+int player::getPlayerPosX() {return player_x;}
+// Posisi activeEngimon_y
+int player::getPlayerPosY() {return player_y;}
+
+//Nama player
+string player::getName() {return name;}

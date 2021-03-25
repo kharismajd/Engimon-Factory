@@ -64,7 +64,7 @@ bool tile::isTileValid(engimon e)
 	}
 }
 
-bool tile::haveWildPokemon()
+bool tile::haveWildEngimon()
 {
 	if (this->wild_engimon.isNull())
 	{
@@ -136,7 +136,7 @@ void tile::spawn()
 	}
 
 	this->setEngimon(potentialEngimon);
-	cout << "Spawn Success" << endl;
+	//cout << "Spawn Success" << endl;
 }
 
 void tile::printTile()
@@ -144,118 +144,10 @@ void tile::printTile()
 	cout << this->symbol;
 }
 
-void tile::setEngimon(engimon &e)
+void tile::setEngimon(engimon e)
 {
 	this->wild_engimon = e;
-
-	if (e.isNull())
-	{
-		if (this->tile_type == "sea")
-		{
-			this->symbol = 'o';
-		}
-		else
-		{
-			this->symbol = '-';
-		}
-	}
-	else if (e.getElmt1() == "Fire" && e.getElmt2() == "Electric")
-	{
-		if (e.getLevel() > HGIH_LEVEL_CAP)
-		{
-			this->symbol = 'L';
-		}
-		else
-		{
-			this->symbol = 'l';
-		}
-		
-	}
-	else if (e.getElmt1() == "Water" && e.getElmt2() == "Ice")
-	{
-		if (e.getLevel() > HGIH_LEVEL_CAP)
-		{
-			this->symbol = 'S';
-		}
-		else
-		{
-			this->symbol = 's';
-		}
-		
-	}
-
-	else if (e.getElmt1() == "Water" && e.getElmt2() == "Ground")
-	{
-		if (e.getLevel() > HGIH_LEVEL_CAP)
-		{
-			this->symbol = 'N';
-		}
-		else
-		{
-			this->symbol = 'n';
-		}
-		
-	}
-
-	else if (e.getElmt1() == "Fire")
-	{
-		if (e.getLevel() > HGIH_LEVEL_CAP)
-		{
-			this->symbol = 'F';
-		}
-		else
-		{
-			this->symbol = 'f';
-		}
-		
-	}
-	else if (e.getElmt1() == "Water")
-	{
-		if (e.getLevel() > HGIH_LEVEL_CAP)
-		{
-			this->symbol = 'W';
-		}
-		else
-		{
-			this->symbol = 'w';
-		}
-		
-	}
-	else if (e.getElmt1() == "Electric")
-	{
-		if (e.getLevel() > HGIH_LEVEL_CAP)
-		{
-			this->symbol = 'E';
-		}
-		else
-		{
-			this->symbol = 'e';
-		}
-	}
-
-	else if (e.getElmt1() == "Ground")
-	{
-		if (e.getLevel() > HGIH_LEVEL_CAP)
-		{
-			this->symbol = 'G';
-		}
-		else
-		{
-			this->symbol = 'g';
-		}
-	}
-
-	else if (e.getElmt1() == "Ground")
-	{
-		if (e.getLevel() > HGIH_LEVEL_CAP)
-		{
-			this->symbol = 'G';
-		}
-		else
-		{
-			this->symbol = 'g';
-		}
-	}
+	this->updateCharacter();
 }
 
 engimon& tile::getEngimon()
@@ -266,4 +158,147 @@ engimon& tile::getEngimon()
 void tile::setSymbol(char c)
 {
 	this->symbol = c;
+}
+
+
+void tile::playerIsHere()
+{
+	isPlayer = true;
+	this->setSymbol('P');
+}
+void tile::playerIsNotHere()
+{
+	isPlayer = false;
+	this->updateCharacter();
+}
+bool tile::isPlayerHere()
+{
+	return isPlayer;
+}
+
+void tile::activeEngimonIsHere()
+{
+	isActivePokemon = true;
+	this->setSymbol('X');
+}
+void tile::activeEngimonIsNotHere()
+{
+	isActivePokemon = false;
+	this->updateCharacter();
+}
+bool tile::isactiveEngimonHere()
+{
+	return isActivePokemon;
+}
+
+void tile::updateCharacter()
+{
+	if (this->wild_engimon.isNull())
+	{
+		if (this->tile_type == "sea")
+		{
+			this->symbol = 'o';
+		}
+		else
+		{
+			this->symbol = '-';
+		}
+	}
+	else if (this->wild_engimon.getElmt1() == "Fire" && this->wild_engimon.getElmt2() == "Electric")
+	{
+		if (this->wild_engimon.getLevel() > HGIH_LEVEL_CAP)
+		{
+			this->symbol = 'L';
+		}
+		else
+		{
+			this->symbol = 'l';
+		}
+		
+	}
+	else if (this->wild_engimon.getElmt1() == "Water" && this->wild_engimon.getElmt2() == "Ice")
+	{
+		if (this->wild_engimon.getLevel() > HGIH_LEVEL_CAP)
+		{
+			this->symbol = 'S';
+		}
+		else
+		{
+			this->symbol = 's';
+		}
+		
+	}
+
+	else if (this->wild_engimon.getElmt1() == "Water" && this->wild_engimon.getElmt2() == "Ground")
+	{
+		if (this->wild_engimon.getLevel() > HGIH_LEVEL_CAP)
+		{
+			this->symbol = 'N';
+		}
+		else
+		{
+			this->symbol = 'n';
+		}
+		
+	}
+
+	else if (this->wild_engimon.getElmt1() == "Fire")
+	{
+		if (this->wild_engimon.getLevel() > HGIH_LEVEL_CAP)
+		{
+			this->symbol = 'F';
+		}
+		else
+		{
+			this->symbol = 'f';
+		}
+		
+	}
+	else if (this->wild_engimon.getElmt1() == "Water")
+	{
+		if (this->wild_engimon.getLevel() > HGIH_LEVEL_CAP)
+		{
+			this->symbol = 'W';
+		}
+		else
+		{
+			this->symbol = 'w';
+		}
+		
+	}
+	else if (this->wild_engimon.getElmt1() == "Electric")
+	{
+		if (this->wild_engimon.getLevel() > HGIH_LEVEL_CAP)
+		{
+			this->symbol = 'E';
+		}
+		else
+		{
+			this->symbol = 'e';
+		}
+	}
+
+	else if (this->wild_engimon.getElmt1() == "Ground")
+	{
+		if (this->wild_engimon.getLevel() > HGIH_LEVEL_CAP)
+		{
+			this->symbol = 'G';
+		}
+		else
+		{
+			this->symbol = 'g';
+		}
+	}
+
+	else if (this->wild_engimon.getElmt1() == "Ground")
+	{
+		if (this->wild_engimon.getLevel() > HGIH_LEVEL_CAP)
+		{
+			this->symbol = 'G';
+		}
+		else
+		{
+			this->symbol = 'g';
+		}
+	}
 }

@@ -296,7 +296,7 @@ skill engimon::getMove(int x) {
 
 bool engimon::isNull()
 {
-	if (this->name == name_null)
+	if (this->name == name_null && this->species == "null")
 	{
 		return true;
 	}
