@@ -49,10 +49,10 @@ int main()
 	player newPlayer("coba", Pulu, 50, 0, 1, 0, 0);
 
 	newPlayer.showEngimonDetails();
+	cout << endl <<Pulu3.getLevel();
 	Battle b2(&newPlayer.getActiveEngimon(), &Pulu3, &newPlayer);
 	b2.initiateBattle();
-	newPlayer.showEngimonDetails();
-	newPlayer.showEngimonList();
+	//newPlayer.getActiveEngimon().getName();
 
 	// Battle b1(&Pulu, &Pulu2, &newPlayer);
 	// cout << "sini?" <<endl;
@@ -64,8 +64,5 @@ int main()
 
 	// newPlayer.deleteEngimonSelect();
 	// newPlayer.showEngimonDetails();
-
-	newPlayer.showEngimonList();
-
 	return 0;
 }

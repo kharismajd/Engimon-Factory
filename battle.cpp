@@ -186,7 +186,7 @@ float* Battle :: power(){
 
     int sumofmyskill = 0;
     int sumofyourskill = 0;
-
+    cout << endl << elmtAdvantage(myelmt,yourelmt) << endl;
     for (i=0;i<4;i++){
         sumofmyskill += myskill[i].getBasePower() * myskill[i].getMasteryLv();
         sumofyourskill += yourskill[i].getBasePower() * yourskill[i].getMasteryLv();
@@ -194,9 +194,12 @@ float* Battle :: power(){
 
     float* power = new float[2];
 
-    power[0] = mymon.getLevel()*elmtAdvantage(myelmt,yourelmt) + sumofmyskill;
-    power[1] = yourmon.getLevel()*elmtAdvantage(yourelmt,myelmt) + sumofyourskill;
+    //power[0] = 
+    cout << "MYMON" << mymon.getLevel()<< endl << elmtAdvantage(myelmt,yourelmt) <<endl<< sumofmyskill <<endl;
+    //power[1] = 
+    cout << "YOURMON" << yourmon.getLevel()<<endl<<elmtAdvantage(yourelmt,myelmt)<<endl<< sumofyourskill << endl;
 
+    
     return power;
 }
 
@@ -235,6 +238,7 @@ void Battle :: win(){
 
 void Battle :: lose(){
     character->deleteActiveEngimon();
+    character->switchOutEngimon();
     // this->~Battle();
 }
 
