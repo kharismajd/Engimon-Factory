@@ -99,7 +99,7 @@ void tile::spawn()
 	randomNumber = rand() %  species_count;
 	srand(tile::random_seed);
 	tile::random_seed++;
-	int randomLevel = rand() % 30 + 1;
+	int randomLevel = rand() % 40 + 1;
 	srand(tile::random_seed);
 	tile::random_seed++;
 

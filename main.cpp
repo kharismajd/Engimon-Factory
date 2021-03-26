@@ -8,7 +8,7 @@
 using namespace std;
 
 /*
-g++ main.cpp tile.cpp gameMap.cpp engimon.cpp skill.cpp player.cpp inventory.cpp battle.cpp breeder.cpp wildEngimon.cpp
+g++ -o main main.cpp tile.cpp gameMap.cpp engimon.cpp skill.cpp player.cpp inventory.cpp battle.cpp breeder.cpp wildEngimon.cpp
 */
 
 void printHelp()
@@ -24,6 +24,7 @@ void printHelp()
 	cout << "Use Skill Item: u" << endl;
 	cout << "Switch Active Engimon: x" << endl;
 	cout << "Inspect Engimon: n" << endl;
+	cout << "Generate Engimon Manually: g" << endl;
 }
 
 void resolveMove(player &P, gameMap &g, player &tempP)
@@ -224,6 +225,10 @@ int main()
 		else if (userInput == "n")
 		{
 			P.showEngimonDetails();
+		}
+		else if (userInput == "g")
+		{
+			g.generateEngimon();
 		}
 		else
 		{
