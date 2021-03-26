@@ -23,7 +23,7 @@ void printHelp()
 	cout << "Show Item: i" << endl;
 	cout << "Use Skill Item: u" << endl;
 	cout << "Switch Active Engimon: x" << endl;
-	cout << "Inspect Active Engimon: n" << endl;
+	cout << "Inspect Engimon: n" << endl;
 }
 
 void resolveMove(player &P, gameMap &g, player &tempP)
