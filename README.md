@@ -8,8 +8,9 @@ Cara instalasi dan jalankan:
 4. Jalankan main.exe
 
 Dibuat oleh:
-13519166 / Karina Imani
-13519176 / Made Kharisma Jagaddhita
-13519182 / Farrell Abieza Zidan
-13519189 / Leonardus James Wang
-13519220 / Leo Cardhio Sih Pratama 
+
+1. 13519166 / Karina Imani
+2. 13519176 / Made Kharisma Jagaddhita
+3. 13519182 / Farrell Abieza Zidan
+4. 13519189 / Leonardus James Wang
+5. 13519220 / Leo Cardhio Sih Pratama 
