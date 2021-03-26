@@ -245,8 +245,18 @@ void breeder::getDominantElmt (engimon *parent1, engimon *parent2, string *paren
         *parent_elmt2 = elmt1_2;
     } else {
         // If all parent elements are unique
-        *parent_elmt1 = getHigherElmtAdvantage(elmt1_1, elmt1_2);
-        *parent_elmt2 = getHigherElmtAdvantage(elmt2_1, elmt2_2);
+        int chance = rng(4);
+        if (chance && elmt1_2 != string_null) {
+            *parent_elmt1 = elmt1_2;
+        } else {
+            *parent_elmt1 = elmt1_1;
+        }
+        int chance = rng(4);
+        if (chance && elmt2_2 != string_null) {
+            *parent_elmt1 = elmt1_2;
+        } else {
+            *parent_elmt1 = elmt1_1;
+        }
     }
 }
 
