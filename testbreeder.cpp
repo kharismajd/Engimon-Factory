@@ -16,15 +16,15 @@ int main() {
 	engimon::IntializeDatabase();
 
     engimon A;
-    engimon parent1("Mona", &A, &A, "Charmander", 36, 10);
-    engimon parent2("Lisa", &A, &A, "Pikachu", 31, 50);
+    engimon parent1("Mona", &A, &A, "Vulpichu", 36, 10);
+    engimon parent2("Lisa", &A, &A, "Charmander", 31, 50);
 
     // Parent Skills
     try {
         parent1.learnMove("tackle");
-        parent1.learnMove("ember");
+        //parent1.learnMove("ember");
         parent2.learnMove("tackle");
-        parent2.learnMove("thunderbolt");
+        //parent2.learnMove("thunderbolt");
     } catch (int x) {
         cout << x << endl;
     }
@@ -54,9 +54,9 @@ int main() {
     cout << endl << endl;
 
     // MISCELLANEOUS TESTERS
-
+    // breeder a;
     // int b = a.rng(50);
-    // cout << b << endl << endl;
+    // cout << b << endl;
 
     // string c = a.inheritSpecies(&parent1, &parent2);
     // cout << c << endl << endl;

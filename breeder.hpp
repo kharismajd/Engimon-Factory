@@ -27,6 +27,7 @@ class breeder {
         void inheritSkill (engimon *child, engimon *parent1, engimon *parent2);
 
         // Misc functions
+        bool sameElements (engimon *parent1, engimon *parent2);
         int indexOfElmt (string elmt);
         float getElmtAdvantage (string elmt1, string elmt2);
         string getHigherElmtAdvantage(string elmt1, string elmt2);

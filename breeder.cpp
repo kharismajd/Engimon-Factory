@@ -11,6 +11,7 @@
 #include <tuple>
 #include <vector>
 #include <algorithm>
+#include <time.h>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ float breeder::element_advantage[5][5] = {{1, 0, 1, 0.5, 2}, {2, 1, 0, 1, 1}, {1
 
 // Generates a random number between 0 to max
 int breeder::rng(int max) {
+    srand(time(NULL));
     return (rand() % max);
 }
 
@@ -39,42 +41,52 @@ engimon breeder::breed (engimon *parent1, engimon *parent2, string name) {
         child.showAttributes();
         return child;
     } else {
-        throw "Error, salah satu atau kedua parent memiliki level di bawah 30";
+        throw "Error, salah satu atau kedua parent memiliki level di bawah 31";
     }
 }
 
 // Method to get species of child engimon
 string breeder::inheritSpecies (engimon *parent1, engimon *parent2) {
-    // Get dominant element from both parents
-    string parent_elmt1, parent_elmt2;
-    getDominantElmt(parent1, parent2, &parent_elmt1, &parent_elmt2);
 
-    if (parent_elmt1 == parent_elmt2) {
-        // Case 1: both parents have same element, child inherits randomized species
-        if (parent1->getSpecies() == parent2->getSpecies()) {
+    // Jika parent memiliki species sama, langsung turunkan species anak
+    if (parent1->getSpecies() == parent2->getSpecies()) {
+        return parent1->getSpecies();
+    // Jika parent memiliki species berbeda, namun elemen sama, randomize species anak
+    } else if (sameElements(parent1, parent2)) {
+        int chance = rng(2);
+        if (chance) {
             return parent1->getSpecies();
         } else {
+            return parent2->getSpecies();
+        }
+    } else {
+        // Get dominant element from both parents
+        string parent_elmt1, parent_elmt2;
+        getDominantElmt(parent1, parent2, &parent_elmt1, &parent_elmt2);
+
+        if (parent_elmt1 == parent_elmt2) {
+            // Case 1: both parents have same dom element, child inherits randomized species
             int chance = rng(2);
             if (chance) {
                 return parent1->getSpecies();
             } else {
                 return parent2->getSpecies();
             }
-        }
-    } else if (getHigherElmtAdvantage(parent_elmt1, parent_elmt2) != string_null) {
-        // Case 2: parents have different elements, get higher element advantage species
-        if (getHigherElmtAdvantage(parent_elmt1, parent_elmt2) == parent_elmt1) {
-            return parent1->getSpecies();
+        } else if (getHigherElmtAdvantage(parent_elmt1, parent_elmt2) != string_null) {
+            // Case 2: parents have different dom elements, get higher element advantage species
+            if (getHigherElmtAdvantage(parent_elmt1, parent_elmt2) == parent_elmt1) {
+                return parent1->getSpecies();
+            } else {
+                return parent2->getSpecies();
+            }
         } else {
-            return parent2->getSpecies();
+            auto i = engimon::all_species.begin();
+            for (i = engimon::all_species.begin(); i != engimon::all_species.end(); ++i)
+            {
+                if ((get<1>(*i) == parent_elmt1 && get<2>(*i) == parent_elmt2) || (get<1>(*i) == parent_elmt2 && get<1>(*i) == parent_elmt1)) break;
+            }
+            return get<0>(*i);
         }
-    } else {
-        auto i = engimon::all_species.begin();
-        for (i = engimon::all_species.begin(); i != engimon::all_species.end(); ++i)
-        {
-            if ((get<1>(*i) == parent_elmt1 && get<2>(*i) == parent_elmt2) || (get<1>(*i) == parent_elmt2 && get<1>(*i) == parent_elmt1)) break;
-        }
-        return get<0>(*i);
     }
 }
 
@@ -92,7 +104,7 @@ void breeder::inheritSkill (engimon *child, engimon *parent1, engimon *parent2) 
         idxmax = -1;
 
         // Find skill with max mastery level
-        for (int j = 0; j < 4; j++) {
+        for (int j = 1; j < 4; j++) {
             if (iter1[j] != 1) {
                 if (!isLearnable(parent1->getMove(j), *child)) {
                     iter1[j] = 1;
@@ -131,7 +143,7 @@ void breeder::inheritSkill (engimon *child, engimon *parent1, engimon *parent2) 
                 // chosen_skill.printAll();
 
                 // Mark skills that both parents have
-                for (int j = 0; j < 4; j++) {
+                for (int j = 1; j < 4; j++) {
                     if (chosen_skill.getSkillName() == parent2->getMove(j).getSkillName()) {
                         iter2[j] = 1;
                         if (chosen_skill.getMasteryLv() == parent2->getMove(j).getMasteryLv()) {
@@ -161,6 +173,15 @@ void breeder::inheritSkill (engimon *child, engimon *parent1, engimon *parent2) 
         }
         i++;
     }
+}
+
+// Returns true if both parents have same elements
+bool breeder::sameElements (engimon *parent1, engimon *parent2) {
+    string elmt1_1 = parent1->getElmt1();
+    string elmt1_2 = parent1->getElmt2();
+    string elmt2_1 = parent2->getElmt1();
+    string elmt2_2 = parent2->getElmt2();
+    return ((elmt1_1 == elmt2_1 && elmt1_2 == elmt2_2) || (elmt1_1 == elmt2_2 && elmt1_2 == elmt2_1));
 }
 
 // Returns index in elmt advantage table
