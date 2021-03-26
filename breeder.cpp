@@ -251,7 +251,7 @@ void breeder::getDominantElmt (engimon *parent1, engimon *parent2, string *paren
         } else {
             *parent_elmt1 = elmt1_1;
         }
-        int chance = rng(4);
+        chance = rng(4);
         if (chance && elmt2_2 != string_null) {
             *parent_elmt1 = elmt1_2;
         } else {
