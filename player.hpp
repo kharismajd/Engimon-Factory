@@ -25,10 +25,10 @@ public:
 	//Menghapus engimon yang sedang aktif. Jika tidak ada, mengeluarkan pesan.
 	void deleteActiveEngimon();
 
-	void moveUp();
-	void moveDown();
-	void moveLeft();
-	void moveRight();
+	void moveUp(int mapLength, int mapWidth);
+	void moveDown(int mapLength, int mapWidth);
+	void moveLeft(int mapLength, int mapWidth);
+	void moveRight(int mapLength, int mapWidth);
 
 	// Menambahkan engimon ke engimon_inventory
 	void addInventoryContent(engimon);

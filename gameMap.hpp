@@ -19,6 +19,7 @@ class gameMap
 {
 public:
 	gameMap();
+	gameMap(string externalFile);
 	~gameMap();
 	void printMap();
 	void printLegend();
@@ -31,11 +32,18 @@ public:
 	string findNearbyEngimon(int x, int y);
 	bool isTileOccupied(int x, int y);
 
+	int getMapLength();
+	int getMapWidth();
+
+
 protected:
 	tile** tile_map;
 
-	static int engimon_count;
-	static int map_move_count;
+	int mapLength = 12;
+	int mapWidth = 10;
+
+	int engimon_count = 0;
+	int map_move_count = MAP_ENGIMON_COUNT;
 	
 };
 #endif

@@ -141,7 +141,7 @@ void tile::spawn()
 	}
 
 	this->setEngimon(potentialEngimon);
-	//cout << "Spawn Success" << endl;
+	//cout << potentialEngimon.getName() <<" berhasil spawn di "<< x << ", " << y << endl;
 }
 
 void tile::printTile()
@@ -295,15 +295,15 @@ void tile::updateCharacter()
 		}
 	}
 
-	else if (this->wild_engimon.getElmt1() == "Ground")
+	else if (this->wild_engimon.getElmt1() == "Ice")
 	{
 		if (this->wild_engimon.getLevel() > HGIH_LEVEL_CAP)
 		{
-			this->symbol = 'G';
+			this->symbol = 'I';
 		}
 		else
 		{
-			this->symbol = 'g';
+			this->symbol = 'i';
 		}
 	}
 }

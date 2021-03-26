@@ -76,83 +76,88 @@ int main()
 	string starter_engimon_name;
 	engimon starter_engimon;
 	player tempP;
-	gameMap g;
+	try
+	{
+		gameMap g("inputMapFile.txt");
+	}
+	catch(const char* e) 
+	{
+		cout << e;
+		return -1;
+	}
+	gameMap g("inputMapFile.txt");
+	
 	
 
-	// /*Program jalan*/
-	// cout << "... Compile Success!" << endl;
+	/*Program jalan*/
+	//cout << "... Compile Success!" << endl;
 
-	// cout << "Pilih engimon pertama anda" << endl;
-	// cout << "- Charmander" << endl;
-	// cout << "- Pikachu" << endl;
-	// cout << "- Glastrier" << endl << endl;
-	// cout << "Engimon: ";
+	cout << "Pilih engimon pertama anda" << endl;
+	cout << "- Charmander" << endl;
+	cout << "- Pikachu" << endl;
+	cout << "- Glastrier" << endl << endl;
+	cout << "Engimon: ";
 
-	// cin >> userInput;
-	// cout << endl;
-	// while (userInput != "Charmander" && userInput != "Pikachu" && userInput != "Glastrier")
-	// {
-	// 	cout << "Species engimon tidak tepat, silahkan coba lagi" << endl;
-	// 	cout << "- Charmander" << endl;
-	// 	cout << "- Pikachu" << endl;
-	// 	cout << "- Glastrier" << endl << endl;
-	// 	cout << "Engimon: ";
+	cin >> userInput;
+	cout << endl;
+	while (userInput != "Charmander" && userInput != "Pikachu" && userInput != "Glastrier")
+	{
+		cout << "Species engimon tidak tepat, silahkan coba lagi" << endl;
+		cout << "- Charmander" << endl;
+		cout << "- Pikachu" << endl;
+		cout << "- Glastrier" << endl << endl;
+		cout << "Engimon: ";
 
-	// 	cin >> userInput;
-	// 	cout << endl;
-	// }
+		cin >> userInput;
+		cout << endl;
+	}
 
-	// cout << "Please name your engimon: ";
-	// cin >> starter_engimon_name;
-	// cout << endl;
+	cout << "Please name your engimon: ";
+	cin >> starter_engimon_name;
+	cout << endl;
 
-	// try
-	// {
-	// 	starter_engimon = engimon(starter_engimon_name, &nullEngimon, &nullEngimon, userInput, 20, 0);
-	// }
-	// catch (char const* e)
-	// {
-	// 	cout << e;
-	// 	return -1;
-	// }
+	try
+	{
+		starter_engimon = engimon(starter_engimon_name, &nullEngimon, &nullEngimon, userInput, 80, 0);
+	}
+	catch (char const* e)
+	{
+		cout << e;
+		return -1;
+	}
 
+	cout << "This is your starting engimon: " << endl;
+	starter_engimon.showAttributes();
 
+	cout << endl << "Now, please tell us your name" << endl;
+	cout << "Name: ";
+	cin >> userInput;
+	cout << endl;
 
-	// if (userInput == "Charmander")
-	// {
-	// 	cout << "Charmander picture ... " << endl;
-	// }
+	player P(userInput, starter_engimon, 50, g.getMapLength()/2, g.getMapWidth()/2, g.getMapLength()/2, g.getMapWidth()/2 + 1);
+	// starter_engimon = engimon("Gab", &nullEngimon, &nullEngimon, "Pikachu", 100, 0);
 
-	// else if (userInput == "Pikachu")
-	// {
-	// 	cout << "Pikachu picture ... " << endl;
-	// }
-	// else /*userInput == "Glastrier*/
-	// {
-	// 	cout << "Glastrier picture ... " << endl;
-	// }
+	
 
-	// cout << "This is your starting engimon: " << endl;
-	// starter_engimon.showAttributes();
-
-	// cout << endl << "Now, please tell us your name" << endl;
-	// cout << "Name: ";
-	// cin >> userInput;
-	// cout << endl;
-
-	// player P(userInput, starter_engimon, 50, 5, 4, 5, 5);
-	starter_engimon = engimon("Gab", &nullEngimon, &nullEngimon, "Pikachu", 100, 0);
-
-	engimon	starter_engimon2("Glastrier", &nullEngimon, &nullEngimon, "Glastrier", 100, 0);
-
-	player P("Ash", starter_engimon, 50, 5, 6, 5, 5);
+	// player P("Ash", starter_engimon, 50, g.getMapLength()/2, g.getMapWidth()/2, g.getMapLength()/2, g.getMapWidth()/2 + 1);
+	engimon	starter_engimon2("Breeder Tester", &nullEngimon, &nullEngimon, "Glastrier", 100, 0);
 	P.addInventoryContent(starter_engimon2);
 	cout << endl;
 	cout << P.getName() << ", you are now ready, step in to the world of engimon" << endl;
 
-	g.generateEngimon();
-	g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
-	g.printMap();
+	try
+	{
+		g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
+		g.generateEngimon();
+		g.printMap();
+	}
+	catch(const char* e)
+	{
+		cout << e;
+		return -1;
+	}
+
+
 
 	cin >> userInput;
 	while (userInput != "exit")
@@ -172,26 +177,26 @@ int main()
 		else if (userInput == "w")
 		{
 			tempP = P;
-			P.moveUp();
+			P.moveUp(g.getMapLength(), g.getMapWidth());
 			resolveMove(P, g, tempP);
 			
 		}
 		else if (userInput == "a")
 		{
 			tempP = P;
-			P.moveLeft();
+			P.moveLeft(g.getMapLength(), g.getMapWidth());
 			resolveMove(P, g, tempP);
 		}
 		else if (userInput == "s")
 		{
 			tempP = P;
-			P.moveDown();
+			P.moveDown(g.getMapLength(), g.getMapWidth());
 			resolveMove(P, g, tempP);
 		}
 		else if (userInput == "d")
 		{
 			tempP = P;
-			P.moveRight();
+			P.moveRight(g.getMapLength(), g.getMapWidth());
 			resolveMove(P, g, tempP);
 		}
 		else if (userInput == "z")

@@ -102,9 +102,9 @@ void player::deleteActiveEngimon()
 	}
 }
 
-void player::moveDown()
+void player::moveDown(int mapLength, int mapWidth)
 {
-	if (player_y != 9){
+	if (player_y < mapWidth - 1){
 		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
 		int oldPosY = player_y;
 		player_y += 1;
@@ -113,9 +113,9 @@ void player::moveDown()
 	}
 }
 
-void player::moveUp()
+void player::moveUp(int mapLength, int mapWidth)
 {
-	if (player_y != 0){
+	if (player_y > 0){
 		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
 		int oldPosY = player_y;
 		player_y -= 1;
@@ -124,9 +124,9 @@ void player::moveUp()
 	}
 }
 
-void player::moveLeft()
+void player::moveLeft(int mapLength, int mapWidth)
 {
-	if (player_x != 0){
+	if (player_x > 0){
 		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
 		int oldPosY = player_y;
 		player_x -= 1;
@@ -135,9 +135,9 @@ void player::moveLeft()
 	}
 }
 
-void player::moveRight()
+void player::moveRight(int mapLength, int mapWidth)
 {
-	if (player_x != 11){
+	if (player_x < mapLength - 1){
 		int oldPosX = player_x;	// Buat posisi engimon aktif ikuti posisi player sebelum pindah
 		int oldPosY = player_y;
 		player_x += 1;
