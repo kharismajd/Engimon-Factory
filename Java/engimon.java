@@ -47,7 +47,11 @@ abstract public class engimon {
     /* @param pr1,pr2 can be null */
     public engimon(String nm, engimon pr1, engimon pr2, String sp, int lvl, int exp) throws Exception
     {
+        this.Initialize(nm, pr1, pr2, sp, lvl, exp);
+    }
 
+    protected void Initialize(String nm, engimon pr1, engimon pr2, String sp, int lvl, int exp) throws Exception
+    {
         name = nm;
         parent1 = pr1;
         parent2 = pr2;

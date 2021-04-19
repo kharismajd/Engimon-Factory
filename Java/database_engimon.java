@@ -41,6 +41,64 @@ public class database_engimon implements Database <species>{
         return tempArray[rand_int];
     }
 
+    public species random(String tiletype) throws Exception
+    {
+        Random rand = new Random();
+
+        List<String> elements = new ArrayList<>();
+
+        if (tiletype == "mountains")
+        {
+            elements.add("Fire");
+        }
+        else if (tiletype == "sea")
+        {
+            elements.add("Water");
+        }
+        else if (tiletype == "grassland")
+        {
+            elements.add("Ground");
+            elements.add("Electric");
+        }
+        else if (tiletype == "tundra")
+        {
+            elements.add("Ice");
+        }
+        else
+        {
+            throw new Exception("Tile type tidak valid");
+        }
+
+        int rand_int = rand.nextInt(all_species.size());
+        species[] tempArray = all_species.toArray(new species[all_species.size()]);
+
+        while( rand_int > 0)
+        {
+            for (int i = 0; i < tempArray.length; i++) {
+                if (elements.contains(tempArray[i].element1))
+                {
+                    rand_int--;
+                    if (rand_int <= 0)
+                    {
+                        return tempArray[i];
+                    }
+                }
+                else if (tempArray[i].element2 != null)
+                {
+                    if (elements.contains(tempArray[i].element2))
+                    {
+                        rand_int--;
+                        if (rand_int <= 0)
+                        {
+                            return tempArray[i];
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     public String cry(String species)
     {
         return engimon_cry.get(species);

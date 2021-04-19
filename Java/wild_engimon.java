@@ -2,13 +2,28 @@ import java.util.Random;
 
 public class wild_engimon extends engimon{
 
+    private static int playerHighestPokemon = 80;
     private static String randSpecies = database_engimon.random().speciesName;
-    private static int randLevel = randomInteger(80,80) ;
+    private static int randLevel = randomInteger(playerHighestPokemon,80) ;
+
 
     private static void randomize()
     {
         randSpecies = database_engimon.random().speciesName;
-        randLevel = randomInteger(80,100);
+        randLevel = randomInteger(playerHighestPokemon,100);
+    }
+
+    private static void randomize(String tiletype)
+    {
+        try
+        {
+            randSpecies = database_engimon.random(tiletype).speciesName;
+            randLevel = randomInteger(playerHighestPokemon,100);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     //Return a random int between start <= x <= end
@@ -22,14 +37,17 @@ public class wild_engimon extends engimon{
 
     public wild_engimon() throws Exception
     {
-        super(this.randSpecies, null, null, this.randSpecies, randLevel,0);
         wild_engimon.randomize();
+        this.Initialize(this.randSpecies, null, null, this.randSpecies, randLevel,0);
+        this.life = 1;
     }
 
-//    public wild_engimon(String tiletype) throws Exception
-//    {
-//
-//    }
+    public wild_engimon(String tiletype) throws Exception
+    {
+        wild_engimon.randomize(tiletype);
+        this.Initialize(this.randSpecies, null, null, this.randSpecies, randLevel,0);
+        this.life = 1;
+    }
 
     public void gainExp(int exp)
     {
