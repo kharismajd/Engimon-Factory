@@ -1,8 +1,3 @@
-import javafx.beans.binding.BooleanExpression;
-
-import javax.annotation.processing.SupportedSourceVersion;
-import java.awt.*;
-
 abstract public class engimon {
     protected String name;
     protected engimon parent1;

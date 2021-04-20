@@ -1,5 +1,3 @@
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 public interface Database <T> {
 
     public Boolean isExist(String name);

@@ -38,14 +38,14 @@ public class wild_engimon extends engimon{
     public wild_engimon() throws Exception
     {
         wild_engimon.randomize();
-        this.Initialize(this.randSpecies, null, null, this.randSpecies, randLevel,0);
+        this.Initialize(randSpecies, null, null, randSpecies, randLevel,0);
         this.life = 1;
     }
 
     public wild_engimon(String tiletype) throws Exception
     {
         wild_engimon.randomize(tiletype);
-        this.Initialize(this.randSpecies, null, null, this.randSpecies, randLevel,0);
+        this.Initialize(randSpecies, null, null, randSpecies, randLevel,0);
         this.life = 1;
     }
 

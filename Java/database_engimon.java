@@ -32,6 +32,15 @@ public class database_engimon implements Database <species>{
         return null;
     }
 
+    public species findByElement(String elem1, String elem2) {
+        for (species s:all_species) {
+            if ((s.element1.equals(elem1) && s.element2.equals(elem2)) || (s.element1.equals(elem2) && s.element2.equals(elem1))) {
+                return s;
+            }
+        }
+        return null;
+    }
+
     public species random()
     {
         Random rand = new Random();
