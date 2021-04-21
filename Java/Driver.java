@@ -24,6 +24,5 @@ public class Driver {
         }
 
         System.out.println(db_skill.isExist("splash"));
-
     }
 }
