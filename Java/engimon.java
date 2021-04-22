@@ -156,13 +156,13 @@ abstract public class engimon {
     {
         return species;
     }
-    public int getLevel()
+    public Integer getLevel()
     {
         return this.level;
     }
     public abstract void setLevel(int lv);
 
-    public int getCummulativeExp()
+    public Integer getCummulativeExp()
     {
         return this.cummulative_experience;
     }
@@ -179,6 +179,4 @@ abstract public class engimon {
     {
         return this.moves[idx];
     }
-
-
 }
