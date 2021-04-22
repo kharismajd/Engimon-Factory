@@ -16,10 +16,10 @@ public class breeder {
     // Main breeder function
     public static engimon breed (String name, engimon parent1, engimon parent2) throws Exception {
         if (parent1.getLevel() > 30 && parent2.getLevel() > 30) {
-            breeder a;
+            breeder a = new breeder();
             
             String sp = a.inheritSpecies(parent1, parent2);
-            engimon child = new engimon(name, parent1, parent2, sp, 1, 0);
+            engimon child = new player_engimon(name, parent1, parent2, sp, 1, 0);
             // !!! Engimon is abstract, wait for subclass implementation !!!
     
             a.inheritSkill(child, parent1, parent2);

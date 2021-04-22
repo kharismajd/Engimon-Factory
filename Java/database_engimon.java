@@ -56,20 +56,20 @@ public class database_engimon implements Database <species>{
 
         List<String> elements = new ArrayList<>();
 
-        if (tiletype == "mountains")
+        if (tiletype.equals("mountains") )
         {
             elements.add("Fire");
         }
-        else if (tiletype == "sea")
+        else if (tiletype.equals("sea"))
         {
             elements.add("Water");
         }
-        else if (tiletype == "grassland")
+        else if (tiletype.equals("grassland"))
         {
             elements.add("Ground");
             elements.add("Electric");
         }
-        else if (tiletype == "tundra")
+        else if (tiletype.equals("tundra"))
         {
             elements.add("Ice");
         }
@@ -78,7 +78,9 @@ public class database_engimon implements Database <species>{
             throw new Exception("Tile type tidak valid");
         }
 
-        int rand_int = rand.nextInt(all_species.size());
+//        System.out.println(elements);
+
+        int rand_int = rand.nextInt(all_species.size()) + 1;
         species[] tempArray = all_species.toArray(new species[all_species.size()]);
 
         while( rand_int > 0)
@@ -87,6 +89,8 @@ public class database_engimon implements Database <species>{
                 if (elements.contains(tempArray[i].element1))
                 {
                     rand_int--;
+//                    System.out.println(rand_int);
+//                    System.out.println(tempArray[i].speciesName);
                     if (rand_int <= 0)
                     {
                         return tempArray[i];

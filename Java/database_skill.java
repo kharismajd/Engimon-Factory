@@ -107,7 +107,7 @@ public class database_skill implements Database <skill>{
         Random rand = new Random();
         int rand_int = rand.nextInt(2);
 
-        if (rand_int == 0)
+        if (rand_int == 1 && elem2 != null)
         {
 //            try
 //            {
@@ -117,7 +117,7 @@ public class database_skill implements Database <skill>{
 //            {
 //                throw e;
 //            }
-            return random(elem1);
+            return random(elem2);
         }
         else
         {
@@ -129,7 +129,7 @@ public class database_skill implements Database <skill>{
 //            {
 //                throw e;
 //            }
-            return random(elem2);
+            return random(elem1);
         }
     }
 
@@ -137,10 +137,11 @@ public class database_skill implements Database <skill>{
     public skill skillUniqueEngimon(String speciesEngimon)
     {
         for (skill s: skill_database) {
-
-            if (s.getEngimonSpecies().equals(speciesEngimon))
-            {
-                return s;
+            if (s.getEngimonSpecies() != null)
+                {
+                if (s.getEngimonSpecies().equals(speciesEngimon)) {
+                    return s;
+                }
             }
         }
 

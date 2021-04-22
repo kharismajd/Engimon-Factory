@@ -3,13 +3,14 @@ import java.util.Random;
 public class wild_engimon extends engimon{
 
     private static int playerHighestPokemon = 80;
-    private static String randSpecies = database_engimon.random().speciesName;
+    private static species randSpecies = database_engimon.random();
     private static int randLevel = randomInteger(playerHighestPokemon,80) ;
+    private static int extraMove = randomInteger(0,1);
 
 
     private static void randomize()
     {
-        randSpecies = database_engimon.random().speciesName;
+        randSpecies = database_engimon.random();
         randLevel = randomInteger(playerHighestPokemon,100);
     }
 
@@ -17,8 +18,12 @@ public class wild_engimon extends engimon{
     {
         try
         {
-            randSpecies = database_engimon.random(tiletype).speciesName;
+            randSpecies = database_engimon.random(tiletype);
             randLevel = randomInteger(playerHighestPokemon,100);
+        }
+        catch (NullPointerException n)
+        {
+            n.printStackTrace();
         }
         catch (Exception e)
         {
@@ -37,15 +42,43 @@ public class wild_engimon extends engimon{
 
     public wild_engimon() throws Exception
     {
+        //Bisa terjadi null
         wild_engimon.randomize();
-        this.Initialize(randSpecies, null, null, randSpecies, randLevel,0);
+        this.Initialize(randSpecies.speciesName, null, null, randSpecies.speciesName, randLevel,0);
+        assert (this != null);
+        assert (this.moves != null);
+        if (wild_engimon.extraMove == 1)
+        {
+            this.learnMove(database_skill.random(randSpecies.element1,randSpecies.element2).getSkillName());
+        }
         this.life = 1;
     }
+
+    public wild_engimon(String species, int level, int extraMove) throws  Exception
+    {
+        this.Initialize(species, null, null, species, level,0);
+        species s = database_engimon.find(species);
+        assert (this != null);
+        assert (this.moves != null);
+        if (extraMove == 1)
+        {
+            String skillName = database_skill.random(s.element1,s.element2).getSkillName();
+            this.learnMove(skillName);
+        }
+        this.life = 1;
+    }
+
 
     public wild_engimon(String tiletype) throws Exception
     {
         wild_engimon.randomize(tiletype);
-        this.Initialize(randSpecies, null, null, randSpecies, randLevel,0);
+        this.Initialize(randSpecies.speciesName, null, null, randSpecies.speciesName, randLevel,0);
+        assert (this != null);
+        assert (this.moves != null);
+        if (wild_engimon.extraMove == 1)
+        {
+            this.learnMove(database_skill.random(randSpecies.element1,randSpecies.element2).getSkillName());
+        }
         this.life = 1;
     }
 
@@ -59,5 +92,41 @@ public class wild_engimon extends engimon{
     {
         this.level = lv;
         this.cummulative_experience = this.level + this.experience;
+    }
+
+    public void learnMove(String move)
+    {
+        if (database_skill.isValid(move,this))
+        {
+            int idx = -1;
+            for (int i = 0; i < 4; i++) {
+
+                if (moves[i] == null)
+                {
+                    idx = i;
+                    break;
+                }
+
+                if (moves[i].getSkillName().equals(move))
+                {
+                    break;
+                }
+
+
+            }
+
+            if (idx == 3)
+            {
+
+            }
+            else if(idx == -1)
+            {
+
+            }
+            else
+            {
+                moves[idx] = new skill(database_skill.find(move));
+            }
+        }
     }
 }

@@ -38,4 +38,40 @@ public class player_engimon extends engimon{
     {
         this.name = name;
     }
+
+    public void learnMove(String move)
+    {
+        if (database_skill.isValid(move,this))
+        {
+            int idx = -1;
+            for (int i = 0; i < 4; i++) {
+
+                if (moves[i] == null)
+                {
+                    idx = i;
+                    break;
+                }
+
+                if (moves[i].getSkillName().equals(move))
+                {
+                    break;
+                }
+
+
+            }
+
+            if (idx == 3)
+            {
+                System.out.println("Sudah penuh");
+            }
+            else if(idx == -1)
+            {
+                System.out.println("Skill telah dipelajari");
+            }
+            else
+            {
+                moves[idx] = new skill(database_skill.find(move));
+            }
+        }
+    }
 }

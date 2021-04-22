@@ -47,15 +47,14 @@ abstract public class engimon {
 
     protected void Initialize(String nm, engimon pr1, engimon pr2, String sp, int lvl, int exp) throws Exception
     {
-        name = nm;
-        parent1 = pr1;
-        parent2 = pr2;
+        this.name = nm;
+        this.parent1 = pr1;
+        this.parent2 = pr2;
 
         species dbspecies = database_engimon.find(sp);
         this.species = sp;
 
-
-        if (database_engimon.isExist(this.species))
+        if (!database_engimon.isExist(this.species))
         {
             throw new Exception("Error, tidak ketemu species");
         }
@@ -67,19 +66,19 @@ abstract public class engimon {
             throw new Exception("Skill unik engimon tidak ditemukan");
         }
 
-        moves[0] = database_skill.skillUniqueEngimon(sp);
+        this.moves[0] = database_skill.skillUniqueEngimon(sp);
 
         for (int j = 1; j < 4; ++j)
         {
-            moves[j] = null;
+            this.moves[j] = null;
         }
 
         this.element1 = dbspecies.element1;
         this.element2 = dbspecies.element2;
-        level = lvl;
-        experience = exp;
-        cummulative_experience = (lvl-1)*100 + exp;
-        active = false;
+        this.level = lvl;
+        this.experience = exp;
+        this.cummulative_experience = (lvl-1)*100 + exp;
+        this.active = false;
     }
 
     public void showAttributes()
@@ -124,39 +123,8 @@ abstract public class engimon {
     }
     public abstract void gainExp(int exp);
 
-    public void learnMove(String move)
-    {
-        if (database_skill.isValid(move,this))
-        {
-            int idx = -1;
-            for (int i = 0; i < 4; i++) {
+    public abstract void learnMove(String move);
 
-                if (moves[i].getSkillName().equals(move))
-                {
-                    break;
-                }
-
-                if (moves[i] != null)
-                {
-                    idx = i;
-                    break;
-                }
-            }
-
-            if (idx == 3)
-            {
-                System.out.println("Sudah penuh");
-            }
-            else if(idx == -1)
-            {
-                System.out.println("Skill telah dipelajari");
-            }
-            else
-            {
-                moves[idx] = new skill(database_skill.find(move));
-            }
-        }
-    }
     public void setSkill (skill x, int idx, int mastery_level)
     {
         x.setMasteryLv(mastery_level);
