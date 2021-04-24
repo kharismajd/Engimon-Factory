@@ -13,8 +13,8 @@ public class gameMap {
     private int engimon_count = 0;
     private int map_move_count = MAP_ENGIMON_COUNT;
 
-    private static final int MAP_ENGIMON_COUNT = 5;
-    private static final int MAP_MOVE = 5;
+    public static final int MAP_ENGIMON_COUNT = 5;
+    public static final int MAP_MOVE = 5;
 
     public gameMap()
     {
@@ -105,13 +105,12 @@ public class gameMap {
             }
         }
 
-        Integer randomDirection = randomInteger(0,10000) % 4;
+        Integer randomDirection = (randomInteger(0,10000) % 4);
 
         for (Vector<tile> i :tile_map){
             for (tile j:i) {
                 if (j.haveWildEngimon() && j.isPass() == false)
                 {
-
                     if (randomDirection == 0 && j.y > 0) //up
                     {
                         moveTileEngimon(j, tile_map.elementAt(j.y-1).elementAt(j.x));
@@ -131,21 +130,22 @@ public class gameMap {
                     {
                         if (randomDirection == 3 && j.y < this.mapWidth - 1)//down
                         {
+//                            System.out.println(randomDirection);
+//                            assert (randomDirection == 3);
                             moveTileEngimon(j, tile_map.elementAt(j.y+1).elementAt(j.x));
                             // cout << "move down" << endl;
                         }
                     }
                     j.passed();
+                    randomDirection = (randomInteger(0,10000) % 4);
                 }
             }
         }
 
         for (Vector<tile> i :tile_map){
             for (tile j:i) {
-                if (j.haveWildEngimon() == false)
-                {
-                    j.resetPass();
-                }
+                j.resetPass();
+
             }
         }
     }

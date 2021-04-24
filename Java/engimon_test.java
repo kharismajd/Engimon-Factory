@@ -3,6 +3,7 @@ public class engimon_test {
     public static void main(String[] args) {
         database_test d = new database_test();
         engimon_test e = new engimon_test();
+        gameMap_test g = new gameMap_test();
     }
 
     public engimon_test()
