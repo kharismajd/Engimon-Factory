@@ -38,6 +38,27 @@ public class player{
 		this.addInventoryContent(starting_engimon);
 	}
 
+	public player(player p)
+	{
+		this.name = p.name;
+		this.max_inventory_capacity = p.max_inventory_capacity;
+		this.player_x = p.player_x;
+		this.player_y = p.player_y;
+		this.activeEngimon_x = p.activeEngimon_x;
+		this.activeEngimon_y = p.activeEngimon_y;
+
+		ArrayList<player_engimon> temp1= p.engimon_inventory.getContents();
+		this.engimon_inventory = new engimonInventory();
+		for (player_engimon i: temp1) {
+			this.engimon_inventory.addItem(i);
+		}
+		ArrayList<skill> temp2= p.skill_inventory.getContents();
+		this.skill_inventory = new skillInventory();
+		for (skill i: temp2) {
+			this.skill_inventory.addItem(i);
+		}
+	}
+
 	public player_engimon getActiveEngimon()
 	{
 		int i;

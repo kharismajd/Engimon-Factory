@@ -63,7 +63,8 @@ public class Main   {
         gameMap g;
         try
         {
-             g = new gameMap("inputMapFile.txt");
+//             g = new gameMap("inputMapFile.txt");
+            g = new gameMap();
         }
         catch(Exception e)
         {
@@ -72,54 +73,65 @@ public class Main   {
             return;
         }
 
-        System.out.println("Pilih engimon pertama anda");
-        System.out.println("- Charmander");
-        System.out.println("- Pikachu");
-        System.out.println("- Glastrier");
-        System.out.println("");
-        System.out.print("Engimon: ");
+//        System.out.println("Pilih engimon pertama anda");
+//        System.out.println("- Charmander");
+//        System.out.println("- Pikachu");
+//        System.out.println("- Glastrier");
+//        System.out.println("");
+//        System.out.print("Engimon: ");
+//
+//        Scanner sc = new Scanner(System.in);
+//        userInput = sc.nextLine();
+//        System.out.println();
+//
+//        while (!("Charmander".equals(userInput) || "Pikachu".equals(userInput) || "Glastrier".equals(userInput)))
+//        {
+//            System.out.println("Species engimon tidak tepat, silahkan coba lagi");
+//            System.out.println("- Charmander");
+//            System.out.println("- Pikachu");
+//            System.out.println("- Glastrier");
+//            System.out.println("");
+//            System.out.print("Engimon: ");
+//
+//            userInput = sc.nextLine();
+//            System.out.println();
+//        }
+//
+//        System.out.println("Please name your engimon:");
+//        starter_engimon_name = sc.nextLine();
+//
+//        try
+//        {
+//            starter_engimon = new player_engimon(starter_engimon_name, null,null, userInput, 30, 0);
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            e.printStackTrace();
+//            return;
+//        }
+//
+//        System.out.println("This is your starting engimon: ");
+//        starter_engimon.showAttributes();
+//
+//        System.out.println("");
+//        System.out.println("Now, please tell us your name");
+//        System.out.print("Name: ");
+//        userInput = sc.nextLine();
+//        System.out.println();
 
-        Scanner sc = new Scanner(System.in);
-        userInput = sc.nextLine();
-        System.out.println();
-
-        while (!("Charmander".equals(userInput) || "Pikachu".equals(userInput) || "Glastrier".equals(userInput)))
-        {
-            System.out.println("Species engimon tidak tepat, silahkan coba lagi");
-            System.out.println("- Charmander");
-            System.out.println("- Pikachu");
-            System.out.println("- Glastrier");
-            System.out.println("");
-            System.out.print("Engimon: ");
-
-            userInput = sc.nextLine();
-            System.out.println();
-        }
-
-        System.out.println("Please name your engimon:");
-        starter_engimon_name = sc.nextLine();
-
+        //player P = new player(userInput, starter_engimon, 50, g.getMapLength()/2, g.getMapWidth()/2, g.getMapLength()/2, g.getMapWidth()/2 + 1);
         try
         {
-            starter_engimon = new player_engimon(starter_engimon_name, null,null, userInput, 30, 0);
+            starter_engimon = new player_engimon("Gab", null,null, "Pikachu", 30, 0);
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
             e.printStackTrace();
             return;
         }
 
-        System.out.println("This is your starting engimon: ");
-        starter_engimon.showAttributes();
-
-        System.out.println("");
-        System.out.println("Now, please tell us your name");
-        System.out.print("Name: ");
-        userInput = sc.nextLine();
-        System.out.println();
-
-        player P = new player(userInput, starter_engimon, 50, g.getMapLength()/2, g.getMapWidth()/2, g.getMapLength()/2, g.getMapWidth()/2 + 1);
+        player P = new player("James", starter_engimon, 50, g.getMapLength()/2, g.getMapWidth()/2, g.getMapLength()/2, g.getMapWidth()/2 + 1);
 
 
         player_engimon starter_engimon2 = null;
@@ -139,6 +151,7 @@ public class Main   {
         {
             g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
             g.generateEngimon();
+            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
             g.printMap();
         }
         catch(Exception e)
@@ -148,55 +161,56 @@ public class Main   {
             return;
         }
 
+        Scanner sc = new Scanner(System.in);
         userInput = sc.nextLine();
-        while (userInput != "exit")
+        while (userInput !="exit")
         {
             //Lower userInput
-            // cout << "Player Position" << P.getPlayerPosX() << "," << P.getPlayerPosY() << endl;
-            // cout << "Active Engimon Position" << P.getActivePetPosX() << "," << P.getActivePetPosY() << endl;
+            // cout <<"Player Position" << P.getPlayerPosX() <<"," << P.getPlayerPosY() << endl;
+            // cout <<"Active Engimon Position" << P.getActivePetPosX() <<"," << P.getActivePetPosY() << endl;
             userInput = userInput.toLowerCase();
-            if (userInput == "c" || userInput == "command" || userInput == "commands" ||userInput == "h" || userInput == "help")
+            if ("c".equals(userInput) || "command".equals(userInput) || "commands".equals(userInput) ||"h".equals(userInput) || "help".equals(userInput))
             {
                 printHelp();
             }
-            else if (userInput == "l")
+            else if ("l".equals(userInput))
             {
                 g.printLegend();
             }
-            else if (userInput == "w")
+            else if ("w".equals(userInput))
             {
-                tempP = P;
+                tempP = new player(P);
                 P.moveUp(g.getMapLength(), g.getMapWidth());
                 resolveMove(P, g, tempP);
 
             }
-            else if (userInput == "a")
+            else if ("a".equals(userInput))
             {
-                tempP = P;
+                tempP = new player(P);
                 P.moveLeft(g.getMapLength(), g.getMapWidth());
                 resolveMove(P, g, tempP);
             }
-            else if (userInput == "s")
+            else if ("s".equals(userInput))
             {
-                tempP = P;
+                tempP = new player(P);
                 P.moveDown(g.getMapLength(), g.getMapWidth());
                 resolveMove(P, g, tempP);
             }
-            else if (userInput == "d")
+            else if ("d".equals(userInput))
             {
-                tempP = P;
+                tempP = new player(P);
                 P.moveRight(g.getMapLength(), g.getMapWidth());
                 resolveMove(P, g, tempP);
             }
-//            else if (userInput == "z")
-//            {
-//                P.interact();
-//            }
-            else if (userInput == "m")
+            else if ("z".equals(userInput))
+            {
+                P.Interact();
+            }
+            else if ("m".equals(userInput))
             {
                 g.printMap();
             }
-            else if (userInput == "b")
+            else if ("b".equals(userInput))
             {
                 try
                 {
@@ -208,15 +222,15 @@ public class Main   {
                 }
 
             }
-            else if (userInput == "e")
+            else if ("e".equals(userInput))
             {
                 P.showEngimonList();
             }
-            else if (userInput == "i")
+            else if ("i".equals(userInput))
             {
                 P.showSkillItemList();
             }
-            else if (userInput == "u")
+            else if ("u".equals(userInput))
             {
                 try
                 {
@@ -226,17 +240,16 @@ public class Main   {
                 {
                     System.out.println(e.getMessage());
                 }
-
             }
-            else if (userInput == "x")
+            else if ("x".equals(userInput))
             {
                 P.switchOutEngimon();
             }
-            else if (userInput == "n")
+            else if ("n".equals(userInput))
             {
                 P.showEngimonDetails();
             }
-            else if (userInput == "g")
+            else if ("g".equals(userInput))
             {
                 g.generateEngimon();
             }
@@ -244,6 +257,7 @@ public class Main   {
             {
                 System.out.println("Invalid Command, type 'h' to list all commands" );
             }
+            System.out.println("");
             userInput = sc.nextLine();
         }
     }
