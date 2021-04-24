@@ -1,7 +1,5 @@
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class engimonInventory extends Inventory<player_engimon> {
     @java.lang.Override
@@ -12,8 +10,12 @@ public class engimonInventory extends Inventory<player_engimon> {
     }
 
     public void deleteItem(player_engimon item) {
-        for (Integer i = 0; i < this.contents.size(); i++) {
-            if (this.contents.get(i).equals(item)) {
+        for (int i = 0; i < this.contents.size(); i++) {
+            if (this.contents.get(i).getName() == item.getName()
+                && this.contents.get(i).getSpecies() == item.getSpecies()
+                && this.contents.get(i).getLevel() == item.getLevel()
+                && this.contents.get(i).getCummulativeExp() == item.getCummulativeExp()
+                && this.contents.get(i).isActive() == item.isActive()) {
                 this.contents.remove(i);
                 break;
             }
