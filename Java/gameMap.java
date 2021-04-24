@@ -32,7 +32,7 @@ public class gameMap {
                 }
 			    else if (i < this.mapLength/2 && j >= this.mapWidth/2)
                 {
-                    r.add(new tile(j,i,"    ns"));
+                    r.add(new tile(j,i,"mountains"));
                 }
 			    else
                 {
