@@ -63,8 +63,8 @@ public class Main   {
         gameMap g;
         try
         {
-//             g = new gameMap("inputMapFile.txt");
-            g = new gameMap();
+             g = new gameMap("inputMapFile.txt");
+//            g = new gameMap();
         }
         catch(Exception e)
         {

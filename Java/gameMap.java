@@ -1,6 +1,8 @@
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import java.io.File;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.Vector;
 
 public class gameMap {
@@ -42,7 +44,74 @@ public class gameMap {
             tile_map.add(r);
         }
     }
-    public gameMap(String externalFile){}
+    public gameMap(String externalFile) throws Exception
+    {
+        File f;
+        Scanner fileReader;
+        try
+        {
+            f = new File(externalFile);
+            fileReader = new Scanner(f);
+
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+
+        String line = fileReader.nextLine();
+        String[] firstLine= line.split(" ");
+        Integer baris = Integer.parseInt(firstLine[0]);
+        Integer kolom = Integer.parseInt(firstLine[1]);
+
+        Integer count = 0;
+        while (fileReader.hasNextLine())
+        {
+            line = fileReader.nextLine();
+            count++;
+            if (line.split(" ").length != kolom)
+            {
+                throw new Exception("Pastikan input file benar");
+            }
+        }
+
+        if (count != baris)
+        {
+            throw new Exception("Pastikan input file benar");
+        }
+        fileReader.close();
+
+        fileReader = new Scanner(f);
+        line = fileReader.nextLine();
+        this.mapWidth = baris;
+        this.mapLength = kolom;
+        tile_map = new Vector<Vector<tile>>();
+        for (int i = 0; i < this.mapWidth; i++) {
+            line = fileReader.nextLine();
+            String[] lineArray = line.split(" ");
+            Vector<tile> r = new Vector<tile>();
+            for (int j = 0; j < this.mapLength; j++) {
+                if ("o".equals(lineArray[j]))
+                {
+                    r.add(new tile(j,i,"sea"));
+                }
+                else if (".".equals(lineArray[j]))
+                {
+                    r.add(new tile(j,i,"tundra"));
+                }
+                else if ("^".equals(lineArray[j]))
+                {
+                    r.add(new tile(j,i,"mountains"));
+                }
+                else
+                {
+                    r.add(new tile(j,i,"grassland"));
+                }
+            }
+            tile_map.add(r);
+        }
+        fileReader.close();
+    }
 
     public void printMap()
     {
@@ -67,11 +136,15 @@ public class gameMap {
         System.out.println("S/s: Water/Ice engimon");
         System.out.println("N/n: Water/Ground engimon");
 
+        System.out.println();
         System.out.println("P: Player");
         System.out.println("X: Active Engimon");
 
+        System.out.println();
         System.out.println("- : Grassland");
         System.out.println("o : Sea");
+        System.out.println("^ : Mountains>");
+        System.out.println(". : Tundra");
     }
 
     private int randomInteger(int start, int end)
