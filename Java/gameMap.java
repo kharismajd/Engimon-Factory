@@ -10,7 +10,7 @@ public class gameMap {
     private int mapLength = 12;
     private int mapWidth = 10;
 
-    private int engimon_count = 0;
+    protected int engimon_count = 0;
     private int map_move_count = MAP_ENGIMON_COUNT;
 
     public static final int MAP_ENGIMON_COUNT = 5;
