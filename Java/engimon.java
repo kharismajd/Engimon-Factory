@@ -135,7 +135,10 @@ abstract public class engimon {
         System.out.println(  this.name+ ": " + database_engimon.cry(this.species));
     }
 
-
+    public void setName(String name)
+    {
+        this.name = name;
+    }
     public void setActive()
     {
         this.active = true;

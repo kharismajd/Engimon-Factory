@@ -38,14 +38,14 @@ public class player{
 		this.addInventoryContent(starting_engimon);
 	}
 
-	public void setActiveEngimon(int i)
+	public void setActiveEngimon(int index)
 	{
 		if (this.getActiveEngimon() != null)
 		{
 			this.getActiveEngimon().setInactive();
 		}
 
-		this.engimon_inventory.getContents().get(i).setActive();
+		this.engimon_inventory.getContents().get(index).setActive();
 	}
 
 	public player_engimon getActiveEngimon()
@@ -125,6 +125,11 @@ public class player{
 		}
 	}
 
+	public void setEngimonName(int index, String name)
+	{
+		this.engimon_inventory.getContents().get(index).setName(name);
+	}
+
 	public void addInventoryContent(player_engimon engimon)
 	{
 		if (engimon.getName() != "null")
@@ -160,9 +165,12 @@ public class player{
 		}
 	}
 
-	public void deleteInventoryContent(skill skill_item) throws Exception
+	public void deleteInventoryContent(skill skill_item, int amount)
 	{
-		this.skill_inventory.deleteItem(skill_item);
+		for (int i = 0; i < amount; i++)
+		{
+			this.skill_inventory.deleteItem(skill_item);
+		}
 	}
 
 	public void showEngimonList()
@@ -329,7 +337,7 @@ public class player{
 					//engimon dummy = new engimon(this.engimon_inventory.getContents()[j-1]);	// perbaiki ini
 					dummy.learnMove(this.skill_inventory.getContents().get(i-1).getSkillName());
 					this.engimon_inventory.getContents().get(j-1).learnMove(this.skill_inventory.getContents().get(i-1).getSkillName());
-					deleteInventoryContent(this.skill_inventory.getContents().get(i-1));
+					deleteInventoryContent(this.skill_inventory.getContents().get(i-1), 1);
 					/*
 					catch (Integer e)
 					{
