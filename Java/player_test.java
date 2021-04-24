@@ -19,6 +19,7 @@ public class player_test {
             newp.addInventoryContent("tackle");
             newp.addInventoryContent("bubble");
             newp.addInventoryContent("rock_smash");
+            newp.addInventoryContent("ember");
             newp.showSkillItemList();
         } catch (Exception e) {
             System.out.println(e);
