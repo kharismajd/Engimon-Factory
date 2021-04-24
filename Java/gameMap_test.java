@@ -11,6 +11,8 @@ public class gameMap_test {
         gameMap_test3();
         System.out.println("Map test 4:");
         gameMap_test4();
+        System.out.println("Map test 5:");
+        gameMap_test5();
     }
 
     public void gameMap_test1()
@@ -69,6 +71,7 @@ public class gameMap_test {
     }
     public void gameMap_test3()
     {
+        /*Move tile engimon*/
         gameMap g = new gameMap();
         wild_engimon we = null;
         try {
@@ -98,6 +101,7 @@ public class gameMap_test {
 
     public void gameMap_test4()
     {
+        /*Move Wild engimon test*/
         gameMap g = new gameMap();
         g.generateEngimon();
         try
@@ -124,6 +128,39 @@ public class gameMap_test {
             }
 //            System.out.println("Move: "+i);
 //            g.printMap();
+        }
+        g.printMap();
+    }
+
+    public void gameMap_test5()
+    {
+        gameMap g = new gameMap();
+        g.generateEngimon();
+
+
+        tile temp = null;
+        for (Vector<tile> i :g.tile_map){
+            for (tile j:i) {
+                if (j.haveWildEngimon())
+                {
+                    temp = j;
+                    break;
+                }
+            }
+        }
+
+        g.deleteTileEngimon(temp.x,temp.y);
+        System.out.println("Engimon count should be: "+(gameMap.MAP_ENGIMON_COUNT - 1));
+        System.out.println("Engimon count: "+ g.engimon_count);
+        assert (g.engimon_count == gameMap.MAP_ENGIMON_COUNT - 1);
+        try
+        {
+            g.updateMap(0,0,0,1);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         g.printMap();
     }
