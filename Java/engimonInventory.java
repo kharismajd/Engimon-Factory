@@ -27,7 +27,7 @@ class engimonComparator implements Comparator<player_engimon> {
 
     @Override
     public int compare(player_engimon e1, player_engimon e2) {
-        int value1 = e1.getName().compareTo(e2.getName());
+        int value1 = e1.getSpecies().compareTo(e2.getSpecies());
         if (value1 == 0) {
             return e2.getLevel().compareTo(e1.getLevel());
         }

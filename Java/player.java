@@ -10,7 +10,6 @@ public class player{
 
 	protected engimonInventory engimon_inventory;
 	protected skillInventory skill_inventory;
-	protected player_engimon nullEngimon;
 
 	public player()
 	{
@@ -20,6 +19,8 @@ public class player{
 		this.player_y = 0;
 		this.activeEngimon_x = -1;
 		this.activeEngimon_y = -1;
+		this.engimon_inventory = new engimonInventory();
+		this.skill_inventory = new skillInventory();
 	}
 
 	public player(String name, player_engimon starting_engimon, Integer max_inventory_capacity, Integer player_x, Integer player_y, Integer activeEngimon_x, Integer activeEngimon_y)
@@ -32,7 +33,19 @@ public class player{
 		this.player_y = player_y;
 		this.activeEngimon_x = activeEngimon_x;
 		this.activeEngimon_y = activeEngimon_y;
+		this.engimon_inventory = new engimonInventory();
+		this.skill_inventory = new skillInventory();
 		this.addInventoryContent(starting_engimon);
+	}
+
+	public void setActiveEngimon(int index)
+	{
+		if (this.getActiveEngimon() != null)
+		{
+			this.getActiveEngimon().setInactive();
+		}
+
+		this.engimon_inventory.getContents().get(index).setActive();
 	}
 
 	public player_engimon getActiveEngimon()
@@ -52,13 +65,13 @@ public class player{
 		}
 		else
 		{
-			return nullEngimon;
+			return null;
 		}
 	}
 
 	public void deleteActiveEngimon()
 	{
-		if (this.getActiveEngimon().getName() != "null")
+		if (this.getActiveEngimon() != null)
 		{
 			deleteInventoryContent(this.getActiveEngimon());
 		}
@@ -112,6 +125,11 @@ public class player{
 		}
 	}
 
+	public void setEngimonName(int index, String name)
+	{
+		this.engimon_inventory.getContents().get(index).setName(name);
+	}
+
 	public void addInventoryContent(player_engimon engimon)
 	{
 		if (engimon.getName() != "null")
@@ -132,7 +150,7 @@ public class player{
 		this.engimon_inventory.deleteItem(engimon);
 	}
 
-	public void addInventoryContent(skill skill_item) throws Exception
+	public void addInventoryContent(skill skill_item)
 	{
 		if (skill_item.getSkillName() != "null")
 		{	
@@ -147,9 +165,12 @@ public class player{
 		}
 	}
 
-	public void deleteInventoryContent(skill skill_item) throws Exception
+	public void deleteInventoryContent(skill skill_item, int amount)
 	{
-		this.skill_inventory.deleteItem(skill_item);
+		for (int i = 0; i < amount; i++)
+		{
+			this.skill_inventory.deleteItem(skill_item);
+		}
 	}
 
 	public void showEngimonList()
@@ -167,7 +188,7 @@ public class player{
 				{
 					System.out.print("|" + this.engimon_inventory.getContents().get(i).getElmt2());
 				}
-				System.out.print("/lv " + this.engimon_inventory.getContents().get(i).getLevel().toString() + ")" + " [active]");
+				System.out.print("/lv " + this.engimon_inventory.getContents().get(i).getLevel().toString() + ")");
 				if (this.engimon_inventory.getContents().get(i).isActive())
 				{
 					System.out.print(" [active]");
@@ -193,7 +214,7 @@ public class player{
 			int i;
 			for (i = 0; i != this.skill_inventory.getContents().size(); ++i)
 			{
-				System.out.println(count + ". " + this.skill_inventory.getContents().get(i).getSkillName() + " base power: " + Integer.toString(this.skill_inventory.getContents().get(i).getBasePower()) + " (" + Integer.toString(this.skill_inventory.getContents().get(i).getAmountInInventory()) + ")");
+				System.out.println(count + ". " + this.skill_inventory.getContents().get(i).getSkillName() + " (base power: " + Integer.toString(this.skill_inventory.getContents().get(i).getBasePower()) + ") [" + Integer.toString(this.skill_inventory.getContents().get(i).getAmountInInventory()) + "]");
 				count++;
 			}
 		}
@@ -253,18 +274,18 @@ public class player{
 			i = sc.nextInt();
 			if (i >= 1 && i <= this.engimon_inventory.getContents().size())
 			{
-				if (getActiveEngimon().getName() != "null"){
+				if (getActiveEngimon() != null){
 					if (this.engimon_inventory.getContents().get(i-1).isActive()){
 						System.out.println("Engimon tersebut sedang aktif");
 					}
 					else{
 						System.out.println("Replace active Engimon " + getActiveEngimon().getName() + " dengan Engimon " + this.engimon_inventory.getContents().get(i-1).getName());
 						getActiveEngimon().setInactive();
-						this.engimon_inventory.getContents().get(i-1).setActive();
+						this.setActiveEngimon(i-1);
 					}
 				}
 				else{
-					this.engimon_inventory.getContents().get(i-1).setActive();
+					this.setActiveEngimon(i-1);
 					System.out.println("Set " + this.engimon_inventory.getContents().get(i-1).getName() + " sebagai active Engimon");
 					if (player_x != 0){
 						activeEngimon_x = player_x - 1;
@@ -316,7 +337,7 @@ public class player{
 					//engimon dummy = new engimon(this.engimon_inventory.getContents()[j-1]);	// perbaiki ini
 					dummy.learnMove(this.skill_inventory.getContents().get(i-1).getSkillName());
 					this.engimon_inventory.getContents().get(j-1).learnMove(this.skill_inventory.getContents().get(i-1).getSkillName());
-					deleteInventoryContent(this.skill_inventory.getContents().get(i-1));
+					deleteInventoryContent(this.skill_inventory.getContents().get(i-1), 1);
 					/*
 					catch (Integer e)
 					{
