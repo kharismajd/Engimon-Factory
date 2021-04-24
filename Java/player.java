@@ -136,7 +136,7 @@ public class player{
 		this.engimon_inventory.deleteItem(engimon);
 	}
 
-	public void addInventoryContent(skill skill_item) throws Exception
+	public void addInventoryContent(skill skill_item)
 	{
 		if (skill_item.getSkillName() != "null")
 		{	
@@ -197,7 +197,7 @@ public class player{
 			int i;
 			for (i = 0; i != this.skill_inventory.getContents().size(); ++i)
 			{
-				System.out.println(count + ". " + this.skill_inventory.getContents().get(i).getSkillName() + " base power: " + Integer.toString(this.skill_inventory.getContents().get(i).getBasePower()) + " (" + Integer.toString(this.skill_inventory.getContents().get(i).getAmountInInventory()) + ")");
+				System.out.println(count + ". " + this.skill_inventory.getContents().get(i).getSkillName() + " (base power: " + Integer.toString(this.skill_inventory.getContents().get(i).getBasePower()) + ") [" + Integer.toString(this.skill_inventory.getContents().get(i).getAmountInInventory()) + "]");
 				count++;
 			}
 		}

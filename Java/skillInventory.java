@@ -17,7 +17,7 @@ public class skillInventory extends Inventory<skill> {
             this.contents.get(i).setAmountInInventory(past_val + 1);
         }
         else {
-            item.setAmountInInventory(0);
+            item.setAmountInInventory(1);
             this.contents.add(item);
             Collections.sort(this.contents, new skillComparator());
         }
