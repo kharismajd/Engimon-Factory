@@ -146,14 +146,14 @@ public class player{
 		this.engimon_inventory.deleteItem(engimon);
 	}
 
-	public void addInventoryContent(String skillName)
+	public void addInventoryContent(String skillName) throws Exception
 	{
 		if (skillName != "null")
 		{	
 			if (!this.isInventoryFull())
 			{
-				auto itr = skill::skill_database.begin();
-				for (itr = skill::skill_database.begin(); itr != skill::skill_database.end(); ++itr)
+				auto itr = skill_database.begin();
+				for (itr = skill_database.begin(); itr != skill_database.end(); ++itr)
 					if ((itr).getSkillName() == skillName)	
 					{
 						break;
@@ -161,7 +161,7 @@ public class player{
 				
 				if (itr == skill_database.end())
 				{
-					throw "Error, skill tidak ditemukan";
+					throw new Exception("Error, skill tidak ditemukan");
 				}
 				
 				this.skill_inventory.addItem((itr));
@@ -173,7 +173,7 @@ public class player{
 		}
 	}
 
-	public void deleteInventoryContent(String skillName)
+	public void deleteInventoryContent(String skillName) throws Exception
 	{
 		auto itr = skill_database.begin();
 		for (itr = skill_database.begin(); itr != skill_database.end(); ++itr)
@@ -182,9 +182,9 @@ public class player{
 				break;
 			}
 		
-		if (itr == skill::skill_database.end())
+		if (itr == skill_database.end())
 		{
-			throw "Error, skill tidak ditemukan";
+			throw new Exception("Error, skill tidak ditemukan");
 		}
 		this.skill_inventory.deleteItem((itr));
 	}
@@ -382,7 +382,7 @@ public class player{
 					{
 						if (i == j)
 						{
-							throw "Tidak bisa breeding engimon yang sama";
+							throw new Exception( "Tidak bisa breeding engimon yang sama");
 						}
 						else
 						{
