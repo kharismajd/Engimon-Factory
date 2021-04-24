@@ -71,7 +71,7 @@ public class player{
 
 	public void deleteActiveEngimon()
 	{
-		if (this.getActiveEngimon().getName() != "null")
+		if (this.getActiveEngimon() != null)
 		{
 			deleteInventoryContent(this.getActiveEngimon());
 		}
@@ -274,7 +274,7 @@ public class player{
 			i = sc.nextInt();
 			if (i >= 1 && i <= this.engimon_inventory.getContents().size())
 			{
-				if (getActiveEngimon().getName() != "null"){
+				if (getActiveEngimon() != null){
 					if (this.engimon_inventory.getContents().get(i-1).isActive()){
 						System.out.println("Engimon tersebut sedang aktif");
 					}
