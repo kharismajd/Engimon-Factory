@@ -179,4 +179,12 @@ abstract public class engimon {
     {
         return this.moves[idx];
     }
+
+    public Integer getLife(){
+        return this.life;
+    }
+
+    public void setLife(Integer life){
+        this.life = life;
+    }
 }
