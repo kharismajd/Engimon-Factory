@@ -1,13 +1,12 @@
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
-public class skillInventory {
+public class skillInventory extends Inventory<skill> {
     public void addItem(skill item) {
         Boolean found = false;
-        for (Integer i = 0; i < this.contents.size(); i++) {
-            if (item.getSkillName() == this.contents.get(i)) {
+        Integer i;
+        for (i = 0; i < this.contents.size(); i++) {
+            if (item.getSkillName() == this.contents.get(i).getSkillName()) {
                 found = true;
                 break;
             }
@@ -25,7 +24,7 @@ public class skillInventory {
     }
 
     public void deleteItem(skill item) {
-        for (Integer i = 0; i < this.contents.size(); i++) {
+        for (int i = 0; i < this.contents.size(); i++) {
             if (item.getSkillName() == this.contents.get(i).getSkillName()) {
                 if (this.contents.get(i).getAmountInInventory() > 1) {
                     Integer past_val = this.contents.get(i).getAmountInInventory();
@@ -51,6 +50,17 @@ class skillComparator implements Comparator<skill> {
 
     @Override
     public int compare(skill s1, skill s2) {
-        return s2.getBasePower().compareTo(s1.getBasePower());
+        if (s2.getBasePower() > s1.getBasePower())
+        {
+            return 1;
+        }
+        else if (s2.getBasePower() < s1.getBasePower())
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 }

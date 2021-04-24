@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Inventory<T> {
     protected ArrayList<T> contents = new ArrayList<T>();
