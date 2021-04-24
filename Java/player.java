@@ -10,7 +10,6 @@ public class player{
 
 	protected engimonInventory engimon_inventory;
 	protected skillInventory skill_inventory;
-	protected player_engimon nullEngimon;
 
 	public player()
 	{
@@ -39,6 +38,16 @@ public class player{
 		this.addInventoryContent(starting_engimon);
 	}
 
+	public void setActiveEngimon(int i)
+	{
+		if (this.getActiveEngimon() != null)
+		{
+			this.getActiveEngimon().setInactive();
+		}
+
+		this.engimon_inventory.getContents().get(i).setActive();
+	}
+
 	public player_engimon getActiveEngimon()
 	{
 		int i;
@@ -56,7 +65,7 @@ public class player{
 		}
 		else
 		{
-			return nullEngimon;
+			return null;
 		}
 	}
 
@@ -264,11 +273,11 @@ public class player{
 					else{
 						System.out.println("Replace active Engimon " + getActiveEngimon().getName() + " dengan Engimon " + this.engimon_inventory.getContents().get(i-1).getName());
 						getActiveEngimon().setInactive();
-						this.engimon_inventory.getContents().get(i-1).setActive();
+						this.setActiveEngimon(i-1);
 					}
 				}
 				else{
-					this.engimon_inventory.getContents().get(i-1).setActive();
+					this.setActiveEngimon(i-1);
 					System.out.println("Set " + this.engimon_inventory.getContents().get(i-1).getName() + " sebagai active Engimon");
 					if (player_x != 0){
 						activeEngimon_x = player_x - 1;
