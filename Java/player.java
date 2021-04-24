@@ -359,11 +359,14 @@ public class player{
 
 	public void useSkillItem(int skillIdx, int engimonIdx)
 	{
-		database_skill database = new database_skill();
-		if (database.isValid(this.skill_inventory.getContents().get(skillIdx).getSkillName(), this.engimon_inventory.getContents().get(engimonIdx)))
+		try
 		{
 			this.engimon_inventory.getContents().get(engimonIdx).learnMove(this.skill_inventory.getContents().get(skillIdx).getSkillName());
 			this.deleteInventoryContent(this.skill_inventory.getContents().get(skillIdx).getSkillName(), 1);
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
 		}
 	}
 
@@ -372,7 +375,6 @@ public class player{
 		Integer i;
 		Integer j;
 		Scanner sc = new Scanner(System.in);
-		database_skill database = new database_skill();
 		if (this.skill_inventory.countItem() > 0 && this.engimon_inventory.countItem() > 0 ) {
 			this.showSkillItemList();
 			System.out.println("Ketik nomor skill yang ingin dipakai: ");
@@ -384,10 +386,14 @@ public class player{
 				j = sc.nextInt();
 				if (j >= 1 && j <= this.engimon_inventory.getContents().size())
 				{
-					if (database.isValid(this.skill_inventory.getContents().get(i-1).getSkillName(), this.engimon_inventory.getContents().get(j-1)))
+					try
 					{
 						this.engimon_inventory.getContents().get(j-1).learnMove(this.skill_inventory.getContents().get(i-1).getSkillName());
 						deleteInventoryContent(this.skill_inventory.getContents().get(i-1).getSkillName(), 1);
+					}
+					catch (Exception e)
+					{
+						System.out.println(e);
 					}
 					
 					/*

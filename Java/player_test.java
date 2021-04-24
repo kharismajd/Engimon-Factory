@@ -14,6 +14,7 @@ public class player_test {
             newp.showEngimonList();
             newp.deleteActiveEngimon();
             newp.showEngimonList();
+            System.out.println(newp.getHighestLevelEngimon());
 
             newp.addInventoryContent("ember");
             newp.addInventoryContent("tackle");

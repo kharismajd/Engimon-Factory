@@ -123,7 +123,7 @@ abstract public class engimon {
     }
     public abstract void gainExp(int exp);
 
-    public abstract void learnMove(String move);
+    public abstract void learnMove(String move) throws Exception;
 
     public void setSkill (skill x, int idx, int mastery_level)
     {

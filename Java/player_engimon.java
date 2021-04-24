@@ -39,7 +39,7 @@ public class player_engimon extends engimon{
         this.name = name;
     }
 
-    public void learnMove(String move)
+    public void learnMove(String move) throws Exception
     {
         if (database_skill.isValid(move,this))
         {
@@ -70,6 +70,10 @@ public class player_engimon extends engimon{
             {
                 moves[idx] = new skill(database_skill.find(move));
             }
+        }
+        else
+        {
+            throw new Exception("Skill tidak kompatibel/valid");
         }
     }
 }
