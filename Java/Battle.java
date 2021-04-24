@@ -29,9 +29,14 @@ public class Battle extends element_advantage {
         List<String> my_elmt_arr = new ArrayList<String>();
         List<String> your_elmt_arr = new ArrayList<String>();
         my_elmt_arr.add(this.mymon.element1);
-        my_elmt_arr.add(this.mymon.element2);
+        if (this.mymon.element2!=engimon.element_null){
+            my_elmt_arr.add(this.mymon.element2);
+        }
+        
         your_elmt_arr.add(this.yourmon.element1);
-        your_elmt_arr.add(this.yourmon.element2);
+        if (this.yourmon.element2!=engimon.element_null){
+            your_elmt_arr.add(this.yourmon.element2);
+        }
 
         double my_most_effective_elmt = 0;
         double your_most_effective_elmt = 0;
@@ -39,6 +44,7 @@ public class Battle extends element_advantage {
         double your_curAdv;
         for (String myelmt : my_elmt_arr){
             for (String yourelmt : your_elmt_arr){
+
                 my_curAdv = getElementAdvantage(myelmt, yourelmt);
                 if (my_most_effective_elmt < my_curAdv){
                     my_most_effective_elmt = my_curAdv;
@@ -61,13 +67,17 @@ public class Battle extends element_advantage {
         int my_skill_mastery; int your_skill_mastery;
 
         for (int i=0;i<4;i++){
-            my_skill_base = this.mymon.getMove(i).getBasePower();
-            my_skill_mastery = this.mymon.getMove(i).getMasteryLv();
-            my_total_skill_power += my_skill_base * my_skill_mastery;
+            if (this.mymon.getMove(i) != null){
+                my_skill_base = this.mymon.getMove(i).getBasePower();
+                my_skill_mastery = this.mymon.getMove(i).getMasteryLv();
+                my_total_skill_power += my_skill_base * my_skill_mastery;
+            }
 
-            your_skill_base = this.yourmon.getMove(i).getBasePower();
-            your_skill_mastery = this.yourmon.getMove(i).getMasteryLv();
-            your_total_skill_power += your_skill_base * your_skill_mastery;
+            if (this.yourmon.getMove(i) != null){
+                your_skill_base = this.yourmon.getMove(i).getBasePower();
+                your_skill_mastery = this.yourmon.getMove(i).getMasteryLv();
+                your_total_skill_power += your_skill_base * your_skill_mastery;
+            }   
         }
 
         double[] elmtAdv = this.getEffectiveElmt();
@@ -82,15 +92,18 @@ public class Battle extends element_advantage {
 
     public int battleConfirmation(){
         this.yourmon.showAttributes();
+        double[] powerList = power();
+        System.out.printf("\nMy engimon power: %.2f\n", powerList[0]);
+        System.out.printf("Wild engimon power: %.2f\n", powerList[1]);
         Scanner stdin = new Scanner(System.in);
         System.out.println("Ingin lanjut gelud? Y/N");
         String descision =  stdin.nextLine();
 
         int retVal;
-        if (descision == "Y" || descision == "y"){
+        if ("Y".equals(descision) || "y".equals(descision)){
             System.out.println("Battle Commencing!!");
             retVal = this.initBattle();
-        } else if (descision == "N" || descision == "n"){
+        } else if ("N".equals(descision) || "n".equals(descision)){
             System.out.println("Gajadi gelud");
             retVal = -1;
         } else {
@@ -131,6 +144,7 @@ public class Battle extends element_advantage {
     }
 
     public void lose(){
+        System.out.println(this.mymon.getLife());
         int life_after = this.mymon.getLife()-1;
         this.mymon.setLife(life_after);
         System.out.printf("Kamu K4L4H!!\n");

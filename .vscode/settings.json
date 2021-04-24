@@ -3,5 +3,8 @@
         "ostream": "cpp",
         "iostream": "cpp",
         "new": "cpp"
-    }
+    },
+    "java.project.sourcePaths": [
+        "Java"
+    ]
 }

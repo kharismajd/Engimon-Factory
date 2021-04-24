@@ -3,6 +3,7 @@ public class player_engimon extends engimon{
     public player_engimon(String nm, engimon pr1, engimon pr2, String sp, int lvl, int exp) throws Exception
     {
         super(nm, pr1, pr2, sp, lvl, exp);
+        this.life=3;
     }
 
     public player_engimon(wild_engimon e)

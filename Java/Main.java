@@ -26,7 +26,7 @@ public class Main   {
             System.out.println("Battle");
 
             Battle b = new Battle(P.getActiveEngimon(), new wild_engimon(g.getTileEngimon(P.getPlayerPosX(),P.getPlayerPosY())) , P);
-            winBattle = b.initBattle();
+            winBattle = b.battleConfirmation();
             if (winBattle == 1)
             {
                 g.deleteTileEngimon(P.getPlayerPosX(), P.getPlayerPosY());
