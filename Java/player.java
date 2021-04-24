@@ -150,8 +150,10 @@ public class player{
 		this.engimon_inventory.deleteItem(engimon);
 	}
 
-	public void addInventoryContent(skill skill_item)
+	public void addInventoryContent(String skillName)
 	{
+		database_skill database = new database_skill();
+		skill skill_item = database.find(skillName);
 		if (skill_item.getSkillName() != "null")
 		{	
 			if (!this.isInventoryFull())
