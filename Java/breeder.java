@@ -8,12 +8,12 @@ public class breeder {
     }
 
     // Main breeder function
-    public static engimon breed (String name, engimon parent1, engimon parent2) throws Exception {
+    public static player_engimon breed (String name, player_engimon parent1, player_engimon parent2) throws Exception {
         if (parent1.getLevel() > 3 && parent2.getLevel() > 3) {
             breeder a = new breeder();
             
             String sp = a.inheritSpecies(parent1, parent2);
-            engimon child = new player_engimon(name, parent1, parent2, sp, 1, 0);
+            player_engimon child = new player_engimon(name, parent1, parent2, sp, 1, 0);
     
             // !!! Skill bawaan kalau parent1 dan parent2 speciesnya sama? !!!
             a.inheritSkill(child, parent1, parent2);

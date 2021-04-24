@@ -1,3 +1,5 @@
+import java.util.*;  
+
 public class player{
 	protected String name;
 	protected Integer max_inventory_capacity;
@@ -6,9 +8,9 @@ public class player{
 	protected Integer activeEngimon_x;
 	protected Integer activeEngimon_y;
 
-	protected inventory<engimon> engimon_inventory;
-	protected inventory<skill> skill_inventory;
-	protected engimon nullEngimon;
+	protected engimonInventory engimon_inventory;
+	protected skillInventory skill_inventory;
+	protected player_engimon nullEngimon;
 
 	public player()
 	{
@@ -20,7 +22,7 @@ public class player{
 		this.activeEngimon_y = -1;
 	}
 
-	public player(String name, engimon starting_engimon, Integer max_inventory_capacity, Integer player_x, Integer player_y, Integer activeEngimon_x, Integer activeEngimon_y)
+	public player(String name, player_engimon starting_engimon, Integer max_inventory_capacity, Integer player_x, Integer player_y, Integer activeEngimon_x, Integer activeEngimon_y)
 	{
 		starting_engimon.setActive();
 
@@ -33,32 +35,20 @@ public class player{
 		this.addInventoryContent(starting_engimon);
 	}
 
-	public player(player play)
+	public player_engimon getActiveEngimon()
 	{
-		this.name = play.name;
-		this.max_inventory_capacity = play.max_inventory_capacity;
-		this.player_x = play.player_x;
-		this.player_y = play.player_y;
-		this.activeEngimon_x = play.activeEngimon_x;
-		this.activeEngimon_y = play.activeEngimon_y;
-		copy(play.engimon_inventory.contents.begin(), play.engimon_inventory.contents.end(), back_inserter(this.engimon_inventory.contents)); 
-		copy(play.skill_inventory.contents.begin(), play.skill_inventory.contents.end(), back_inserter(this.skill_inventory.contents)); 
-	}
-
-	public engimon getActiveEngimon()
-	{
-		auto i = this.engimon_inventory.contents.begin();
-		for (i = this.engimon_inventory.contents.begin(); i != this.engimon_inventory.contents.end(); ++i)
+		int i;
+		for (i = 0; i < this.engimon_inventory.getContents().size(); i++)
 		{
-			if ((i).isActive())
+			if (this.engimon_inventory.getContents().get(i).isActive())
 			{
 				break;
 			}
 		}
 
-		if (i != this.engimon_inventory.contents.end())
+		if (i != this.engimon_inventory.getContents().size())
 		{
-			return(i);
+			return(this.engimon_inventory.getContents().get(i));
 		}
 		else
 		{
@@ -71,10 +61,6 @@ public class player{
 		if (this.getActiveEngimon().getName() != "null")
 		{
 			deleteInventoryContent(this.getActiveEngimon());
-			if (this.engimon_inventory.countItem() > 0)
-			{
-				this.engimon_inventory.contents[0].setActive();
-			}
 		}
 		else
 		{
@@ -126,7 +112,7 @@ public class player{
 		}
 	}
 
-	public void addInventoryContent(engimon engimon)
+	public void addInventoryContent(player_engimon engimon)
 	{
 		if (engimon.getName() != "null")
 		{
@@ -141,30 +127,18 @@ public class player{
 		}
 	}
 
-	public void deleteInventoryContent(engimon engimon)
+	public void deleteInventoryContent(player_engimon engimon)
 	{
 		this.engimon_inventory.deleteItem(engimon);
 	}
 
-	public void addInventoryContent(String skillName) throws Exception
+	public void addInventoryContent(skill skill_item) throws Exception
 	{
-		if (skillName != "null")
+		if (skill_item.getSkillName() != "null")
 		{	
 			if (!this.isInventoryFull())
 			{
-				auto itr = skill_database.begin();
-				for (itr = skill_database.begin(); itr != skill_database.end(); ++itr)
-					if ((itr).getSkillName() == skillName)	
-					{
-						break;
-					}
-				
-				if (itr == skill_database.end())
-				{
-					throw new Exception("Error, skill tidak ditemukan");
-				}
-				
-				this.skill_inventory.addItem((itr));
+				this.skill_inventory.addItem(skill_item);
 			}
 			else
 			{
@@ -173,20 +147,9 @@ public class player{
 		}
 	}
 
-	public void deleteInventoryContent(String skillName) throws Exception
+	public void deleteInventoryContent(skill skill_item) throws Exception
 	{
-		auto itr = skill_database.begin();
-		for (itr = skill_database.begin(); itr != skill_database.end(); ++itr)
-			if ((itr).getSkillName() == skillName)	
-			{
-				break;
-			}
-		
-		if (itr == skill_database.end())
-		{
-			throw new Exception("Error, skill tidak ditemukan");
-		}
-		this.skill_inventory.deleteItem((itr));
+		this.skill_inventory.deleteItem(skill_item);
 	}
 
 	public void showEngimonList()
@@ -196,17 +159,21 @@ public class player{
 			System.out.println("List engimon kamu: ");
 
 			Integer count = 1;
-			auto i = this.engimon_inventory.contents.begin();
-			for (i = this.engimon_inventory.contents.begin(); i != this.engimon_inventory.contents.end(); ++i)
+			int i;
+			for (i = 0; i != this.engimon_inventory.getContents().size(); ++i)
 			{
-				if ((i).isActive())
+				System.out.print(count + ". " + this.engimon_inventory.getContents().get(i).getName() + " (" + this.engimon_inventory.getContents().get(i).getSpecies() + "/" + this.engimon_inventory.getContents().get(i).getElmt1());
+				if (this.engimon_inventory.getContents().get(i).getElmt2() != null)
 				{
-					System.out.println(count + ". " + (i).getName() + " (" + (i).getSpecies() + " lv " + (i).getLevel() + ")" + " [active]");
+					System.out.print("|" + this.engimon_inventory.getContents().get(i).getElmt2());
 				}
-				else
+				System.out.print("/lv " + this.engimon_inventory.getContents().get(i).getLevel().toString() + ")" + " [active]");
+				if (this.engimon_inventory.getContents().get(i).isActive())
 				{
-					System.out.println(count + ". " + (i).getName() + " (" + (i).getSpecies() + " lv " + (i).getLevel() + ")" );
+					System.out.print(" [active]");
 				}
+				System.out.println();
+
 				count++;
 			}
 		}
@@ -223,10 +190,10 @@ public class player{
 			System.out.println("List skill item kamu: ");
 
 			Integer count = 1;
-			auto i = this.skill_inventory.contents.begin();
-			for (i = this.skill_inventory.contents.begin(); i != this.skill_inventory.contents.end(); ++i)
+			int i;
+			for (i = 0; i != this.skill_inventory.getContents().size(); ++i)
 			{
-				System.out.println(count + ". " + (i).getSkillName() + " (" + (i).getAmountInInventory() + ")");
+				System.out.println(count + ". " + this.skill_inventory.getContents().get(i).getSkillName() + " base power: " + Integer.toString(this.skill_inventory.getContents().get(i).getBasePower()) + " (" + Integer.toString(this.skill_inventory.getContents().get(i).getAmountInInventory()) + ")");
 				count++;
 			}
 		}
@@ -239,61 +206,66 @@ public class player{
 	public void deleteEngimonSelect()
 	{
 		Integer i;
+		Scanner sc= new Scanner(System.in);
 		if (this.engimon_inventory.countItem() > 0) {
 			this.showEngimonList();
 			System.out.println("Ketik nomor engimon yang ingin dibuang: ");
-			//cin >> i;
-			if (i >= 1 && i <= this.engimon_inventory.contents.size())
+			i = sc.nextInt();
+			if (i >= 1 && i <= this.engimon_inventory.getContents().size())
 			{
-				deleteInventoryContent(this.engimon_inventory.contents[i-1]);
+				deleteInventoryContent(this.engimon_inventory.getContents().get(i-1));
 			}
 		}
 		else
 		{
 			System.out.println("Anda tidak memiliki engimon");
 		}
+		sc.close();
 	}
 
 	public void showEngimonDetails()
 	{
 		Integer i;
+		Scanner sc = new Scanner(System.in);
 		if (this.engimon_inventory.countItem() > 0) {
 			this.showEngimonList();
 			System.out.println("Ketik nomor yang ada untuk melihat detail engimon: ");
-			//cin >> i;
-			if (i >= 1 && i <= this.engimon_inventory.contents.size())
+			i = sc.nextInt();
+			if (i >= 1 && i <= this.engimon_inventory.getContents().size())
 			{
-				this.engimon_inventory.contents[i-1].showAttributes();
+				this.engimon_inventory.getContents().get(i-1).showAttributes();
 			}
 		}
 		else
 		{
 			System.out.println("Anda tidak memiliki engimon");
 		}
+		sc.close();
 	}
 
 	public void switchOutEngimon()
 	{
 		Integer i;
+		Scanner sc = new Scanner(System.in);
 		if (this.engimon_inventory.countItem() > 0) {
 			this.showEngimonList();
 			System.out.println("Ketik nomor engimon yang ingin dibuat aktif: ");
-			//cin >> i;
-			if (i >= 1 && i <= this.engimon_inventory.contents.size())
+			i = sc.nextInt();
+			if (i >= 1 && i <= this.engimon_inventory.getContents().size())
 			{
 				if (getActiveEngimon().getName() != "null"){
-					if (this.engimon_inventory.contents[i-1].isActive()){
+					if (this.engimon_inventory.getContents().get(i-1).isActive()){
 						System.out.println("Engimon tersebut sedang aktif");
 					}
 					else{
-						System.out.println("Replace active Engimon " + getActiveEngimon().getName() + " dengan Engimon " + this.engimon_inventory.contents[i-1].getName());
+						System.out.println("Replace active Engimon " + getActiveEngimon().getName() + " dengan Engimon " + this.engimon_inventory.getContents().get(i-1).getName());
 						getActiveEngimon().setInactive();
-						this.engimon_inventory.contents[i-1].setActive();
+						this.engimon_inventory.getContents().get(i-1).setActive();
 					}
 				}
 				else{
-					this.engimon_inventory.contents[i-1].setActive();
-					System.out.println("Set " + this.engimon_inventory.contents[i-1].getName() + " sebagai active Engimon");
+					this.engimon_inventory.getContents().get(i-1).setActive();
+					System.out.println("Set " + this.engimon_inventory.getContents().get(i-1).getName() + " sebagai active Engimon");
 					if (player_x != 0){
 						activeEngimon_x = player_x - 1;
 						activeEngimon_y = player_y;
@@ -309,6 +281,7 @@ public class player{
 		{
 			System.out.println("Anda tidak memiliki engimon");
 		}
+		sc.close();
 	}
 
 	public void Integereract()
@@ -327,22 +300,23 @@ public class player{
 	{
 		Integer i;
 		Integer j;
+		Scanner sc = new Scanner(System.in);
 		if (this.skill_inventory.countItem() > 0 && this.engimon_inventory.countItem() > 0 ) {
 			this.showSkillItemList();
 			System.out.println("Ketik nomor skill yang ingin dipakai: ");
-			//cin >> i;
-			if (i >= 1 && i <= this.skill_inventory.contents.size())
+			i = sc.nextInt();
+			if (i >= 1 && i <= this.skill_inventory.getContents().size())
 			{
 				this.showEngimonList();
-				System.out.println("Ketik nomor engimon yang ingin learn skill " + this.skill_inventory.contents[i-1].getSkillName() + " : ");
-				//cin >> j;
-				if (j >= 1 && j <= this.engimon_inventory.contents.size())
+				System.out.println("Ketik nomor engimon yang ingin learn skill " + this.skill_inventory.getContents().get(i-1).getSkillName() + " : ");
+				j = sc.nextInt();
+				if (j >= 1 && j <= this.engimon_inventory.getContents().size())
 				{
-					engimon dummy = this.engimon_inventory.contents[j-1];	// hapus ini
-					//engimon dummy = new engimon(this.engimon_inventory.contents[j-1]);	// perbaiki ini
-					dummy.learnMove(this.skill_inventory.contents[i-1].getSkillName());
-					this.engimon_inventory.contents[j-1].learnMove(this.skill_inventory.contents[i-1].getSkillName());
-					deleteInventoryContent(this.skill_inventory.contents[i-1].getSkillName());
+					player_engimon dummy = this.engimon_inventory.getContents().get(i-1);	// hapus ini
+					//engimon dummy = new engimon(this.engimon_inventory.getContents()[j-1]);	// perbaiki ini
+					dummy.learnMove(this.skill_inventory.getContents().get(i-1).getSkillName());
+					this.engimon_inventory.getContents().get(j-1).learnMove(this.skill_inventory.getContents().get(i-1).getSkillName());
+					deleteInventoryContent(this.skill_inventory.getContents().get(i-1));
 					/*
 					catch (Integer e)
 					{
@@ -359,6 +333,7 @@ public class player{
 		{
 			System.out.println("Anda harus memiliki minimal 1 engimon dan item skill");
 		}
+		sc.close();
 	}
 
 	public void breeding() throws Exception 
@@ -366,29 +341,31 @@ public class player{
 		Integer i;
 		Integer j;
 		String name;
+		Scanner sc = new Scanner(System.in);
 		if (!this.isInventoryFull())
 		{
 			if (this.engimon_inventory.countItem() >= 2)
 			{
 				this.showEngimonList();
 				System.out.println("Ketik nomor engimon pertama yang ingin breeding\n");
-				//cin >> i;
-				if (i >= 1 && i <= this.engimon_inventory.contents.size())
+				i = sc.nextInt();
+				if (i >= 1 && i <= this.engimon_inventory.getContents().size())
 				{
 					this.showEngimonList();
 					System.out.println("Ketik nomor engimon kedua yang ingin breeding\n");
-					//cin >> j;
-					if (j >= 1 && j <= this.engimon_inventory.contents.size())
+					j = sc.nextInt();
+					if (j >= 1 && j <= this.engimon_inventory.getContents().size())
 					{
 						if (i == j)
 						{
+							sc.close();
 							throw new Exception( "Tidak bisa breeding engimon yang sama");
 						}
 						else
 						{
 							System.out.println("Ketik nama engimon hasil breeding\n");
-							//cin >> name;
-							engimon newEngimon = breed(this.engimon_inventory.contents[i-1], this.engimon_inventory.contents[j-1], name);
+							name = sc.nextLine();
+							player_engimon newEngimon = breeder.breed(name, this.engimon_inventory.getContents().get(i-1), this.engimon_inventory.getContents().get(j-1));
 							this.addInventoryContent(newEngimon);
 						}
 					}
@@ -396,13 +373,16 @@ public class player{
 			}
 			else
 			{
+				sc.close();
 				throw new Exception("Kamu tidak memiliki engimon yang cukup untuk breeding");
 			}
 		}
 		else
 		{
+			sc.close();
 			throw new Exception("Inventory kamu sudah penuh");
 		}
+		sc.close();
 	}
 
 		
@@ -419,12 +399,12 @@ public class player{
 					this.showEngimonList();
 					System.out.println("Ketik nomor engimon pertama yang ingin breeding\n");
 					//cin >> i;
-					if (i >= 1 && i <= this.engimon_inventory.contents.size())
+					if (i >= 1 && i <= this.engimon_inventory.getContents().size())
 					{
 						this.showEngimonList();
 						System.out.println("Ketik nomor engimon kedua yang ingin breeding\n");
 						//cin >> j;
-						if (j >= 1 && j <= this.engimon_inventory.contents.size())
+						if (j >= 1 && j <= this.engimon_inventory.getContents().size())
 						{
 							if (i == j)
 							{
@@ -434,7 +414,7 @@ public class player{
 							{
 								System.out.println("Ketik nama engimon hasil breeding\n");
 								//cin >> name;
-								engimon newEngimon = breed(this.engimon_inventory.contents[i-1], this.engimon_inventory.contents[j-1], name);
+								engimon newEngimon = breed(this.engimon_inventory.getContents()[i-1], this.engimon_inventory.getContents()[j-1], name);
 								this.addInventoryContent(newEngimon);
 							}
 						}
