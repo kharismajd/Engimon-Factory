@@ -271,7 +271,7 @@ public class player{
 		{
 			System.out.println("Anda tidak memiliki engimon");
 		}
-		sc.close();
+		
 	}
 
 	public void showEngimonDetails()
@@ -291,7 +291,7 @@ public class player{
 		{
 			System.out.println("Anda tidak memiliki engimon");
 		}
-		sc.close();
+		
 	}
 
 	public void switchOutEngimon(int index)
@@ -342,7 +342,7 @@ public class player{
 		{
 			System.out.println("Anda tidak memiliki engimon");
 		}
-		sc.close();
+		
 	}
 
 	public void Interact()
@@ -412,7 +412,7 @@ public class player{
 		{
 			System.out.println("Anda harus memiliki minimal 1 engimon dan item skill");
 		}
-		sc.close();
+		
 	}
 
 	public void breeding(int engimonIdx1, int engimonIdx2, String name) throws Exception
@@ -443,7 +443,7 @@ public class player{
 					{
 						if (i == j)
 						{
-							sc.close();
+							
 							throw new Exception( "Tidak bisa breeding engimon yang sama");
 						}
 						else
@@ -458,16 +458,16 @@ public class player{
 			}
 			else
 			{
-				sc.close();
+				
 				throw new Exception("Kamu tidak memiliki engimon yang cukup untuk breeding");
 			}
 		}
 		else
 		{
-			sc.close();
+			
 			throw new Exception("Inventory kamu sudah penuh");
 		}
-		sc.close();
+		
 	}
 
 		

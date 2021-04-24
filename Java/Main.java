@@ -257,7 +257,6 @@ public class Main   {
             {
                 System.out.println("Invalid Command, type 'h' to list all commands" );
             }
-            System.out.println("");
             userInput = sc.nextLine();
         }
     }
