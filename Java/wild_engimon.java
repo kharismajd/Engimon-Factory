@@ -72,6 +72,25 @@ public class wild_engimon extends engimon{
         this.life = 1;
     }
 
+    public wild_engimon(engimon e)
+    {
+        this.name = e.name;
+        this.parent1 = e.parent1;
+        this.parent2 = e.parent2;
+        this.species = e.species;
+        this.moves = new skill[4];
+        for (int i = 0; i < 4; i++) {
+            this.moves[i] = e.moves[i];
+        }
+        this.element1 = e.element1;
+        this.element2 = e.element2;
+        this.level = e.level;
+        this.experience = e.experience;
+        this.cummulative_experience = e.cummulative_experience;
+        this.active = e.active;
+        this.life = 1;
+    }
+
     public wild_engimon(String species, int level, int extraMove) throws  Exception
     {
         this.Initialize(species, null, null, species, level,0);

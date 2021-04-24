@@ -42,7 +42,7 @@ public class gameMap {
             tile_map.add(r);
         }
     }
-//    public gameMap(String externalFile){}
+    public gameMap(String externalFile){}
 
     public void printMap()
     {
