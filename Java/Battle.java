@@ -145,7 +145,7 @@ public class Battle extends element_advantage {
     //Jangan pake ini buat dipake di main,, pake fungsi battleConfirmation()
     public int initBattle(){
         double[] power_var = power();
-        if (this.mymon == this.character.nullEngimon){
+        if (this.mymon == null){
             System.out.println("Kamu tidak memiliki engimon aktif");
             return -1;
         }
