@@ -2,16 +2,27 @@ import java.util.Random;
 
 public class wild_engimon extends engimon{
 
-    private static int playerHighestPokemon = 80;
+    public static int playerHighestPokemon = 30;
     private static species randSpecies = database_engimon.random();
-    private static int randLevel = randomInteger(playerHighestPokemon,80) ;
+    private static int randLevel = randomInteger(playerHighestPokemon,playerHighestPokemon+10) ;
     private static int extraMove = randomInteger(0,1);
 
+
+    public static void setPlayerHighestPokemon(int playerHighestPokemon) {
+        wild_engimon.playerHighestPokemon = playerHighestPokemon;
+    }
 
     private static void randomize()
     {
         randSpecies = database_engimon.random();
-        randLevel = randomInteger(playerHighestPokemon,100);
+        if (playerHighestPokemon + 10 < 100)
+        {
+            randLevel = randomInteger(playerHighestPokemon, playerHighestPokemon+10);
+        }
+        else
+        {
+            randLevel = randomInteger(playerHighestPokemon, 100);
+        }
     }
 
     private static void randomize(String tiletype)
@@ -19,7 +30,14 @@ public class wild_engimon extends engimon{
         try
         {
             randSpecies = database_engimon.random(tiletype);
-            randLevel = randomInteger(playerHighestPokemon,100);
+            if (playerHighestPokemon + 10 < 100)
+            {
+                randLevel = randomInteger(playerHighestPokemon, playerHighestPokemon+10);
+            }
+            else
+            {
+                randLevel = randomInteger(playerHighestPokemon, 100);
+            }
         }
         catch (NullPointerException n)
         {

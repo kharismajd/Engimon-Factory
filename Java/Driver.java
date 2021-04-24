@@ -1,7 +1,7 @@
 public class Driver {
-//    public static void main(String[] args) {
-//        database_skill database_skill = new database_skill();
-//        database_engimon database_engimon = new database_engimon();
+    public static void main(String[] args) {
+        database_skill database_skill = new database_skill();
+        database_engimon database_engimon = new database_engimon();
 //        String[] elem = {"Fire", "Water", "Electric", "Ice"};
 //        String[] lol = {"Fire"};
 //        skill a = new skill("a", 50, 0, lol);
@@ -23,11 +23,11 @@ public class Driver {
 //        {
 //            System.out.println(e.getMessage());
 //        }
-//
-//        // System.out.println(database_skill.isExist("splash"));
-//
-//        // System.out.println(database_skill.skillUniqueEngimon("Magikarp") == null);
-////        System.out.println(database_engimon.isExist("Magikarp"));
+
+        // System.out.println(database_skill.isExist("splash"));
+
+        // System.out.println(database_skill.skillUniqueEngimon("Magikarp") == null);
+//        System.out.println(database_engimon.isExist("Magikarp"));
 //        System.out.println("");
 //        player_engimon Gab;
 //        try
@@ -57,7 +57,11 @@ public class Driver {
 //            System.out.println(e.getMessage());
 //            e.printStackTrace();
 //        }
-//
-//
-//    }
+
+        gameMap g = new gameMap();
+//        System.out.println('h');
+        g.printMap();
+        System.out.println("x: " + g.tile_map.elementAt(9).elementAt(11).x);
+        System.out.println("y: " + g.tile_map.elementAt(9).elementAt(11).y);
+    }
 }
