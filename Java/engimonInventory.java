@@ -11,11 +11,7 @@ public class engimonInventory extends Inventory<player_engimon> {
 
     public void deleteItem(player_engimon item) {
         for (int i = 0; i < this.contents.size(); i++) {
-            if (this.contents.get(i).getName() == item.getName()
-                && this.contents.get(i).getSpecies() == item.getSpecies()
-                && this.contents.get(i).getLevel() == item.getLevel()
-                && this.contents.get(i).getCummulativeExp() == item.getCummulativeExp()
-                && this.contents.get(i).isActive() == item.isActive()) {
+            if (this.contents.get(i) == item) {
                 this.contents.remove(i);
                 break;
             }
