@@ -56,17 +56,15 @@ public class player_engimon extends engimon{
                 {
                     break;
                 }
-
-
             }
 
-            if (idx == 3)
+//            if (idx == 3)
+//            {
+//                System.out.println("Sudah penuh");
+//            }
+            if(idx == -1)
             {
-                System.out.println("Sudah penuh");
-            }
-            else if(idx == -1)
-            {
-                System.out.println("Skill telah dipelajari");
+                System.out.println("Skill telah dipelajari atau sudah penuh");
             }
             else
             {
