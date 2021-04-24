@@ -122,23 +122,27 @@ public class tile {
     public void playerIsHere()
     {
         this.isPlayer = true;
+        this.setSymbol('P');
     }
     public void playerIsNotHere()
     {
         this.isPlayer = false;
+        this.updateCharacter();
     }
     public Boolean isPlayerHere()
     {
-        return  this.isPlayer;
+        return this.isPlayer;
     }
 
     public void activeEngimonIsHere()
     {
         this.isActivePokemon = true;
+        this.setSymbol('X');
     }
     public void activeEngimonIsNotHere()
     {
         this.isActivePokemon = false;
+        this.updateCharacter();
     }
     public Boolean isactiveEngimonHere()
     {

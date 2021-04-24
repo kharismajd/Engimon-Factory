@@ -32,7 +32,7 @@ public class gameMap {
                 }
 			    else if (i < this.mapLength/2 && j >= this.mapWidth/2)
                 {
-                    r.add(new tile(j,i,"mountains"));
+                    r.add(new tile(j,i,"    ns"));
                 }
 			    else
                 {
@@ -189,6 +189,8 @@ public class gameMap {
 
         this.tile_map.elementAt(player_y).elementAt(player_x).playerIsHere();
         this.tile_map.elementAt(active_y).elementAt(active_x).activeEngimonIsHere();
+
+
     }
 
     public void deleteTileEngimon(int x, int y)
