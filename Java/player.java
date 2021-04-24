@@ -20,6 +20,8 @@ public class player{
 		this.player_y = 0;
 		this.activeEngimon_x = -1;
 		this.activeEngimon_y = -1;
+		this.engimon_inventory = new engimonInventory();
+		this.skill_inventory = new skillInventory();
 	}
 
 	public player(String name, player_engimon starting_engimon, Integer max_inventory_capacity, Integer player_x, Integer player_y, Integer activeEngimon_x, Integer activeEngimon_y)
@@ -32,6 +34,8 @@ public class player{
 		this.player_y = player_y;
 		this.activeEngimon_x = activeEngimon_x;
 		this.activeEngimon_y = activeEngimon_y;
+		this.engimon_inventory = new engimonInventory();
+		this.skill_inventory = new skillInventory();
 		this.addInventoryContent(starting_engimon);
 	}
 
@@ -167,7 +171,7 @@ public class player{
 				{
 					System.out.print("|" + this.engimon_inventory.getContents().get(i).getElmt2());
 				}
-				System.out.print("/lv " + this.engimon_inventory.getContents().get(i).getLevel().toString() + ")" + " [active]");
+				System.out.print("/lv " + this.engimon_inventory.getContents().get(i).getLevel().toString() + ")");
 				if (this.engimon_inventory.getContents().get(i).isActive())
 				{
 					System.out.print(" [active]");
