@@ -117,6 +117,10 @@ public class tile {
         return this.tileEngimon;
     }
 
+    public String getTile_type() {
+        return tile_type;
+    }
+
     public void setListener(tileListener listener) {
         this.listener = listener;
     }

@@ -61,6 +61,8 @@ public class Driver {
         gameMap g;
         try {
             g = new gameMap("inputMapFile.txt");
+            g.updateMap(g.getMapLength()/2, g.getMapWidth()/2,
+                    g.getMapLength()/2, g.getMapWidth()/2 + 1);
             g.printMap();
             map_visualizer m = new map_visualizer(g);
 

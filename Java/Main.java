@@ -161,6 +161,7 @@ public class Main   {
             return;
         }
 
+        map_visualizer m = new map_visualizer(g);
         Scanner sc = new Scanner(System.in);
         userInput = sc.nextLine();
         while (userInput !="exit")
