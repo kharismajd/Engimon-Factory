@@ -1,5 +1,3 @@
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.io.File;
 import java.util.Random;
 import java.util.Scanner;
