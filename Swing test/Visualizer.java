@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Visualizer {
     public JFrame frame;
-    private JPanel panel;
+    public JPanel panel;
     private JLabel label1, label2,  label3, label4;
 //    Visualizer(){
 //        f=new JFrame();//creating instance of JFrame
@@ -54,6 +54,8 @@ public class Visualizer {
         this.frame.pack();
         this.frame.setMinimumSize(this.frame.getPreferredSize());
         this.frame.setVisible(true);
+        this.frame.setMaximumSize(this.frame.getSize());
+//        this.frame.setResizable(false);
     }
 
     public void update1()
@@ -100,9 +102,14 @@ public class Visualizer {
         {
             if ("1".equals(userInput))
             {
-                if (!v.frame.isVisible())
+//                if (!v.frame.isVisible())
+//                {
+//                    v.frame.setVisible(true);
+//                }
+
+                if (!v.panel.isVisible())
                 {
-                    v.frame.setVisible(true);
+                    v.panel.setVisible(true);
                 }
 //                v.frame.setVisible(true);
 //                v.frame.setEnabled(true);
@@ -110,9 +117,13 @@ public class Visualizer {
             }
             else if ("2".equals(userInput))
             {
-                if (!v.frame.isVisible())
+//                if (!v.frame.isVisible())
+//                {
+//                    v.frame.setVisible(true);
+//                }
+                if (!v.panel.isVisible())
                 {
-                    v.frame.setVisible(true);
+                    v.panel.setVisible(true);
                 }
 //                v.frame.setVisible(true);
 //                v.frame.setEnabled(true);
@@ -120,7 +131,8 @@ public class Visualizer {
             }
             else
             {
-                v.frame.setVisible(false);
+//                v.frame.setVisible(false);
+                v.panel.setVisible(false);
 //                v.frame.setEnabled(false);
             }
             userInput = sc.nextLine();

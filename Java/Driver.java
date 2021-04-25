@@ -58,25 +58,36 @@ public class Driver {
 //            e.printStackTrace();
 //        }
 
-        gameMap g = new gameMap();
-//        System.out.println('h');
-        g.printMap();
-        System.out.println("x: " + g.tile_map.elementAt(9).elementAt(11).x);
-        System.out.println("y: " + g.tile_map.elementAt(9).elementAt(11).y);
+        gameMap g;
+        try {
+            g = new gameMap("inputMapFile.txt");
+            g.printMap();
+            map_visualizer m = new map_visualizer(g);
 
-        try
-        {
-            g.generateEngimon();
-            g.updateMap(g.getMapLength()/2, g.getMapWidth()/2,
-                    g.getMapLength()/2, g.getMapWidth()/2 + 1);
+            System.out.println("x: " + g.tile_map.elementAt(9).elementAt(11).x);
+            System.out.println("y: " + g.tile_map.elementAt(9).elementAt(11).y);
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            System.out.println(e.getMessage());
         }
 
-        g.printMap();
+//        System.out.println('h');
+
+//
+//        try
+//        {
+//            g.generateEngimon();
+//            g.updateMap(g.getMapLength()/2, g.getMapWidth()/2,
+//                    g.getMapLength()/2, g.getMapWidth()/2 + 1);
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//            System.out.println(e.getMessage());
+//        }
+//
+//        g.printMap();
 
     }
 }

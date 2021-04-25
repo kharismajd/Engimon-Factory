@@ -5,8 +5,8 @@ public class breeder_test {
         try {
             engimon daddad = new wild_engimon();
             engimon mommom = new wild_engimon();
-            engimon dad = new player_engimon("Dad", daddad, mommom, "Lapras", 32, 100);
-            engimon mom = new player_engimon("Mom", daddad, mommom, "Wooper", 33, 200);
+            player_engimon dad = new player_engimon("Dad", daddad, mommom, "Lapras", 32, 100);
+            player_engimon mom = new player_engimon("Mom", daddad, mommom, "Wooper", 33, 200);
             // Water, Ice, Water x Ice, Water x Ground
 
             dad.learnMove("tackle");
