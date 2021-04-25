@@ -8,7 +8,6 @@ import java.util.Vector;
 public class map_visualizer {
     public JFrame mainFrame;
     private JPanel mapPanel;
-    private JLabel label1, label2,  label3, label4;
 
     private Vector<Vector<customLabel>> customLabelMap;
 
@@ -25,6 +24,7 @@ public class map_visualizer {
             customLabel.seaTile = ImageIO.read(new File("img/sea.png"));
             customLabel.grasslandTile = ImageIO.read(new File("img/grassland.png"));
             customLabel.tundraTile = ImageIO.read(new File("img/tundra.png"));
+
             customLabel.playerTile = ImageIO.read(new File("img/player.png"));
             customLabel.activeEngimonTile = ImageIO.read(new File("img/activeEngimon.png"));
         }
@@ -59,7 +59,7 @@ public class map_visualizer {
 
 class customLabel extends JPanel implements tileListener{
     tile t;
-    JLabel baseLayer;
+    JLabel topLayer;
 
     private BufferedImage background;
 
@@ -71,17 +71,18 @@ class customLabel extends JPanel implements tileListener{
     protected static BufferedImage playerTile;
     protected static BufferedImage activeEngimonTile;
 
+    protected static BufferedImage Pikachu;
+
     public customLabel(tile t)
     {
         super();
-        baseLayer = new JLabel();
+        topLayer = new JLabel();
         this.setBaseIcon(t.getTile_type());
-        this.add(baseLayer);
+        this.add(topLayer);
 
 //        this.setBaseColor(t.getTile_type());
 //        this.setOpaque(true);
-        this.tileChangedCharacter(t.getSymbol());
-
+        this.tileChangedCharacter(t.getSymbol(), t.getEngimon());
     }
 
     @Override
@@ -105,7 +106,6 @@ class customLabel extends JPanel implements tileListener{
 
             g.drawImage(background, x, y, this);
         }
-
     }
 
     private void setBaseIcon(String tile_type)
@@ -129,48 +129,20 @@ class customLabel extends JPanel implements tileListener{
     }
 
     @Override
-    public void tileChangedCharacter(char symbol) {
-//        if (symbol == '^')
-//        {
-//            this.setIcon(new ImageIcon(mountainTile));
-//        }
-//        else if (symbol == 'o')
-//        {
-//            this.setIcon(new ImageIcon(seaTile));
-//        }
-//        else if (symbol == '-')
-//        {
-//            this.setIcon(new ImageIcon(grasslandTile));
-//        }
-//        else if (symbol == '.')
-//        {
-//            this.setIcon(new ImageIcon(tundraTile));
-//        }
+    public void tileChangedCharacter(char symbol, engimon e) {
+
         if (symbol == 'P')
         {
-            this.baseLayer.setIcon(new ImageIcon(playerTile));
-//            if (!this.isOpaque())
-//            {
-//                this.setOpaque(true);
-//                this.repaint();
-//            }
+            this.topLayer.setIcon(new ImageIcon(playerTile));
 
         }
         else if (symbol == 'X')
         {
-            this.baseLayer.setIcon(new ImageIcon(activeEngimonTile));
-//            if (!this.isOpaque())
-//            {
-//                this.setOpaque(true);
-//                this.repaint();
-//            }
-
+            this.topLayer.setIcon(new ImageIcon(activeEngimonTile));
         }
         else
         {
-            this.baseLayer.setIcon(null);
-//            this.setOpaque(false);
-//            this.repaint();
+            this.topLayer.setIcon(null);
         }
 
     }
