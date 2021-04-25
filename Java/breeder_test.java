@@ -21,14 +21,22 @@ public class breeder_test {
             // mom.showAttributes();
             // System.out.println();
 
-            player_engimon childe = breeder.breed("Childe", dad, mom);
-            System.out.println();
-            for (int i = 0; i < 4; i++) {
-                if (childe.getMove(i) != null) {
-                    childe.getMove(i).printAll();
-                    System.out.println();
-                }
-            }
+            //player_engimon childe = breeder.breed("Childe", dad, mom);
+            //System.out.println();
+            //for (int i = 0; i < 4; i++) {
+            //    if (childe.getMove(i) != null) {
+            //        childe.getMove(i).printAll();
+            //        System.out.println();
+            //    }
+            //}
+            //engimon childe = breeder.breed("Childe", dad, mom);
+            //System.out.println();
+            //for (int i = 0; i < 4; i++) {
+            //    if (childe.getMove(i) != null) {
+            //        childe.getMove(i).printAll();
+            //        System.out.println();
+            //    }
+            //}
 
             // System.out.println();
             // dad.showAttributes();

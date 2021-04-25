@@ -49,6 +49,14 @@ public class InventoryGUI {
                     b.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
+                            if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).isActive())
+                            {
+                                engimonOption[3] = "Set inactive";
+                            }
+                            else
+                            {
+                                engimonOption[3] = "Set active";
+                            }
                             int n = JOptionPane.showOptionDialog(null,
                                     "Pilih aksi",
                                     "Engimon",
@@ -82,7 +90,14 @@ public class InventoryGUI {
                             }
                             else if (n == 3)
                             {
-                                InventoryGUI.this.play.switchOutEngimon(pilihan);
+                                if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).isActive())
+                                {
+                                    InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).setInactive();
+                                }
+                                else
+                                {
+                                    InventoryGUI.this.play.switchOutEngimon(pilihan);
+                                }
                             }
 
                             engimonButton.doClick();
