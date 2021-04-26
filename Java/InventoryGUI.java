@@ -39,6 +39,9 @@ public class InventoryGUI {
         um.put("JPanel.messageForeground", Color.white);
         um.put("Panel.background", Color.black);
         um.put("Panel.messageForeground", Color.black);
+        um.put("JLabel.messageForeground", Color.white);
+        um.put("Label.messageForeground", Color.white);
+
 
         engimonButton.addActionListener(new ActionListener() {
             @Override
@@ -116,9 +119,12 @@ public class InventoryGUI {
                             //    }
                             //}
                             //this.printMoves();
-
-                            optionPane.add(new JLabel("<html>" + optionPaneFill + "</html>"));
-                            optionPane.add(new JLabel("Moves: "));
+                            JLabel descLabel = new JLabel("<html>" + optionPaneFill + "</html>");
+                            JLabel moves = new JLabel("Moves: ");
+                            descLabel.setForeground(Color.white);
+                            moves.setForeground(Color.white);
+                            optionPane.add(descLabel);
+                            optionPane.add(moves);
                             optionPane.add(skill_icons.showIcons(InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan)));
                             int n = JOptionPane.showOptionDialog(null,
                                     optionPane,
