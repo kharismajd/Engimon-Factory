@@ -26,7 +26,7 @@ public class MainVisualizer implements KeyListener {
         player p = mainObject.P;
         this.mainFrame = new JFrame("Engimon");
         mainFrame.addKeyListener(this);
-        this.inventoryGUI = new InventoryGUI(p, mainFrame, caller);
+        this.inventoryGUI = new InventoryGUI(p, mainFrame);
         this.mapGUI = new map_visualizer(g, mainFrame);
         this.mainFrame.setVisible(true);
         this.state = VISUALIZER_MAP;
@@ -92,6 +92,10 @@ public class MainVisualizer implements KeyListener {
 
         if (key == KeyEvent.VK_X) {
             caller.openMenu();
+        }
+
+        if (key == KeyEvent.VK_I) {
+
         }
 
 //        try

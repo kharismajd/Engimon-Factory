@@ -25,11 +25,10 @@ public class InventoryGUI {
 
     public void refresh() {this.engimonButton.doClick();}
 
-    InventoryGUI(player p, Main mainObject)
+    InventoryGUI(player p)
     {
         this.play = p;
         this.scrollpanel.setLayout(new GridLayout(10, 1));
-        this.caller = mainObject;
 
         this.frame = new JFrame("Inventory");
         this.frame.setContentPane(this.main);
@@ -412,11 +411,10 @@ public class InventoryGUI {
         });
     }
 
-    public InventoryGUI(player p, JFrame frame, Main mainObject)
+    public InventoryGUI(player p, JFrame frame)
     {
         this.play = p;
         this.scrollpanel.setLayout(new GridLayout(10, 1));
-        this.caller = mainObject;
 
         this.frame = frame;
 
