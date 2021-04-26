@@ -1,10 +1,12 @@
-Vulpichu.null.null.Vulpichu.overload.1.null.null.null.Fire.Electric.45.0.1
+Charmander.null.null.Charmander.charred.1.null.null.null.Fire.null.34.0.1
 
-Vulpichu.null.null.Vulpichu.overload.1.null.null.null.Fire.Electric.32.0.1
+Vulpichu.null.null.Vulpichu.overload.1.null.null.null.Fire.Electric.36.0.1
 
-Gab.null.null.Pikachu.electrified_tail.1.null.null.null.Electric.null.30.15.3
+Gab.null.null.Pikachu.electrified_tail.1.null.null.null.Electric.null.30.17.3
 
-Wooper.null.null.Wooper.mudball.1.null.null.null.Water.Ground.32.0.1
+Pikachu.null.null.Pikachu.electrified_tail.1.null.null.null.Electric.null.44.0.1
 
-Lapras.null.null.Lapras.ice_breath.1.null.null.null.Water.Ice.38.0.1
+Geodude.null.null.Geodude.rock_punch.1.null.null.null.Ground.null.40.0.1
+
+Geodude.null.null.Geodude.rock_punch.1.null.null.null.Ground.null.40.0.1
 

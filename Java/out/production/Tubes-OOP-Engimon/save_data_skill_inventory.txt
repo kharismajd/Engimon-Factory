@@ -1,2 +1,2 @@
-ice_breath.80.1.2.Lapras.Water.Ice
-splash.5.1.1.Magikarp.Water
+ice_breath.80.1.1.Lapras.Water.Ice
+snowball.80.1.1.Glastrier.Ice
