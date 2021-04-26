@@ -98,12 +98,13 @@ public class MainVisualizer implements KeyListener {
             JLabel cryMessage = new JLabel();
             if (caller.P.getActiveEngimon() != null)
             {
-                cryMessage.setText(caller.P.getActiveEngimon().getSpecies() + ": " + caller.P.getActiveEngimon().getCry());
+                cryMessage.setText("<html><center>" + caller.P.getActiveEngimon().getSpecies() + ": " + caller.P.getActiveEngimon().getCry() + "</html>");
             }
             else
             {
-                cryMessage.setText("Tidak ada engimon yang sedang aktif");
+                cryMessage.setText("<html><center>Tidak ada engimon yang sedang aktif</html>");
             }
+            cryMessage.setHorizontalAlignment(SwingConstants.CENTER);
             cryMessage.setForeground(Color.white);
             Object[] options = {"OK"};
             int n = JOptionPane.showOptionDialog(mainFrame,
