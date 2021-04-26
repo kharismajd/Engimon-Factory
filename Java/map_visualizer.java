@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Vector;
 
+import static java.lang.Character.isUpperCase;
+
 public class map_visualizer {
     public JFrame mainFrame;
     private JPanel mapPanel;
@@ -48,6 +50,15 @@ public class map_visualizer {
             customLabel.pikachu_electric_wild_1 = ImageIO.read(new File("img/pikachu_electric_wild_1.png"));
             customLabel.vulpichu_fire_wild_1 = ImageIO.read(new File("img/vulpichu_fire_wild_1.png"));
             customLabel.wooper_water_wild_1 = ImageIO.read(new File("img/wooper_water_wild_1.png"));
+
+            customLabel.charmander_fire_wild_2 = ImageIO.read(new File("img/charmander_fire_wild_2.png"));
+            customLabel.geodude_ground_wild_2 = ImageIO.read(new File("img/geodude_ground_wild_2.png"));
+            customLabel.glastrier_ice_wild_2 = ImageIO.read(new File("img/glastrier_ice_wild_2.png"));
+            customLabel.lapras_water_wild_2 = ImageIO.read(new File("img/lapras_water_wild_2.png"));
+            customLabel.magikarp_water_wild_2 = ImageIO.read(new File("img/magikarp_water_wild_2.png"));
+            customLabel.pikachu_electric_wild_2 = ImageIO.read(new File("img/pikachu_electric_wild_2.png"));
+            customLabel.vulpichu_fire_wild_2 = ImageIO.read(new File("img/vulpichu_fire_wild_2.png"));
+            customLabel.wooper_water_wild_2 = ImageIO.read(new File("img/wooper_water_wild_2.png"));
         }
         catch (Exception e)
         {
@@ -108,6 +119,15 @@ public class map_visualizer {
             customLabel.pikachu_electric_wild_1 = ImageIO.read(new File("img/pikachu_electric_wild_1.png"));
             customLabel.vulpichu_fire_wild_1 = ImageIO.read(new File("img/vulpichu_fire_wild_1.png"));
             customLabel.wooper_water_wild_1 = ImageIO.read(new File("img/wooper_water_wild_1.png"));
+
+            customLabel.charmander_fire_wild_2 = ImageIO.read(new File("img/charmander_fire_wild_2.png"));
+            customLabel.geodude_ground_wild_2 = ImageIO.read(new File("img/geodude_ground_wild_2.png"));
+            customLabel.glastrier_ice_wild_2 = ImageIO.read(new File("img/glastrier_ice_wild_2.png"));
+            customLabel.lapras_water_wild_2 = ImageIO.read(new File("img/lapras_water_wild_2.png"));
+            customLabel.magikarp_water_wild_2 = ImageIO.read(new File("img/magikarp_water_wild_2.png"));
+            customLabel.pikachu_electric_wild_2 = ImageIO.read(new File("img/pikachu_electric_wild_2.png"));
+            customLabel.vulpichu_fire_wild_2 = ImageIO.read(new File("img/vulpichu_fire_wild_2.png"));
+            customLabel.wooper_water_wild_2 = ImageIO.read(new File("img/wooper_water_wild_2.png"));
         }
         catch (Exception e)
         {
@@ -170,6 +190,15 @@ class customLabel extends JPanel implements tileListener{
     protected static BufferedImage pikachu_electric_wild_1;
     protected static BufferedImage vulpichu_fire_wild_1;
     protected static BufferedImage wooper_water_wild_1;
+
+    protected static BufferedImage charmander_fire_wild_2;
+    protected static BufferedImage geodude_ground_wild_2;
+    protected static BufferedImage glastrier_ice_wild_2;
+    protected static BufferedImage lapras_water_wild_2;
+    protected static BufferedImage magikarp_water_wild_2;
+    protected static BufferedImage pikachu_electric_wild_2;
+    protected static BufferedImage vulpichu_fire_wild_2;
+    protected static BufferedImage wooper_water_wild_2;
 
     public customLabel(tile t)
     {
@@ -246,19 +275,19 @@ class customLabel extends JPanel implements tileListener{
                 if (e.species == "Charmander") {
                     this.baseLayer.setIcon(new ImageIcon(charmander_fire_player_1));
                 } else if (e.species == "Magikarp") {
-                    this.baseLayer.setIcon(new ImageIcon(magikarp_water_wild_1));
+                    this.baseLayer.setIcon(new ImageIcon(magikarp_water_player_1));
                 } else if (e.species == "Pikachu") {
-                    this.baseLayer.setIcon(new ImageIcon(pikachu_electric_wild_1));
+                    this.baseLayer.setIcon(new ImageIcon(pikachu_electric_player_1));
                 } else if (e.species == "Geodude") {
-                    this.baseLayer.setIcon(new ImageIcon(geodude_ground_wild_1));
+                    this.baseLayer.setIcon(new ImageIcon(geodude_ground_player_1));
                 } else if (e.species == "Glastrier") {
-                    this.baseLayer.setIcon(new ImageIcon(glastrier_ice_wild_1));
+                    this.baseLayer.setIcon(new ImageIcon(glastrier_ice_player_1));
                 } else if (e.species == "Vulpichu") {
-                    this.baseLayer.setIcon(new ImageIcon(vulpichu_fire_wild_1));
+                    this.baseLayer.setIcon(new ImageIcon(vulpichu_fire_player_1));
                 } else if (e.species == "Lapras") {
-                    this.baseLayer.setIcon(new ImageIcon(lapras_water_wild_1));
+                    this.baseLayer.setIcon(new ImageIcon(lapras_water_player_1));
                 } else if (e.species == "Wooper") {
-                    this.baseLayer.setIcon(new ImageIcon(wooper_water_wild_1));
+                    this.baseLayer.setIcon(new ImageIcon(wooper_water_player_1));
                 }
             }
             else{
@@ -268,7 +297,7 @@ class customLabel extends JPanel implements tileListener{
         }
         else
         {
-            if(e != null) {
+            if(e != null && !isUpperCase(symbol)) {
                 if (e.getSpecies() == "Charmander") {
                     this.baseLayer.setIcon(new ImageIcon(charmander_fire_wild_1));
                 } else if (e.getSpecies() == "Magikarp") {
@@ -285,6 +314,26 @@ class customLabel extends JPanel implements tileListener{
                     this.baseLayer.setIcon(new ImageIcon(lapras_water_wild_1));
                 } else if (e.getSpecies() == "Wooper") {
                     this.baseLayer.setIcon(new ImageIcon(wooper_water_wild_1));
+                }
+            }
+
+            else if(e != null && isUpperCase(symbol)) {
+                if (e.getSpecies() == "Charmander") {
+                    this.baseLayer.setIcon(new ImageIcon(charmander_fire_wild_2));
+                } else if (e.getSpecies() == "Magikarp") {
+                    this.baseLayer.setIcon(new ImageIcon(magikarp_water_wild_2));
+                } else if (e.getSpecies() == "Pikachu") {
+                    this.baseLayer.setIcon(new ImageIcon(pikachu_electric_wild_2));
+                } else if (e.getSpecies() == "Geodude") {
+                    this.baseLayer.setIcon(new ImageIcon(geodude_ground_wild_2));
+                } else if (e.getSpecies() == "Glastrier") {
+                    this.baseLayer.setIcon(new ImageIcon(glastrier_ice_wild_2));
+                } else if (e.getSpecies() == "Vulpichu") {
+                    this.baseLayer.setIcon(new ImageIcon(vulpichu_fire_wild_2));
+                } else if (e.getSpecies() == "Lapras") {
+                    this.baseLayer.setIcon(new ImageIcon(lapras_water_wild_2));
+                } else if (e.getSpecies() == "Wooper") {
+                    this.baseLayer.setIcon(new ImageIcon(wooper_water_wild_2));
                 }
             }
             else {
