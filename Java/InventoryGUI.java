@@ -32,6 +32,14 @@ public class InventoryGUI {
         this.frame.setResizable(false);
         this.frame.setVisible(true);
 
+        UIManager um = new UIManager();
+        um.put("OptionPane.background", Color.black);
+        um.put("OptionPane.messageForeground", Color.white);
+        um.put("JPanel.background", Color.black);
+        um.put("JPanel.messageForeground", Color.white);
+        um.put("Panel.background", Color.black);
+        um.put("Panel.messageForeground", Color.black);
+
         engimonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,22 +104,22 @@ public class InventoryGUI {
                                 optionPaneFill += "<br/>";
                             }
 
-                            optionPaneFill += "Moves: <br/>";
-
-                            for (int skillIndex = 0; skillIndex < 4; skillIndex++)
-                            {
-                                if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).moves[skillIndex] != null)
-                                {
-                                    optionPaneFill += "- " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).moves[skillIndex].getSkillName() + "<br/>";
-                                }
-                            }
-                            //this.printMoves();
-
                             optionPaneFill += "Level: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).level + "<br/>";
                             optionPaneFill += "Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).experience + "<br/>";
                             optionPaneFill += "Cummulative Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).cummulative_experience;
 
+                            //for (int skillIndex = 0; skillIndex < 4; skillIndex++)
+                            //{
+                            //    if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).moves[skillIndex] != null)
+                            //    {
+                            //        optionPaneFill += "- " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).moves[skillIndex].getSkillName() + "<br/>";
+                            //    }
+                            //}
+                            //this.printMoves();
+
                             optionPane.add(new JLabel("<html>" + optionPaneFill + "</html>"));
+                            optionPane.add(new JLabel("Moves: "));
+                            optionPane.add(skill_icons.showIcons(InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan)));
                             int n = JOptionPane.showOptionDialog(null,
                                     optionPane,
                                     "Engimon",
@@ -167,7 +175,7 @@ public class InventoryGUI {
                                             }
                                             catch(Exception exception)
                                             {
-                                                JOptionPane.showMessageDialog(null, "Level engimon harus diatas level 3", "Warning", JOptionPane.WARNING_MESSAGE);
+                                                JOptionPane.showMessageDialog(null, exception, "Warning", JOptionPane.WARNING_MESSAGE);
                                             }
                                         }
                                     });
