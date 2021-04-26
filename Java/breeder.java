@@ -132,10 +132,29 @@ public class breeder {
             // Find skill with max mastery level
             for (int j = 0; j < 4; j++) {
                 if (iter1[j] != 1) {
+                    int found = 0;
+                    int temp = parent1.getMove(j).getMasteryLv();
                     // if (!isLearnable(parent1.getMove(j), child)) {
                     //     iter1[j] = 1;
                     // }
-                    if (parent1.getMove(j).getMasteryLv() > max) {
+                    for (int k = 1; k < 4; k++) {
+                        if(iter2[j] != 1) {
+                            if (parent1.getMove(j).getSkillName().equals(parent2.getMove(k).getSkillName())) {
+                                if (parent1.getMove(j).getMasteryLv() == parent2.getMove(k).getMasteryLv() && parent1.getMove(j).getMasteryLv() < 3) {
+                                    // Learn skill, chosen mastery level + 1
+                                    found = 1;
+                                    temp = parent1.getMove(j).getMasteryLv() + 1;
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    if (found == 1) {
+                        if (temp > max) {
+                            max = temp;
+                            idxmax = j;
+                        }
+                    } else if (parent1.getMove(j).getMasteryLv() > max) {
                         max = parent1.getMove(j).getMasteryLv();
                         idxmax = j;
                     }
