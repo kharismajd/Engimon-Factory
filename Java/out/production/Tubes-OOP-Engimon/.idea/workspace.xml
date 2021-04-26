@@ -22,7 +22,10 @@
     <list default="true" id="7d2bb3a4-c08e-4567-a1e4-48653b8e87ba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tubes-OOP-Engimon/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tubes-OOP-Engimon/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tubes-OOP-Engimon/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tubes-OOP-Engimon/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,8 +83,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.InventoryGUI" />
-        <item itemvalue="Application.skill_icons_test" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.skill_icons_test" />
       </list>
     </recent_temporary>
   </component>
@@ -107,5 +110,27 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1323" height="2" key="GridCell.Tab.0.bottom" timestamp="1619431759384">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="2" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1619431759384" />
+    <state width="1323" height="2" key="GridCell.Tab.0.center" timestamp="1619431759383">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="2" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1619431759383" />
+    <state width="1323" height="2" key="GridCell.Tab.0.left" timestamp="1619431759383">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="2" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1619431759383" />
+    <state width="1323" height="2" key="GridCell.Tab.0.right" timestamp="1619431759383">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="2" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1619431759383" />
+    <state x="163" y="0" key="SettingsEditor" timestamp="1619431058127">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1619431058127" />
   </component>
 </project>

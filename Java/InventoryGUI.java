@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ public class InventoryGUI {
     private JPanel main;
     private JPanel scrollpanel;
     private JScrollPane scroll;
+    private JPanel sidePane;
     private player play;
     private String engimonOption[] = {"Breeding", "Ganti nama", "Buang", "Set active"};
     private String skillOption[] = {"Pakai", "Buang"};
@@ -32,6 +34,16 @@ public class InventoryGUI {
         this.frame.setResizable(false);
         this.frame.setVisible(true);
 
+        this.sidePane.setBackground(Color.darkGray);
+        this.scrollpanel.setBackground(Color.gray);
+        this.main.setBackground(Color.darkGray);
+
+        this.engimonButton.setFocusPainted(false);
+        this.engimonButton.setBackground(Color.lightGray);
+
+        this.skillButton.setFocusPainted(false);
+        this.skillButton.setBackground(Color.lightGray);
+
         UIManager um = new UIManager();
         um.put("OptionPane.background", Color.black);
         um.put("OptionPane.messageForeground", Color.white);
@@ -39,9 +51,6 @@ public class InventoryGUI {
         um.put("JPanel.messageForeground", Color.white);
         um.put("Panel.background", Color.black);
         um.put("Panel.messageForeground", Color.black);
-        um.put("JLabel.messageForeground", Color.white);
-        um.put("Label.messageForeground", Color.white);
-
 
         engimonButton.addActionListener(new ActionListener() {
             @Override
@@ -71,6 +80,9 @@ public class InventoryGUI {
                         fill +=" [active]";
                     }
                     JButton b = new JButton(fill);
+                    b.setFont(Font.getFont("Fira Code Retina Regular"));
+                    b.setBackground(Color.lightGray);
+                    b.setFocusPainted(false);
                     b.setHorizontalAlignment(SwingConstants.LEFT);
                     b.setPreferredSize(new Dimension(100, 55));
                     b.addActionListener(new ActionListener() {
@@ -122,7 +134,9 @@ public class InventoryGUI {
                             JLabel descLabel = new JLabel("<html>" + optionPaneFill + "</html>");
                             JLabel moves = new JLabel("Moves: ");
                             descLabel.setForeground(Color.white);
+                            descLabel.setFont(Font.getFont("Fira Code Retina Regular"));
                             moves.setForeground(Color.white);
+                            moves.setFont(Font.getFont("Fira Code Retina Regular"));
                             optionPane.add(descLabel);
                             optionPane.add(moves);
                             optionPane.add(skill_icons.showIcons(InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan)));
@@ -156,6 +170,9 @@ public class InventoryGUI {
                                         fill2 += " [active]";
                                     }
                                     JButton button = new JButton(fill2);
+                                    button.setFont(Font.getFont("Fira Code Retina Regular"));
+                                    button.setBackground(Color.lightGray);
+                                    button.setFocusPainted(false);
                                     button.setHorizontalAlignment(SwingConstants.LEFT);
                                     button.setPreferredSize(new Dimension(100, 40));
                                     button.addActionListener(new ActionListener() {
@@ -179,9 +196,13 @@ public class InventoryGUI {
                                                 }
                                                 engimonButton.doClick();
                                             }
+                                            catch(NullPointerException exception)
+                                            {
+
+                                            }
                                             catch(Exception exception)
                                             {
-                                                JOptionPane.showMessageDialog(null, exception, "Warning", JOptionPane.WARNING_MESSAGE);
+                                                JOptionPane.showMessageDialog(null, "Level engimon harus lebih dari 3", "Warning", JOptionPane.WARNING_MESSAGE);
                                             }
                                         }
                                     });
@@ -197,6 +218,7 @@ public class InventoryGUI {
                                 };
                                 d.setTitle("Pilih pasangan untuk breeding");
                                 d.add(new JLabel("Pilih engimon untuk breeding"));
+                                d.setFont(Font.getFont("Fira Code Retina Regular"));
                                 d.add(engimonSelect);
                                 d.setLocationRelativeTo(frame);
                                 d.setVisible(true);
@@ -266,6 +288,9 @@ public class InventoryGUI {
                     String fill;
                     fill = (i + 1) + ". " + play.skill_inventory.getContents().get(i).getSkillName() + " (base power: " + Integer.toString(play.skill_inventory.getContents().get(i).getBasePower()) + ") [" + Integer.toString(play.skill_inventory.getContents().get(i).getAmountInInventory()) + "]";
                     JButton b = new JButton(fill);
+                    b.setFont(Font.getFont("Fira Code Retina Regular"));
+                    b.setBackground(Color.lightGray);
+                    b.setFocusPainted(false);
                     b.setHorizontalAlignment(SwingConstants.LEFT);
                     b.setPreferredSize(new Dimension(100, 55));
                     b.addActionListener(new ActionListener() {
@@ -288,6 +313,7 @@ public class InventoryGUI {
 
                             JLabel skillDesc = new JLabel("<html>" + optionPaneFill + "</html>");
                             skillDesc.setForeground(Color.white);
+                            skillDesc.setFont(Font.getFont("Fira Code Retina Regular"));
                             optionPane.add(skillDesc);
                             int n = JOptionPane.showOptionDialog(null,
                                     optionPane,
@@ -320,6 +346,9 @@ public class InventoryGUI {
                                         fill2 += " [active]";
                                     }
                                     JButton button = new JButton(fill2);
+                                    button.setFont(Font.getFont("Fira Code Retina Regular"));
+                                    button.setBackground(Color.lightGray);
+                                    button.setFocusPainted(false);
                                     button.setHorizontalAlignment(SwingConstants.LEFT);
                                     button.setPreferredSize(new Dimension(100, 40));
                                     button.addActionListener(new ActionListener() {
@@ -348,6 +377,7 @@ public class InventoryGUI {
                                 };
                                 d.setTitle("Pilih engimon untuk learn move");
                                 d.add(new JLabel("Pilih engimon untuk learn move"));
+                                d.setFont(Font.getFont("Fira Code Retina Regular"));
                                 d.add(engimonSelect);
                                 d.setLocationRelativeTo(frame);
                                 d.setVisible(true);
@@ -412,6 +442,7 @@ public class InventoryGUI {
                         fill +=" [active]";
                     }
                     JButton b = new JButton(fill);
+                    b.setFont(Font.getFont("Fira Code Retina Regular"));
                     b.setHorizontalAlignment(SwingConstants.LEFT);
                     b.setPreferredSize(new Dimension(100, 55));
                     b.addActionListener(new ActionListener() {
@@ -463,7 +494,15 @@ public class InventoryGUI {
                             optionPaneFill += "Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).experience + "<br/>";
                             optionPaneFill += "Cummulative Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).cummulative_experience;
 
-                            optionPane.add(new JLabel("<html>" + optionPaneFill + "</html>"));
+                            JLabel descLabel = new JLabel("<html>" + optionPaneFill + "</html>");
+                            JLabel moves = new JLabel("Moves: ");
+                            descLabel.setForeground(Color.white);
+                            descLabel.setFont(Font.getFont("Fira Code Retina Regular"));
+                            moves.setForeground(Color.white);
+                            moves.setFont(Font.getFont("Fira Code Retina Regular"));
+                            optionPane.add(descLabel);
+                            optionPane.add(moves);
+                            optionPane.add(skill_icons.showIcons(InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan)));
                             int n = JOptionPane.showOptionDialog(null,
                                     optionPane,
                                     "Engimon",
@@ -494,6 +533,7 @@ public class InventoryGUI {
                                         fill2 += " [active]";
                                     }
                                     JButton button = new JButton(fill2);
+                                    button.setFont(Font.getFont("Fira Code Retina Regular"));
                                     button.setHorizontalAlignment(SwingConstants.LEFT);
                                     button.setPreferredSize(new Dimension(100, 40));
                                     button.addActionListener(new ActionListener() {
@@ -535,6 +575,7 @@ public class InventoryGUI {
                                 };
                                 d.setTitle("Pilih pasangan untuk breeding");
                                 d.add(new JLabel("Pilih engimon untuk breeding"));
+                                d.setFont(Font.getFont("Fira Code Retina Regular"));
                                 d.add(engimonSelect);
                                 d.setLocationRelativeTo(frame);
                                 d.setVisible(true);
@@ -604,6 +645,7 @@ public class InventoryGUI {
                     String fill;
                     fill = (i + 1) + ". " + play.skill_inventory.getContents().get(i).getSkillName() + " (base power: " + Integer.toString(play.skill_inventory.getContents().get(i).getBasePower()) + ") [" + Integer.toString(play.skill_inventory.getContents().get(i).getAmountInInventory()) + "]";
                     JButton b = new JButton(fill);
+                    b.setFont(Font.getFont("Fira Code Retina Regular"));
                     b.setHorizontalAlignment(SwingConstants.LEFT);
                     b.setPreferredSize(new Dimension(100, 55));
                     b.addActionListener(new ActionListener() {
@@ -624,7 +666,9 @@ public class InventoryGUI {
                                 optionPaneFill += "SKill unique to: " + InventoryGUI.this.play.skill_inventory.getContents().get(pilihan).getUniqueEngimonName();
                             }
 
-                            optionPane.add(new JLabel("<html>" + optionPaneFill + "</html>"));
+                            JLabel skillDesc = new JLabel("<html>" + optionPaneFill + "</html>");
+                            skillDesc.setFont(Font.getFont("Fira Code Retina Regular"));
+                            optionPane.add(skillDesc);
                             int n = JOptionPane.showOptionDialog(null,
                                     optionPane,
                                     "Skill item",
@@ -656,6 +700,7 @@ public class InventoryGUI {
                                         fill2 += " [active]";
                                     }
                                     JButton button = new JButton(fill2);
+                                    button.setFont(Font.getFont("Fira Code Retina Regular"));
                                     button.setHorizontalAlignment(SwingConstants.LEFT);
                                     button.setPreferredSize(new Dimension(100, 40));
                                     button.addActionListener(new ActionListener() {
@@ -684,6 +729,7 @@ public class InventoryGUI {
                                 };
                                 d.setTitle("Pilih engimon untuk learn move");
                                 d.add(new JLabel("Pilih engimon untuk learn move"));
+                                d.setFont(Font.getFont("Fira Code Retina Regular"));
                                 d.add(engimonSelect);
                                 d.setLocationRelativeTo(frame);
                                 d.setVisible(true);
