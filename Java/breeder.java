@@ -15,7 +15,7 @@ public class breeder {
             String sp = a.inheritSpecies(parent1, parent2);
             player_engimon child = new player_engimon(name, parent1, parent2, sp, 1, 0);
     
-            // !!! Skill bawaan kalau parent1 dan parent2 speciesnya sama? !!!
+            a.parentSkill(child, parent1, parent2);
             a.inheritSkill(child, parent1, parent2);
     
             parent1.setLevel(parent1.getLevel() - 3);
@@ -59,6 +59,35 @@ public class breeder {
                     return db.findByElement(parent_elmt1, parent_elmt2).speciesName;
                 }
             }
+        }
+    }
+
+    public void parentSkill(engimon child, engimon parent1, engimon parent2) {
+        String csp = child.getSpecies();
+        String sp1 = parent1.getSpecies();
+        String sp2 = parent2.getSpecies();
+
+        skill cmove = child.getMove(0);
+        skill move1 = parent1.getMove(0);
+        skill move2 = parent2.getMove(0);
+
+        if (csp == sp1 && csp == sp2) {
+            // If parents are of same species
+            if (move1.getMasteryLv() == move2.getMasteryLv()) {
+                if (move1.getMasteryLv() < 3) {
+                    child.setSkill(new skill(cmove), 0, move1.getMasteryLv() + 1);
+                } else {
+                    child.setSkill(new skill(cmove), 0, move1.getMasteryLv());
+                }
+            } else if (move1.getMasteryLv() > move2.getMasteryLv()) {
+                child.setSkill(new skill(cmove), 0, move1.getMasteryLv());
+            } else {
+                child.setSkill(new skill(cmove), 0, move2.getMasteryLv());
+            }
+        } else if (csp == sp1) {
+            child.setSkill(new skill(cmove), 0, move1.getMasteryLv());
+        } else if (csp == sp2) {
+            child.setSkill(new skill(cmove), 0, move2.getMasteryLv());
         }
     }
 
@@ -137,7 +166,7 @@ public class breeder {
 
                     // Mark skills that both parents have
                     for (int j = 1; j < 4; j++) {
-                        if(iter2[i] != 1) {
+                        if(iter2[j] != 1) {
                             if (chosen_skill.getSkillName() == parent2.getMove(j).getSkillName()) {
                                 iter2[j] = 1;
                                 if (chosen_skill.getMasteryLv() == parent2.getMove(j).getMasteryLv() && mastery < 3) {
@@ -156,7 +185,7 @@ public class breeder {
 
                     // Mark skills that both parents have
                     for (int j = 0; j < 4; j++) {
-                        if (iter1[i] != 1) {
+                        if (iter1[j] != 1) {
                             if (chosen_skill.getSkillName() == parent1.getMove(j).getSkillName()) {
                                 iter1[j] = 1;
                                 break;
@@ -164,9 +193,7 @@ public class breeder {
                         }
                     }
                 }
-                if (mastery != -1 && chosen_skill != null)
-                child.setSkill(chosen_skill, i, mastery);
-                // cout << chosen_skill.getSkillName() << " has been learned with mastery = " << mastery << endl << endl;
+                if (mastery != -1 && chosen_skill != null) child.setSkill(new skill(chosen_skill), i, mastery);
             }
             i++;
         }
