@@ -95,7 +95,24 @@ public class MainVisualizer implements KeyListener {
         }
 
         if (key == KeyEvent.VK_I) {
-
+            JLabel cryMessage = new JLabel();
+            if (caller.P.getActiveEngimon() != null)
+            {
+                cryMessage.setText(caller.P.getActiveEngimon().getSpecies() + ": " + caller.P.getActiveEngimon().getCry());
+            }
+            else
+            {
+                cryMessage.setText("Tidak ada engimon yang sedang aktif");
+            }
+            cryMessage.setForeground(Color.white);
+            Object[] options = {"OK"};
+            int n = JOptionPane.showOptionDialog(mainFrame,
+                    cryMessage, "Interact",
+                    JOptionPane.PLAIN_MESSAGE,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
         }
 
 //        try
