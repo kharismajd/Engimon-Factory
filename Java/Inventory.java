@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public abstract class Inventory<T> {
     protected ArrayList<T> contents = new ArrayList<T>();
-    public static Integer maxInventory = 50;
 
     public abstract void addItem(T item);
     public abstract void deleteItem(T item);
