@@ -4,11 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class InventoryGUI {
+    private JFrame frame;
     private JButton engimonButton;
     private JButton skillButton;
     private JPanel main;
-    private JScrollPane scroll;
     private JPanel scrollpanel;
+    private JScrollPane scroll;
     private player play;
     private String engimonOption[] = {"Breeding", "Ganti nama", "Buang", "Set active"};
     private String skillOption[] = {"Pakai", "Buang"};
@@ -19,16 +20,26 @@ public class InventoryGUI {
         this.play = p;
         this.scrollpanel.setLayout(new GridLayout(10, 1));
 
-        JFrame frame = new JFrame("Inventory");
-        frame.setContentPane(this.main);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+
+        this.frame = new JFrame("Inventory");
+        this.frame.setContentPane(this.main);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setSize(800, 600);
+        this.frame.setResizable(false);
+        this.frame.setVisible(true);
 
         engimonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 scrollpanel.removeAll();
+                if (InventoryGUI.this.play.engimon_inventory.getContents().size() > 10)
+                {
+                    scrollpanel.setLayout(new GridLayout(InventoryGUI.this.play.engimon_inventory.getContents().size(), 1));
+                }
+                else
+                {
+                    scrollpanel.setLayout(new GridLayout(10, 1));
+                }
                 int i = 0;
                 while (i < InventoryGUI.this.play.engimon_inventory.getContents().size())
                 {
@@ -46,6 +57,7 @@ public class InventoryGUI {
                     }
                     JButton b = new JButton(fill);
                     b.setHorizontalAlignment(SwingConstants.LEFT);
+                    b.setPreferredSize(new Dimension(100, 55));
                     b.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -115,6 +127,14 @@ public class InventoryGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 scrollpanel.removeAll();
+                if (InventoryGUI.this.play.skill_inventory.getContents().size() > 10)
+                {
+                    scrollpanel.setLayout(new GridLayout(InventoryGUI.this.play.skill_inventory.getContents().size(), 1));
+                }
+                else
+                {
+                    scrollpanel.setLayout(new GridLayout(10, 1));
+                }
                 int i = 0;
                 while (i < InventoryGUI.this.play.skill_inventory.getContents().size())
                 {
@@ -123,6 +143,7 @@ public class InventoryGUI {
                     fill = (i + 1) + ". " + play.skill_inventory.getContents().get(i).getSkillName() + " (base power: " + Integer.toString(play.skill_inventory.getContents().get(i).getBasePower()) + ") [" + Integer.toString(play.skill_inventory.getContents().get(i).getAmountInInventory()) + "]";
                     JButton b = new JButton(fill);
                     b.setHorizontalAlignment(SwingConstants.LEFT);
+                    b.setPreferredSize(new Dimension(100, 55));
                     b.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -170,7 +191,6 @@ public class InventoryGUI {
             newp.addInventoryContent(test);
             newp.addInventoryContent(test2);
             newp.addInventoryContent(test3);
-            newp.showEngimonList();
             newp.showEngimonList();
             System.out.println(newp.getHighestLevelEngimon());
 
