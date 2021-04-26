@@ -55,13 +55,17 @@ public class Main   {
         g.printMap();
     }
 
-    public static void main(String[] args) {
+    player_engimon starter_engimon = null;
+    player tempP;
+    gameMap g;
+    player P;
+    MainVisualizer m;
+
+    public Main() {
         //Deklarasi
         String userInput;
         String starter_engimon_name;
-        player_engimon starter_engimon = null;
-        player tempP;
-        gameMap g;
+
         try
         {
              g = new gameMap("inputMapFile.txt");
@@ -132,8 +136,7 @@ public class Main   {
             return;
         }
 
-        player P = new player("James", starter_engimon, 50, g.getMapLength()/2, g.getMapWidth()/2, g.getMapLength()/2, g.getMapWidth()/2 + 1);
-
+        P = new player("James", starter_engimon, 50, g.getMapLength()/2, g.getMapWidth()/2, g.getMapLength()/2, g.getMapWidth()/2 + 1);
 
         player_engimon starter_engimon2 = null;
         try
@@ -162,7 +165,15 @@ public class Main   {
             return;
         }
 
-        MainVisualizer m = new MainVisualizer(g, P);
+        m = new MainVisualizer(g, P);
+        try
+        {
+            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY(), P);
+        }
+        catch (Exception e)
+        {
+
+        }
         Scanner sc = new Scanner(System.in);
         userInput = sc.nextLine();
         while (userInput !="exit")
@@ -181,28 +192,23 @@ public class Main   {
             }
             else if ("w".equals(userInput))
             {
-                tempP = new player(P);
-                P.moveUp(g.getMapLength(), g.getMapWidth());
-                resolveMove(P, g, tempP);
+                this.moveUp();
 
             }
             else if ("a".equals(userInput))
             {
-                tempP = new player(P);
-                P.moveLeft(g.getMapLength(), g.getMapWidth());
-                resolveMove(P, g, tempP);
+                this.moveLeft();
+
             }
             else if ("s".equals(userInput))
             {
-                tempP = new player(P);
-                P.moveDown(g.getMapLength(), g.getMapWidth());
-                resolveMove(P, g, tempP);
+                this.moveDown();
+
             }
             else if ("d".equals(userInput))
             {
-                tempP = new player(P);
-                P.moveRight(g.getMapLength(), g.getMapWidth());
-                resolveMove(P, g, tempP);
+                this.moveRight();
+
             }
             else if ("z".equals(userInput))
             {
@@ -274,5 +280,33 @@ public class Main   {
             }
             userInput = sc.nextLine();
         }
+    }
+
+    private void moveUp() {
+        tempP = new player(P);
+        P.moveUp(g.getMapLength(), g.getMapWidth());
+        resolveMove(P, g, tempP);
+    }
+
+    private void moveDown() {
+        tempP = new player(P);
+        P.moveDown(g.getMapLength(), g.getMapWidth());
+        resolveMove(P, g, tempP);
+    }
+
+    private void moveLeft() {
+        tempP = new player(P);
+        P.moveLeft(g.getMapLength(), g.getMapWidth());
+        resolveMove(P, g, tempP);
+    }
+
+    private void moveRight() {
+        tempP = new player(P);
+        P.moveRight(g.getMapLength(), g.getMapWidth());
+        resolveMove(P, g, tempP);
+    }
+
+    public static void main(String[] args) {
+        new Main();
     }
 }
