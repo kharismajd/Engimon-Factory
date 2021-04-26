@@ -17,7 +17,6 @@ public class InventoryGUI {
     private player play;
     private String engimonOption[] = {"Breeding", "Ganti nama", "Buang", "Set active"};
     private String skillOption[] = {"Pakai", "Buang"};
-    private Main caller;
 
     public JPanel getMain()
     {
