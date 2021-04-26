@@ -69,49 +69,49 @@ public class InventoryGUI {
                                 engimonOption[3] = "Set active";
                             }
                             JPanel optionPane = new JPanel();
-                            String optionPaneFill;
-                            optionPaneFill = "Engimon name: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).getName() + "\n";
+                            String optionPaneFill = "";
+                            optionPaneFill = "Engimon name: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).getName() + "<br/>";
                             if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).parent1 != null)
                             {
-                                optionPaneFill += "Parent 1: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).parent1.name + "\n";
+                                optionPaneFill += "Parent 1: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).parent1.name + "<br/>";
                             }
                             if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).parent2 != null)
                             {
-                                optionPaneFill += ("Parent 2: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).parent2.name + "\n");
+                                optionPaneFill += ("Parent 2: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).parent2.name + "<br/>");
                             }
-                            optionPaneFill += "Species: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).species + "\n";
+                            optionPaneFill += "Species: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).species + "<br/>";
                             optionPaneFill += "Element: "+ InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).element1;
 
                             if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).element2 != null)
                             {
-                                optionPaneFill += "/" + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).element2 + "\n";
+                                optionPaneFill += "/" + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).element2 + "<br/>";
                             }
                             else
                             {
-                                optionPaneFill += "\n";
+                                optionPaneFill += "<br/>";
                             }
 
-                            optionPaneFill += "Moves: \n";
+                            optionPaneFill += "Moves: <br/>";
 
                             for (int skillIndex = 0; skillIndex < 4; skillIndex++)
                             {
                                 if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).moves[skillIndex] != null)
                                 {
-                                    optionPaneFill += "- " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).moves[skillIndex].getSkillName() + "\n";
+                                    optionPaneFill += "- " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).moves[skillIndex].getSkillName() + "<br/>";
                                 }
                             }
                             //this.printMoves();
 
-                            optionPaneFill += "Level: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).level + "\n";
-                            optionPaneFill += "Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).experience + "\n";
+                            optionPaneFill += "Level: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).level + "<br/>";
+                            optionPaneFill += "Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).experience + "<br/>";
                             optionPaneFill += "Cummulative Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).cummulative_experience;
 
-                            optionPane.add(new JLabel(optionPaneFill));
+                            optionPane.add(new JLabel("<html>" + optionPaneFill + "</html>"));
                             int n = JOptionPane.showOptionDialog(null,
-                                    optionPaneFill,
+                                    optionPane,
                                     "Engimon",
                                     JOptionPane.DEFAULT_OPTION,
-                                    JOptionPane.QUESTION_MESSAGE,
+                                    JOptionPane.PLAIN_MESSAGE,
                                     null,
                                     engimonOption,
                                     engimonOption[0]);
@@ -179,6 +179,7 @@ public class InventoryGUI {
                                 d.setTitle("Breeding engimon");
                                 d.add(new JLabel("Pilih engimon untuk breeding"));
                                 d.add(engimonSelect);
+                                d.setLocationRelativeTo(frame);
                                 d.setVisible(true);
                                 d.pack();
                             }
@@ -251,14 +252,31 @@ public class InventoryGUI {
                     b.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
+                            JPanel optionPane = new JPanel();
+                            String optionPaneFill = "";
+                            optionPaneFill += "Name: "+ InventoryGUI.this.play.skill_inventory.getContents().get(pilihan).getSkillName() + "<br/>";
+                            optionPaneFill += "Base Power: " +InventoryGUI.this.play.skill_inventory.getContents().get(pilihan).getBasePower() + "<br/>";
+                            optionPaneFill += "Mastery Level: "+InventoryGUI.this.play.skill_inventory.getContents().get(pilihan).getMasteryLv() + "<br/>";
+                            optionPaneFill += "Elements: " + "<br/>";
+                            for (String i:InventoryGUI.this.play.skill_inventory.getContents().get(pilihan).getElements()) {
+                                optionPaneFill += "- " + i + "<br/>";
+                            }
+
+                            if (InventoryGUI.this.play.skill_inventory.getContents().get(pilihan).getUniqueEngimonName() != null)
+                            {
+                                optionPaneFill += "SKill unique to: " + InventoryGUI.this.play.skill_inventory.getContents().get(pilihan).getUniqueEngimonName();
+                            }
+
+                            optionPane.add(new JLabel("<html>" + optionPaneFill + "</html>"));
                             int n = JOptionPane.showOptionDialog(null,
-                                    "Pilih aksi",
+                                    optionPane,
                                     "Skill item",
                                     JOptionPane.DEFAULT_OPTION,
-                                    JOptionPane.QUESTION_MESSAGE,
+                                    JOptionPane.PLAIN_MESSAGE,
                                     null,
                                     skillOption,
                                     skillOption[0]);
+
                             if (n == 0) {
                                 JPanel engimonSelectFill = new JPanel();
                                 JDialog d = new JDialog() {
@@ -310,6 +328,7 @@ public class InventoryGUI {
                                 d.setTitle("Learn move");
                                 d.add(new JLabel("Pilih engimon untuk learn move"));
                                 d.add(engimonSelect);
+                                d.setLocationRelativeTo(frame);
                                 d.setVisible(true);
                                 d.pack();
                             }
