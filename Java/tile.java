@@ -131,7 +131,7 @@ public class tile {
         this.symbol = symbol;
         if (this.listener != null)
         {
-            listener.tileChangedCharacter(this.symbol, this.tileEngimon);
+            listener.tileChangedCharacter(this.symbol);
         }
     }
 

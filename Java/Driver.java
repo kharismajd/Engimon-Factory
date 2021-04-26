@@ -60,14 +60,14 @@ public class Driver {
 
         gameMap g;
         try {
-            g = new gameMap("inputMapFile.txt");
+            g = new gameMap("./Java/inputMapFile.txt");
             g.updateMap(g.getMapLength()/2, g.getMapWidth()/2,
                     g.getMapLength()/2, g.getMapWidth()/2 + 1);
             g.printMap();
             map_visualizer m = new map_visualizer(g);
 
-            System.out.println("x: " + g.tile_map.elementAt(9).elementAt(11).x);
-            System.out.println("y: " + g.tile_map.elementAt(9).elementAt(11).y);
+            //.out.println("x: " + g.tile_map.elementAt(9).elementAt(11).x);
+            //System.out.println("y: " + g.tile_map.elementAt(9).elementAt(11).y);
         }
         catch (Exception e)
         {

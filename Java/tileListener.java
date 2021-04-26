@@ -1,3 +1,3 @@
 public interface tileListener {
-    public void tileChangedCharacter(char symbol, engimon e);
+    public void tileChangedCharacter(char symbol, wild_engimon e, player p);
 }
