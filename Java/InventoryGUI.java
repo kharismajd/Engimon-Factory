@@ -13,7 +13,6 @@ public class InventoryGUI {
     private player play;
     private String engimonOption[] = {"Breeding", "Ganti nama", "Buang", "Set active"};
     private String skillOption[] = {"Pakai", "Buang"};
-    private int i = 0;
 
     InventoryGUI(player p)
     {
@@ -69,15 +68,120 @@ public class InventoryGUI {
                             {
                                 engimonOption[3] = "Set active";
                             }
+                            JPanel optionPane = new JPanel();
+                            String optionPaneFill;
+                            optionPaneFill = "Engimon name: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).getName() + "\n";
+                            if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).parent1 != null)
+                            {
+                                optionPaneFill += "Parent 1: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).parent1.name + "\n";
+                            }
+                            if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).parent2 != null)
+                            {
+                                optionPaneFill += ("Parent 2: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).parent2.name + "\n");
+                            }
+                            optionPaneFill += "Species: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).species + "\n";
+                            optionPaneFill += "Element: "+ InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).element1;
+
+                            if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).element2 != null)
+                            {
+                                optionPaneFill += "/" + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).element2 + "\n";
+                            }
+                            else
+                            {
+                                optionPaneFill += "\n";
+                            }
+
+                            optionPaneFill += "Moves: \n";
+
+                            for (int skillIndex = 0; skillIndex < 4; skillIndex++)
+                            {
+                                if (InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).moves[skillIndex] != null)
+                                {
+                                    optionPaneFill += "- " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).moves[skillIndex].getSkillName() + "\n";
+                                }
+                            }
+                            //this.printMoves();
+
+                            optionPaneFill += "Level: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).level + "\n";
+                            optionPaneFill += "Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).experience + "\n";
+                            optionPaneFill += "Cummulative Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).cummulative_experience;
+
+                            optionPane.add(new JLabel(optionPaneFill));
                             int n = JOptionPane.showOptionDialog(null,
-                                    "Pilih aksi",
+                                    optionPaneFill,
                                     "Engimon",
                                     JOptionPane.DEFAULT_OPTION,
                                     JOptionPane.QUESTION_MESSAGE,
                                     null,
                                     engimonOption,
                                     engimonOption[0]);
+                            if (n == 0) {
+                                JPanel engimonSelectFill = new JPanel();
+                                JDialog d = new JDialog() {
+                                    @Override
+                                    public Dimension getPreferredSize() {
+                                        return new Dimension(400, 200);
+                                    }
+                                };
+                                engimonSelectFill.setLayout(new GridLayout(0, 1));
+                                int j = 0;
+                                while (j < InventoryGUI.this.play.engimon_inventory.getContents().size()) {
+                                    int pilihan2 = j;
+                                    String fill2;
+                                    fill2 = (j + 1) + ". " + play.engimon_inventory.getContents().get(j).getName() + " (" + play.engimon_inventory.getContents().get(j).getSpecies() + "/" + play.engimon_inventory.getContents().get(j).getElmt1();
+                                    if (play.engimon_inventory.getContents().get(j).getElmt2() != null) {
+                                        fill2 += "/" + play.engimon_inventory.getContents().get(j).getElmt2();
+                                    }
+                                    fill2 += "/lv " + play.engimon_inventory.getContents().get(j).getLevel().toString() + ")";
+                                    if (play.engimon_inventory.getContents().get(j).isActive()) {
+                                        fill2 += " [active]";
+                                    }
+                                    JButton button = new JButton(fill2);
+                                    button.setHorizontalAlignment(SwingConstants.LEFT);
+                                    button.setPreferredSize(new Dimension(100, 40));
+                                    button.addActionListener(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            try {
+                                                String engimonName = JOptionPane.showInputDialog(null,
+                                                        "Masukkan nama engimon baru");
 
+                                                if (engimonName.length() != 0)
+                                                {
+                                                    if (pilihan == pilihan2)
+                                                    {
+                                                        JOptionPane.showMessageDialog(null, "Tidak bisa breeding engimon yang sama", "Warning", JOptionPane.WARNING_MESSAGE);
+                                                    }
+                                                    else
+                                                    {
+                                                        InventoryGUI.this.play.breeding(pilihan, pilihan2, engimonName);
+                                                        d.setVisible(false);
+                                                    }
+                                                }
+                                                engimonButton.doClick();
+                                            }
+                                            catch(Exception exception)
+                                            {
+                                                JOptionPane.showMessageDialog(null, "Level engimon harus diatas level 3", "Warning", JOptionPane.WARNING_MESSAGE);
+                                            }
+                                        }
+                                    });
+
+                                    engimonSelectFill.add(button);
+                                    j++;
+                                }
+                                JScrollPane engimonSelect = new JScrollPane(engimonSelectFill) {
+                                    @Override
+                                    public Dimension getPreferredSize() {
+                                        return new Dimension(400, 200);
+                                    }
+                                };
+                                d.setTitle("Breeding engimon");
+                                d.add(new JLabel("Pilih engimon untuk breeding"));
+                                d.add(engimonSelect);
+                                d.setVisible(true);
+                                d.pack();
+                            }
                             if (n == 1)
                             {
                                 String name = JOptionPane.showInputDialog(null,
@@ -155,11 +259,65 @@ public class InventoryGUI {
                                     null,
                                     skillOption,
                                     skillOption[0]);
+                            if (n == 0) {
+                                JPanel engimonSelectFill = new JPanel();
+                                JDialog d = new JDialog() {
+                                    @Override
+                                    public Dimension getPreferredSize() {
+                                        return new Dimension(400, 200);
+                                    }
+                                };
+                                engimonSelectFill.setLayout(new GridLayout(0, 1));
+                                int j = 0;
+                                while (j < InventoryGUI.this.play.engimon_inventory.getContents().size()) {
+                                    int pilihan2 = j;
+                                    String fill2;
+                                    fill2 = (j + 1) + ". " + play.engimon_inventory.getContents().get(j).getName() + " (" + play.engimon_inventory.getContents().get(j).getSpecies() + "/" + play.engimon_inventory.getContents().get(j).getElmt1();
+                                    if (play.engimon_inventory.getContents().get(j).getElmt2() != null) {
+                                        fill2 += "/" + play.engimon_inventory.getContents().get(j).getElmt2();
+                                    }
+                                    fill2 += "/lv " + play.engimon_inventory.getContents().get(j).getLevel().toString() + ")";
+                                    if (play.engimon_inventory.getContents().get(j).isActive()) {
+                                        fill2 += " [active]";
+                                    }
+                                    JButton button = new JButton(fill2);
+                                    button.setHorizontalAlignment(SwingConstants.LEFT);
+                                    button.setPreferredSize(new Dimension(100, 40));
+                                    button.addActionListener(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            try {
+                                                InventoryGUI.this.play.useSkillItem(pilihan, pilihan2);
+                                                d.setVisible(false);
+                                                skillButton.doClick();
+                                            }
+                                            catch(Exception exception)
+                                            {
+                                                JOptionPane.showMessageDialog(null, "Elemen engimon tidak cocok", "Warning", JOptionPane.WARNING_MESSAGE);
+                                            }
+                                        }
+                                    });
+
+                                    engimonSelectFill.add(button);
+                                    j++;
+                                }
+                                JScrollPane engimonSelect = new JScrollPane(engimonSelectFill) {
+                                    @Override
+                                    public Dimension getPreferredSize() {
+                                        return new Dimension(400, 200);
+                                    }
+                                };
+                                d.setTitle("Learn move");
+                                d.add(new JLabel("Pilih engimon untuk learn move"));
+                                d.add(engimonSelect);
+                                d.setVisible(true);
+                                d.pack();
+                            }
 
                             if (n == 1)
                             {
                                 int amount = Integer.parseInt( JOptionPane.showInputDialog(null,
-                                        "Berapa banyak yang ingin kamu buang?",
+                                        "Berapa banyak yang ingin dibuang?",
                                         "0"));
 
                                 if (amount > 0)

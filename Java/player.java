@@ -357,17 +357,10 @@ public class player{
 		}
 	}
 
-	public void useSkillItem(int skillIdx, int engimonIdx)
+	public void useSkillItem(int skillIdx, int engimonIdx) throws Exception
 	{
-		try
-		{
-			this.engimon_inventory.getContents().get(engimonIdx).learnMove(this.skill_inventory.getContents().get(skillIdx).getSkillName());
-			this.deleteInventoryContent(this.skill_inventory.getContents().get(skillIdx).getSkillName(), 1);
-		}
-		catch (Exception e)
-		{
-			System.out.println(e);
-		}
+		this.engimon_inventory.getContents().get(engimonIdx).learnMove(this.skill_inventory.getContents().get(skillIdx).getSkillName());
+		this.deleteInventoryContent(this.skill_inventory.getContents().get(skillIdx).getSkillName(), 1);
 	}
 
 	public void useSkillItem() throws Exception
