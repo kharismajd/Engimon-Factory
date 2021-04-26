@@ -127,7 +127,7 @@ public class Main   {
 
             Object[] options = {"Battle!", "Nope"};
             int n = JOptionPane.showOptionDialog(null,
-                    panel, "Interact",
+                    panel, "Battle",
                     JOptionPane.PLAIN_MESSAGE,
                     JOptionPane.PLAIN_MESSAGE,
                     null,
@@ -148,7 +148,7 @@ public class Main   {
             {
                 Object[] options1 = {"OK"};
                 int m = JOptionPane.showOptionDialog(null,
-                        winmsglbl, "Interact",
+                        winmsglbl, "Win",
                         JOptionPane.PLAIN_MESSAGE,
                         JOptionPane.PLAIN_MESSAGE,
                         null,
@@ -160,7 +160,7 @@ public class Main   {
             {
                 Object[] options2 = {"OK"};
                 int m = JOptionPane.showOptionDialog(null,
-                        losemsglbl, "Interact",
+                        losemsglbl, "Lose",
                         JOptionPane.PLAIN_MESSAGE,
                         JOptionPane.PLAIN_MESSAGE,
                         null,
