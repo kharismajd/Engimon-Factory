@@ -95,9 +95,39 @@ public class Main   {
             panel.add(engimon2);
             panel.setSize(600, 800);
 
+            int LVbefore = P.getActiveEngimon().getLevel();
+            int diffLv = enemy.getLevel() - P.getActiveEngimon().getLevel();
+            int exp = (int)Math.floor((10*diffLv + 600)/(80-diffLv)+5);
+
+            JLabel winmsglbl = new JLabel();
+            String winmsg = "Kamu menang (^v^)b <br/>";
+            winmsg += P.getActiveEngimon().getName() + " telah mendapatkan " + Integer.toString(exp) + "exp<br/>";
+            int LVafter = P.getActiveEngimon().getLevel();
+            if (LVafter > LVbefore){
+                winmsg += P.getActiveEngimon().getName() + " telah naik level!<br/>";
+            }
+            String skill_item_get = P.getActiveEngimon().getMove(0).getSkillName();
+            winmsg += "Anda mendapatkan skill item " + skill_item_get + "<br/>";
+            if (P.getActiveEngimon().getCummulativeExp()>100000){
+                winmsg += P.getActiveEngimon().getName() + " telah mencapai batas usia, ucapkan selamat tinggal (T_T)/<br/>";
+            }
+            winmsglbl.setText("<html><center>" + winmsg + "</html>");
+            winmsglbl.setForeground(Color.white);
+
+            JLabel losemsglbl = new JLabel();
+            int life_after = P.getActiveEngimon().getLife()-1;
+            String losemsg = "Kamu K4L4H!!<br/>";
+            if (life_after == 0){
+                losemsg += P.getActiveEngimon().getName() + " telah banyak menderita, kini saatnya dia untuk pergi (T_T)/<br/>";
+            } else {
+                losemsg += "Berhati-hatilah, Life " + P.getActiveEngimon().getName() + " tersisa " + life_after + "<br/>";
+            }
+            losemsglbl.setText("<html><center>" + losemsg + "</html>");
+            losemsglbl.setForeground(Color.white);
+
             Object[] options = {"Battle!", "Nope"};
             int n = JOptionPane.showOptionDialog(null,
-                    panel, "Interact",
+                    panel, "Battle",
                     JOptionPane.PLAIN_MESSAGE,
                     JOptionPane.PLAIN_MESSAGE,
                     null,
@@ -118,7 +148,7 @@ public class Main   {
             {
                 Object[] options1 = {"OK"};
                 int m = JOptionPane.showOptionDialog(null,
-                        "Kamu menang!", "Interact",
+                        winmsglbl, "Win",
                         JOptionPane.PLAIN_MESSAGE,
                         JOptionPane.PLAIN_MESSAGE,
                         null,
@@ -130,7 +160,7 @@ public class Main   {
             {
                 Object[] options2 = {"OK"};
                 int m = JOptionPane.showOptionDialog(null,
-                        "Kamu kalah!", "Interact",
+                        losemsglbl, "Lose",
                         JOptionPane.PLAIN_MESSAGE,
                         JOptionPane.PLAIN_MESSAGE,
                         null,

@@ -119,6 +119,7 @@ public class MainVisualizer implements KeyListener {
                     options[0]);
         }
 
+<<<<<<< HEAD
         if (key == KeyEvent.VK_F12){
             new Save(this.caller.g, this.caller.P);
         }
@@ -131,6 +132,24 @@ public class MainVisualizer implements KeyListener {
         }
 
 
+=======
+        if (key == KeyEvent.VK_H) {
+            JLabel helpMessage = new JLabel("<html><br/><br/>Lawan engimon liar pake engimon aktif, <br/>\r\ncara kalahin engimon liar dilihat dari siapa yang <br/>\r\npunya power score terbesar. Engimon bisa di breed<br/>\r\n dan bisa menggunakan skill yang ada di inventory.<br/>\r\n<br/><br/>\r\nControl :<br/>\r\nW - move up<br/>\r\nA - move left<br/>\r\nS - move down<br/>\r\nD - move right<br/>\r\nX - Inventory</html>");
+
+            helpMessage.setHorizontalAlignment(SwingConstants.CENTER);
+            helpMessage.setForeground(Color.white);
+            Object[] options = {"OK"};
+            int n = JOptionPane.showOptionDialog(mainFrame,
+                    helpMessage, "Help",
+                    JOptionPane.PLAIN_MESSAGE,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+        }
+
+        
+>>>>>>> 24ca8584fac013fffae5edf1279371984090707b
         //spesies, move, element, level, power
 
 //        try
