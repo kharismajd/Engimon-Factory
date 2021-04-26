@@ -176,7 +176,7 @@ public class InventoryGUI {
                                         return new Dimension(400, 200);
                                     }
                                 };
-                                d.setTitle("Breeding engimon");
+                                d.setTitle("Pilih pasangan untuk breeding");
                                 d.add(new JLabel("Pilih engimon untuk breeding"));
                                 d.add(engimonSelect);
                                 d.setLocationRelativeTo(frame);
@@ -325,7 +325,7 @@ public class InventoryGUI {
                                         return new Dimension(400, 200);
                                     }
                                 };
-                                d.setTitle("Learn move");
+                                d.setTitle("Pilih engimon untuk learn move");
                                 d.add(new JLabel("Pilih engimon untuk learn move"));
                                 d.add(engimonSelect);
                                 d.setLocationRelativeTo(frame);
