@@ -162,7 +162,7 @@ public class Main   {
             return;
         }
 
-        map_visualizer m = new map_visualizer(g);
+        MainVisualizer m = new MainVisualizer(g, P);
         Scanner sc = new Scanner(System.in);
         userInput = sc.nextLine();
         while (userInput !="exit")
@@ -230,7 +230,19 @@ public class Main   {
             }
             else if ("i".equals(userInput))
             {
-                P.showSkillItemList();
+                if (m.getState() == MainVisualizer.VISUALIZER_MAP)
+                {
+                    m.openInventory();
+                }
+                else if (m.getState() == MainVisualizer.VISUALIZER_INVENTORY)
+                {
+                    m.openMap();
+                }
+                else
+                {
+                    m.openMap();
+                }
+//                P.showSkillItemList();
             }
             else if ("u".equals(userInput))
             {

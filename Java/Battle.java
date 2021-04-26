@@ -111,7 +111,6 @@ public class Battle extends element_advantage {
             retVal = -1;
         }
 
-//        stdin.close();
         return retVal;
     }
 
