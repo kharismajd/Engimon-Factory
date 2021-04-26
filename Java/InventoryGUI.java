@@ -412,12 +412,7 @@ public class InventoryGUI {
         this.play = p;
         this.scrollpanel.setLayout(new GridLayout(10, 1));
 
-        this.frame = new JFrame("Inventory");
-        this.frame.setContentPane(this.main);
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setSize(800, 600);
-        this.frame.setResizable(false);
-        this.frame.setVisible(true);
+        this.frame = frame;
 
         this.sidePane.setBackground(Color.darkGray);
         this.scrollpanel.setBackground(Color.gray);
