@@ -3,40 +3,30 @@
 public class breeder_test {
     public static void main (String args[]) {
         try {
-            engimon daddad = new wild_engimon();
-            engimon mommom = new wild_engimon();
-            player_engimon dad = new player_engimon("Dad", daddad, mommom, "Vulpichu", 4, 100);
-            player_engimon mom = new player_engimon("Mom", daddad, mommom, "Charmander", 5, 200);
-            // Water, Ice, Water x Ice, Water x Ground
+            engimon null_engimon = new wild_engimon();
+            player_engimon dad = new player_engimon("Dad", null_engimon, null_engimon, "Lapras", 32, 100);
+            player_engimon test = new player_engimon("test1", null_engimon, null_engimon, "Vulpichu", 32, 100);
+            player_engimon test2 = new player_engimon("test2", null_engimon, null_engimon, "Lapras", 40, 100);
+            player_engimon test3 = new player_engimon("test3", null_engimon, null_engimon, "Lapras", 80, 100);
+            player newp = new player("Test", dad, 50, 0, 0, 0, 1);
 
-            dad.learnMove("tackle");
-            //dad.learnMove("bubble");
-            //dad.learnMove("ice_beam");
-            mom.learnMove("tackle");
-            //mom.learnMove("bubble");
-            //mom.learnMove("rock_smash");
+            newp.addInventoryContent(test);
+            newp.addInventoryContent(test2);
+            newp.addInventoryContent(test3);
+            newp.showEngimonList();
+            System.out.println(newp.getHighestLevelEngimon());
 
-            // dad.showAttributes();
-            // System.out.println();
-            // mom.showAttributes();
-            // System.out.println();
+            newp.addInventoryContent("ember");
+            newp.addInventoryContent("tackle");
+            newp.addInventoryContent("bubble");
+            newp.addInventoryContent("rock_smash");
+            newp.addInventoryContent("ember");
+            newp.showSkillItemList();
 
-            player_engimon childe = breeder.breed("Childe", dad, mom);
-            System.out.println();
-            for (int i = 0; i < 4; i++) {
-               if (childe.getMove(i) != null) {
-                   childe.getMove(i).printAll();
-                   System.out.println();
-               }
-            }
-
-            // System.out.println();
-            // dad.showAttributes();
-            // System.out.println();
-            // mom.showAttributes();
-            // System.out.println();
+            newp.breeding(3, 0, "Testt");
+            newp.showEngimonList();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }

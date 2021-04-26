@@ -286,7 +286,9 @@ public class InventoryGUI {
                                 optionPaneFill += "SKill unique to: " + InventoryGUI.this.play.skill_inventory.getContents().get(pilihan).getUniqueEngimonName();
                             }
 
-                            optionPane.add(new JLabel("<html>" + optionPaneFill + "</html>"));
+                            JLabel skillDesc = new JLabel("<html>" + optionPaneFill + "</html>");
+                            skillDesc.setForeground(Color.white);
+                            optionPane.add(skillDesc);
                             int n = JOptionPane.showOptionDialog(null,
                                     optionPane,
                                     "Skill item",
