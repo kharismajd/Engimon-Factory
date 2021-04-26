@@ -258,6 +258,7 @@ public class Main   {
             else if ("x".equals(userInput))
             {
                 P.switchOutEngimon();
+                g.tile_map.elementAt(P.activeEngimon_y).elementAt(P.activeEngimon_x).setEngimon(P.getActiveEngimon());
             }
             else if ("n".equals(userInput))
             {
