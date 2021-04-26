@@ -21,6 +21,7 @@ public class Main   {
     static void resolveMove(player P, gameMap g, player tempP)
     {
         Integer winBattle;
+        wild_engimon.setPlayerHighestPokemon(P.getHighestLevelEngimon());
         if (g.isTileOccupied(P.getPlayerPosX(),P.getPlayerPosY()))
         {
             System.out.println("Battle");

@@ -317,7 +317,10 @@ public class gameMap {
         }
 
     }
-    public Boolean isTileOccupied(int x, int y){ return tile_map.elementAt(y).elementAt(x).haveWildEngimon(); }
+    public Boolean isTileOccupied(int x, int y)
+    {
+        return (tile_map.elementAt(y).elementAt(x).haveWildEngimon() && !tile_map.elementAt(y).elementAt(x).getEngimon().isActive());
+    }
 
     public int getMapLength(){ return this.mapLength; }
     public int getMapWidth(){ return this.mapWidth; }
