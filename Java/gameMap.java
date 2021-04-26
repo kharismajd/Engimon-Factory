@@ -11,10 +11,12 @@ public class gameMap {
     private int mapWidth = 10;
 
     protected int engimon_count = 0;
-    private int map_move_count = MAP_ENGIMON_COUNT;
+    private int map_move_count = MAP_MOVE;
+    private int map_generate_count = MAP_GENERATE;
 
     public static final int MAP_ENGIMON_COUNT = 5;
     public static final int MAP_MOVE = 5;
+    public static final int MAP_GENERATE = 10;
 
     public gameMap()
     {
@@ -256,6 +258,13 @@ public class gameMap {
         {
             moveWildEngimon();
             map_move_count = MAP_MOVE;
+        }
+
+        this.map_generate_count = this.map_generate_count - 1;
+        if (this.map_generate_count <= 0)
+        {
+            generateEngimon();
+            map_generate_count = MAP_GENERATE;
         }
 
         this.tile_map.elementAt(player_y).elementAt(player_x).playerIsHere();
