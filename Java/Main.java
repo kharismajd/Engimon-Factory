@@ -44,7 +44,7 @@ public class Main   {
 
         try
         {
-            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
+            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY(), P);
         }
         catch(Exception e)
         {
@@ -149,9 +149,9 @@ public class Main   {
         System.out.println(P.getName()+ ", you are now ready, step in to the world of engimon");
         try
         {
-            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
+            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY(), P);
             g.generateEngimon();
-            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
+            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY(), P);
             g.printMap();
         }
         catch(Exception e)

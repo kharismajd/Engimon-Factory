@@ -131,7 +131,7 @@ public class tile {
         this.symbol = symbol;
         if (this.listener != null)
         {
-            listener.tileChangedCharacter(this.symbol);
+            listener.tileChangedCharacter(this.symbol, this.tileEngimon);
         }
     }
 
@@ -144,6 +144,7 @@ public class tile {
         this.isPlayer = true;
         this.setSymbol('P');
     }
+
     public void playerIsNotHere()
     {
         this.isPlayer = false;
@@ -159,8 +160,20 @@ public class tile {
         this.isActivePokemon = true;
         this.setSymbol('X');
     }
+
+    public void activeEngimonIsHere(engimon e)
+    {
+        this.isActivePokemon = true;
+        this.tileEngimon = e;
+        this.setSymbol('X');
+    }
+
     public void activeEngimonIsNotHere()
     {
+        if (this.isActivePokemon)
+        {
+            this.tileEngimon = null;
+        }
         this.isActivePokemon = false;
         this.updateCharacter();
     }
