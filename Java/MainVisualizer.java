@@ -1,12 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class MainVisualizer {
+public class MainVisualizer implements KeyListener {
 
     map_visualizer mapGUI;
     InventoryGUI inventoryGUI;
     JFrame mainFrame;
     Integer state = 0;
+
+    Main caller;
 
     public static final Integer VISUALIZER_MAP = 0;
     public static final Integer VISUALIZER_INVENTORY = 1;
@@ -15,9 +19,13 @@ public class MainVisualizer {
         return state;
     }
 
-    public MainVisualizer(gameMap g, player p)
+    public MainVisualizer(Main mainObject)
     {
+        caller = mainObject;
+        gameMap g = mainObject.g;
+        player p = mainObject.P;
         this.mainFrame = new JFrame("Engimon");
+        mainFrame.addKeyListener(this);
         this.inventoryGUI = new InventoryGUI(p, mainFrame);
         this.mapGUI = new map_visualizer(g, mainFrame);
         this.mainFrame.setVisible(true);
@@ -44,4 +52,59 @@ public class MainVisualizer {
     }
 
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_A) {
+            if (this.getState() == VISUALIZER_MAP)
+            {
+                caller.moveLeft();
+            }
+        }
+
+        if (key == KeyEvent.VK_D) {
+            if (this.getState() == VISUALIZER_MAP)
+            {
+                caller.moveRight();
+            }
+        }
+
+        if (key == KeyEvent.VK_W) {
+            if (this.getState() == VISUALIZER_MAP)
+            {
+                caller.moveUp();
+            }
+        }
+
+        if (key == KeyEvent.VK_S) {
+            if (this.getState() == VISUALIZER_MAP)
+            {
+                caller.moveDown();
+            }
+        }
+
+        if (key == KeyEvent.VK_X) {
+            caller.openMenu();
+        }
+
+//        try
+//        {
+//            Thread.sleep(500);;
+//        }
+//        catch (Exception exception)
+//        {
+//            exception.printStackTrace();
+//        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
 }

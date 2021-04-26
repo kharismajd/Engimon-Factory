@@ -165,7 +165,7 @@ public class Main   {
             return;
         }
 
-        m = new MainVisualizer(g, P);
+        m = new MainVisualizer(this);
         try
         {
             g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY(), P);
@@ -217,6 +217,10 @@ public class Main   {
             else if ("m".equals(userInput))
             {
                 g.printMap();
+                if (m.getState() != MainVisualizer.VISUALIZER_MAP)
+                {
+                    m.openMap();
+                }
             }
             else if ("b".equals(userInput))
             {
@@ -236,19 +240,8 @@ public class Main   {
             }
             else if ("i".equals(userInput))
             {
-                if (m.getState() == MainVisualizer.VISUALIZER_MAP)
-                {
-                    m.openInventory();
-                }
-                else if (m.getState() == MainVisualizer.VISUALIZER_INVENTORY)
-                {
-                    m.openMap();
-                }
-                else
-                {
-                    m.openMap();
-                }
-//                P.showSkillItemList();
+
+                P.showSkillItemList();
             }
             else if ("u".equals(userInput))
             {
@@ -282,28 +275,44 @@ public class Main   {
         }
     }
 
-    private void moveUp() {
+    public void moveUp() {
         tempP = new player(P);
         P.moveUp(g.getMapLength(), g.getMapWidth());
         resolveMove(P, g, tempP);
     }
 
-    private void moveDown() {
+    public void moveDown() {
         tempP = new player(P);
         P.moveDown(g.getMapLength(), g.getMapWidth());
         resolveMove(P, g, tempP);
     }
 
-    private void moveLeft() {
+    public void moveLeft() {
         tempP = new player(P);
         P.moveLeft(g.getMapLength(), g.getMapWidth());
         resolveMove(P, g, tempP);
     }
 
-    private void moveRight() {
+    public void moveRight() {
         tempP = new player(P);
         P.moveRight(g.getMapLength(), g.getMapWidth());
         resolveMove(P, g, tempP);
+    }
+
+    public void openMenu()
+    {
+        if (m.getState() == MainVisualizer.VISUALIZER_MAP)
+        {
+            m.openInventory();
+        }
+        else if (m.getState() == MainVisualizer.VISUALIZER_INVENTORY)
+        {
+            m.openMap();
+        }
+        else
+        {
+            m.openMap();
+        }
     }
 
     public static void main(String[] args) {
