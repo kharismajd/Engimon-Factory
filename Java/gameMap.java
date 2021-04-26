@@ -331,4 +331,21 @@ public class gameMap {
 
     public int getMapLength(){ return this.mapLength; }
     public int getMapWidth(){ return this.mapWidth; }
+    public Vector<Vector<tile>> getTilesMap(){
+        return this.tile_map;
+    }
+
+    public void setTilesMap(Vector<Vector<tile>> tile_map){
+        this.tile_map = tile_map;
+    }
+
+    public void setTilesMap(Integer x, Integer y, Character sym, wild_engimon e){
+        Vector<Vector<tile>> tiles = this.tile_map;
+        Vector<tile> row = tiles.get(y);
+        tile pointed = row.get(x);
+        tile newtile = new tile(x.intValue(),y.intValue(),e,pointed.getType());
+        row.set(x,newtile);
+        tiles.set(y,row);
+        this.tile_map = tiles;
+    }
 }

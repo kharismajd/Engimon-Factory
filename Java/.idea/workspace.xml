@@ -21,7 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="7d2bb3a4-c08e-4567-a1e4-48653b8e87ba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainVisualizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engimon.java" beforeDir="false" afterPath="$PROJECT_DIR$/engimon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tubes-OOP-Engimon/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tubes-OOP-Engimon/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/player.java" beforeDir="false" afterPath="$PROJECT_DIR$/player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/player_engimon.java" beforeDir="false" afterPath="$PROJECT_DIR$/player_engimon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/tile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

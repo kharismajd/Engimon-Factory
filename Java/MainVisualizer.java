@@ -1,7 +1,10 @@
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.KeyException;
 
 public class MainVisualizer implements KeyListener {
 
@@ -115,6 +118,19 @@ public class MainVisualizer implements KeyListener {
                     options,
                     options[0]);
         }
+
+        if (key == KeyEvent.VK_F12){
+            new Save(this.caller.g, this.caller.P);
+        }
+
+        if (key == KeyEvent.VK_F11){
+            Load load = new Load(this.caller.g);
+            this.caller.P = load.getPlayer();
+            this.caller.g = load.getMap();
+            this.mapGUI = new map_visualizer(this.caller.g, this.mainFrame);
+        }
+
+
         //spesies, move, element, level, power
 
 //        try

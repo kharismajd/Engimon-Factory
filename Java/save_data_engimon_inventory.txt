@@ -1,0 +1,11 @@
+Glastrier.null.null.Glastrier.snowball.1.null.null.null.Ice.null.49.0.3
+
+Glastrier.null.null.Glastrier.snowball.1.null.null.null.Ice.null.34.0.3
+
+Breeder Tester.null.null.Glastrier.snowball.1.null.null.null.Ice.null.30.0.3
+
+Lapras.null.null.Lapras.ice_breath.1.null.null.null.Water.Ice.40.0.3
+
+Lapras.null.null.Lapras.ice_breath.1.null.null.null.Water.Ice.39.0.3
+
+Gab.null.null.Pikachu.electrified_tail.1.null.null.null.Electric.null.30.17.3

@@ -544,4 +544,12 @@ public class player{
 
 	//Nama player
 	public String getName() {return name;}
+	//setter
+	public void setEngimonInventory(engimonInventory ei){
+		this.engimon_inventory = ei;
+	}
+
+	public void setSkillInventory(skillInventory si){
+		this.skill_inventory = si;
+	}
 }

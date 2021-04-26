@@ -6,6 +6,12 @@ public class player_engimon extends engimon{
         this.life=3;
     }
 
+    public player_engimon(String nm, String sp, String pr1, int lvl, int exp, String pr2) throws Exception
+    {   
+        super(nm,pr1,pr2,sp,lvl,exp);
+        this.life = 3;
+    }
+
     public player_engimon(wild_engimon e)
     {
         this.name = e.name;

@@ -317,4 +317,16 @@ public class tile {
         }
     }
 
+    public Integer getX(){
+        return this.x;
+    }
+
+    public Integer getY(){
+        return this.y;
+    }
+
+    public String getType(){
+        return this.tile_type;
+    }
+
 }

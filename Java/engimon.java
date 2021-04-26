@@ -213,4 +213,27 @@ abstract public class engimon {
     public void setLife(Integer life){
         this.life = life;
     }
+    public engimon getParent1(){
+        return this.parent1;
+    }
+
+    public engimon getParent2(){
+        return this.parent2;
+    }
+
+    public int getExp(){
+        return this.experience;
+    }
+
+    public void setParent1(engimon pr1){
+        this.parent1 = pr1;
+    }
+
+    public void setParent2(engimon pr2){
+        this.parent2 = pr2;
+    }
+
+    public void setMove(int idx, skill move){
+        this.moves[idx] = move;
+    }
 }

@@ -1,0 +1,10 @@
+Vulpichu.null.null.Vulpichu.overload.1.null.null.null.Fire.Electric.45.0.1
+
+Vulpichu.null.null.Vulpichu.overload.1.null.null.null.Fire.Electric.32.0.1
+
+Gab.null.null.Pikachu.electrified_tail.1.null.null.null.Electric.null.30.15.3
+
+Wooper.null.null.Wooper.mudball.1.null.null.null.Water.Ground.32.0.1
+
+Lapras.null.null.Lapras.ice_breath.1.null.null.null.Water.Ice.38.0.1
+
