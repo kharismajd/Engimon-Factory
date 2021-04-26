@@ -13,10 +13,12 @@ public class gameMap {
     protected int engimon_count = 0;
     private int map_move_count = MAP_MOVE;
     private int map_generate_count = MAP_GENERATE;
+    private int map_wild_engimon_levelup = MAP_WILD_ENGIMON_LEVELUP;
 
     public static final int MAP_ENGIMON_COUNT = 5;
     public static final int MAP_MOVE = 5;
     public static final int MAP_GENERATE = 10;
+    public static final int MAP_WILD_ENGIMON_LEVELUP = 30;
 
     public gameMap()
     {
@@ -237,6 +239,24 @@ public class gameMap {
             }
         }
     }
+
+    public void levelUpEngimon()
+    {
+        for (Vector<tile> i :tile_map){
+            for (tile j:i) {
+                if (j.haveWildEngimon())
+                {
+                    j.getEngimon().gainExp(100);
+                    if (j.getEngimon().getCummulativeExp() >= 10000)
+                    {
+                        deleteTileEngimon(j.x,j.y);
+                    }
+                }
+            }
+        }
+    }
+
+
     public void updateMap(int player_x, int player_y, int active_x, int active_y) throws Exception
     {
         for (Vector<tile> i :tile_map){
@@ -267,10 +287,15 @@ public class gameMap {
             map_generate_count = MAP_GENERATE;
         }
 
+        this.map_wild_engimon_levelup = this.map_wild_engimon_levelup - 1;
+        if (this.map_wild_engimon_levelup <= 0)
+        {
+            levelUpEngimon();
+            map_wild_engimon_levelup = MAP_WILD_ENGIMON_LEVELUP;
+        }
+
         this.tile_map.elementAt(player_y).elementAt(player_x).playerIsHere();
         this.tile_map.elementAt(active_y).elementAt(active_x).activeEngimonIsHere();
-
-
     }
 
     public void updateMap(int player_x, int player_y, int active_x, int active_y, player P) throws Exception
