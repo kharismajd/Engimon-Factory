@@ -138,7 +138,7 @@ public class breeder {
                     //     iter1[j] = 1;
                     // }
                     for (int k = 1; k < 4; k++) {
-                        if(iter2[j] != 1) {
+                        if(parent2.getMove(k) != null) {
                             if (parent1.getMove(j).getSkillName().equals(parent2.getMove(k).getSkillName())) {
                                 if (parent1.getMove(j).getMasteryLv() == parent2.getMove(k).getMasteryLv() && parent1.getMove(j).getMasteryLv() < 3) {
                                     // Learn skill, chosen mastery level + 1
