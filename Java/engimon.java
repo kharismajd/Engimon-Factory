@@ -2,6 +2,10 @@ abstract public class engimon {
     protected String name;
     protected engimon parent1;
     protected engimon parent2;
+
+    private String parent1Name; //Hanya digunakan jika parent1 null
+    private String parent2Name; //Hanya digunakan jika parent2 null
+
     protected String species;
     protected skill[] moves;
     protected String element1;
@@ -43,6 +47,13 @@ abstract public class engimon {
     public engimon(String nm, engimon pr1, engimon pr2, String sp, int lvl, int exp) throws Exception
     {
         this.Initialize(nm, pr1, pr2, sp, lvl, exp);
+    }
+
+    public engimon(String nm, String pr1, String pr2, String sp, int lvl, int exp) throws Exception
+    {
+        this.Initialize(nm, null, null, sp, lvl, exp);
+        this.parent1Name = pr1;
+        this.parent2Name = pr2;
     }
 
     protected void Initialize(String nm, engimon pr1, engimon pr2, String sp, int lvl, int exp) throws Exception
@@ -88,9 +99,20 @@ abstract public class engimon {
         {
             System.out.println("Parent 1: " + parent1.name);
         }
+
+        if (parent1Name != null)
+        {
+            System.out.println("Parent 1: "+parent1Name);
+        }
+
         if (parent2 != null)
         {
             System.out.println("Parent 2: " + parent2.name);
+        }
+
+        if (parent2Name != null)
+        {
+            System.out.println("Parent 2: " + parent2Name);
         }
         System.out.println("Species: " + this.species);
         System.out.print("Element: "+this.element1);
