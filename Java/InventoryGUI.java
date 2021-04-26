@@ -508,7 +508,8 @@ public class InventoryGUI {
 
                             optionPaneFill += "Level: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).level + "<br/>";
                             optionPaneFill += "Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).experience + "<br/>";
-                            optionPaneFill += "Cummulative Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).cummulative_experience;
+                            optionPaneFill += "Cummulative Experience: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).cummulative_experience + "<br/>";
+                            optionPaneFill += "Life: " + InventoryGUI.this.play.engimon_inventory.getContents().get(pilihan).getLife().toString();
 
                             //for (int skillIndex = 0; skillIndex < 4; skillIndex++)
                             //{

@@ -1,7 +1,14 @@
+import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
 
 public class Main   {
+    player_engimon starter_engimon = null;
+    player tempP;
+    gameMap g;
+    player P;
+    MainVisualizer m;
+
     static void printHelp()
     {
         System.out.println("Commands: ");
@@ -22,15 +29,117 @@ public class Main   {
     {
         Integer winBattle;
         wild_engimon.setPlayerHighestPokemon(P.getHighestLevelEngimon());
+        //spesies, move, element, level, power
+
         if (g.isTileOccupied(P.getPlayerPosX(),P.getPlayerPosY()))
         {
-            System.out.println("Battle");
-
+            wild_engimon enemy = new wild_engimon(g.getTileEngimon(P.getPlayerPosX(),P.getPlayerPosY()));
             Battle b = new Battle(P.getActiveEngimon(), new wild_engimon(g.getTileEngimon(P.getPlayerPosX(),P.getPlayerPosY())) , P);
-            winBattle = b.battleConfirmation();
-            if (winBattle == 1)
+            double[] power = b.power();
+
+            JPanel panel = new JPanel();
+            JPanel engimon1 = new JPanel();
+            JPanel engimon2 = new JPanel();
+            JPanel engimon1Move = skill_icons.showIcons(P.getActiveEngimon());
+            JPanel engimon2Move = skill_icons.showIcons(enemy);
+            JLabel engimon1Lbl = new JLabel();
+            JLabel engimon2Lbl = new JLabel();
+            JLabel moveLabel1 = new JLabel("<html>Move: </html>");
+            JLabel moveLabel2 = new JLabel("<html>Move: </html>");
+
+            String engimon1Desc = "Your engimon:<br/>";
+            engimon1Desc += "Species: " + P.getActiveEngimon().getSpecies() + "<br/>";
+            engimon1Desc += "Element: " + P.getActiveEngimon().getElmt1();
+            if (P.getActiveEngimon().getElmt2() != null)
             {
+                engimon1Desc += "/" + P.getActiveEngimon().getElmt2();
+            }
+            engimon1Desc += "       <br/>";
+            engimon1Desc += "Level: " + P.getActiveEngimon().getLevel().toString() + "<br/>";
+            engimon1Desc += "Power: " + power[0];
+
+            String engimon2Desc = "Enemy engimon:<br/>";
+            engimon2Desc += "Species: " + enemy.getSpecies() + "<br/>";
+            engimon2Desc += "Element: " + enemy.getElmt1();
+            if (enemy.getElmt2() != null)
+            {
+                engimon2Desc += "/" + enemy.getElmt2();
+            }
+            engimon2Desc += "       <br/>";
+            engimon2Desc += "Level: " + enemy.getLevel().toString() + "<br/>";
+            engimon2Desc += "Power: " + power[1];
+
+            engimon1Lbl.setText("<html>" + engimon1Desc + "</html>");
+            engimon2Lbl.setText("<html>" + engimon2Desc + "</html>");
+
+            engimon1Lbl.setForeground(Color.white);
+            moveLabel1.setForeground(Color.white);
+            engimon2Lbl.setForeground(Color.white);
+            moveLabel2.setForeground(Color.white);
+
+            engimon1.setLayout(new GridLayout(1, 0));
+            engimon1.add(engimon1Lbl, BorderLayout.EAST);
+            engimon1.add(moveLabel1, BorderLayout.CENTER);
+            engimon1.add(engimon1Move, BorderLayout.WEST);
+
+            engimon2.setLayout(new GridLayout(1, 0));
+            engimon2.add(engimon2Lbl, BorderLayout.EAST);
+            engimon2.add(moveLabel2, BorderLayout.CENTER);
+            engimon2.add(engimon2Move, BorderLayout.WEST);
+
+            GridLayout layout = new GridLayout(2,1);
+            layout.setVgap(20);
+            panel.setLayout(layout);
+
+            panel.add(engimon1);
+            panel.add(engimon2);
+            panel.setSize(600, 800);
+
+            Object[] options = {"Battle!", "Nope"};
+            int n = JOptionPane.showOptionDialog(null,
+                    panel, "Interact",
+                    JOptionPane.PLAIN_MESSAGE,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+
+            int win;
+            if (n == 0)
+            {
+                win = b.initBattle();
+            }
+            else
+            {
+                win = -1;
+            }
+
+            if (win == 1)
+            {
+                Object[] options1 = {"OK"};
+                int m = JOptionPane.showOptionDialog(null,
+                        "Kamu menang!", "Interact",
+                        JOptionPane.PLAIN_MESSAGE,
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        options1,
+                        options1[0]);
                 g.deleteTileEngimon(P.getPlayerPosX(), P.getPlayerPosY());
+            }
+            else if (win == 0)
+            {
+                Object[] options2 = {"OK"};
+                int m = JOptionPane.showOptionDialog(null,
+                        "Kamu kalah!", "Interact",
+                        JOptionPane.PLAIN_MESSAGE,
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        options2,
+                        options2[0]);
+                P.setPlayerPosX(tempP.getPlayerPosX());
+                P.setPlayerPosY(tempP.getPlayerPosY());
+                P.setActivePetPosX(tempP.getActivePetPosX());
+                P.setActivePetPosY(tempP.getActivePetPosY());
             }
             else
             {
@@ -54,12 +163,6 @@ public class Main   {
 
         g.printMap();
     }
-
-    player_engimon starter_engimon = null;
-    player tempP;
-    gameMap g;
-    player P;
-    MainVisualizer m;
 
     public Main() {
         //Deklarasi

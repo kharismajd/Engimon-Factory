@@ -115,6 +115,7 @@ public class MainVisualizer implements KeyListener {
                     options,
                     options[0]);
         }
+        //spesies, move, element, level, power
 
 //        try
 //        {
