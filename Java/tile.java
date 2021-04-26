@@ -116,7 +116,12 @@ public class tile {
 
     public void setEngimon(engimon e)
     {
-        this.tileEngimon = e;
+        if (this.getEngimon() != e)
+        {
+            this.tileEngimon = e;
+            updateCharacter();
+        }
+
     }
     public engimon getEngimon()
     {
