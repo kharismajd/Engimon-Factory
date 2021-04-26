@@ -3,6 +3,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class InventoryGUI {
     private JFrame frame;
@@ -15,17 +17,20 @@ public class InventoryGUI {
     private player play;
     private String engimonOption[] = {"Breeding", "Ganti nama", "Buang", "Set active"};
     private String skillOption[] = {"Pakai", "Buang"};
+    private Main caller;
 
     public JPanel getMain()
     {
         return main;
     }
 
+    public void refresh() {this.engimonButton.doClick();}
 
-    InventoryGUI(player p)
+    InventoryGUI(player p, Main mainObject)
     {
         this.play = p;
         this.scrollpanel.setLayout(new GridLayout(10, 1));
+        this.caller = mainObject;
 
         this.frame = new JFrame("Inventory");
         this.frame.setContentPane(this.main);
@@ -37,6 +42,7 @@ public class InventoryGUI {
         this.sidePane.setBackground(Color.darkGray);
         this.scrollpanel.setBackground(Color.gray);
         this.main.setBackground(Color.darkGray);
+        this.main.requestFocus();
 
         this.engimonButton.setFocusPainted(false);
         this.engimonButton.setBackground(Color.lightGray);
@@ -407,10 +413,11 @@ public class InventoryGUI {
         });
     }
 
-    public InventoryGUI(player p, JFrame frame)
+    public InventoryGUI(player p, JFrame frame, Main mainObject)
     {
         this.play = p;
         this.scrollpanel.setLayout(new GridLayout(10, 1));
+        this.caller = mainObject;
 
         this.frame = frame;
 
@@ -420,9 +427,11 @@ public class InventoryGUI {
 
         this.engimonButton.setFocusPainted(false);
         this.engimonButton.setBackground(Color.lightGray);
+        this.engimonButton.setFocusable(false);
 
         this.skillButton.setFocusPainted(false);
         this.skillButton.setBackground(Color.lightGray);
+        this.skillButton.setFocusable(false);
 
         UIManager um = new UIManager();
         um.put("OptionPane.background", Color.black);
@@ -463,6 +472,7 @@ public class InventoryGUI {
                     b.setFont(Font.getFont("Fira Code Retina Regular"));
                     b.setBackground(Color.lightGray);
                     b.setFocusPainted(false);
+                    b.setFocusable(false);
                     b.setHorizontalAlignment(SwingConstants.LEFT);
                     b.setPreferredSize(new Dimension(100, 55));
                     b.addActionListener(new ActionListener() {
@@ -553,6 +563,7 @@ public class InventoryGUI {
                                     button.setFont(Font.getFont("Fira Code Retina Regular"));
                                     button.setBackground(Color.lightGray);
                                     button.setFocusPainted(false);
+                                    button.setFocusable(false);
                                     button.setHorizontalAlignment(SwingConstants.LEFT);
                                     button.setPreferredSize(new Dimension(100, 40));
                                     button.addActionListener(new ActionListener() {
@@ -671,6 +682,7 @@ public class InventoryGUI {
                     b.setFont(Font.getFont("Fira Code Retina Regular"));
                     b.setBackground(Color.lightGray);
                     b.setFocusPainted(false);
+                    b.setFocusable(false);
                     b.setHorizontalAlignment(SwingConstants.LEFT);
                     b.setPreferredSize(new Dimension(100, 55));
                     b.addActionListener(new ActionListener() {
@@ -729,6 +741,7 @@ public class InventoryGUI {
                                     button.setFont(Font.getFont("Fira Code Retina Regular"));
                                     button.setBackground(Color.lightGray);
                                     button.setFocusPainted(false);
+                                    button.setFocusable(false);
                                     button.setHorizontalAlignment(SwingConstants.LEFT);
                                     button.setPreferredSize(new Dimension(100, 40));
                                     button.addActionListener(new ActionListener() {
@@ -787,8 +800,6 @@ public class InventoryGUI {
         });
     }
 
-
-
     public static void main(String[] args) {
         try {
             engimon null_engimon = new wild_engimon();
@@ -811,7 +822,7 @@ public class InventoryGUI {
             newp.addInventoryContent("ember");
             newp.showSkillItemList();
 
-            InventoryGUI gui = new InventoryGUI(newp);
+            //InventoryGUI gui = new InventoryGUI(newp);
 
 
         } catch (Exception e) {

@@ -26,7 +26,7 @@ public class MainVisualizer implements KeyListener {
         player p = mainObject.P;
         this.mainFrame = new JFrame("Engimon");
         mainFrame.addKeyListener(this);
-        this.inventoryGUI = new InventoryGUI(p, mainFrame);
+        this.inventoryGUI = new InventoryGUI(p, mainFrame, caller);
         this.mapGUI = new map_visualizer(g, mainFrame);
         this.mainFrame.setVisible(true);
         this.state = VISUALIZER_MAP;
@@ -34,6 +34,7 @@ public class MainVisualizer implements KeyListener {
 
     public void openInventory()
     {
+        this.inventoryGUI.refresh();
         this.mainFrame.setContentPane(inventoryGUI.getMain());
         this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.mainFrame.setSize(800, 600);
