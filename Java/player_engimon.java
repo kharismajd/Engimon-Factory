@@ -29,10 +29,18 @@ public class player_engimon extends engimon{
         this.experience = exp % 100;
         this.level = this.level + exp/100;
         this.cummulative_experience = this.cummulative_experience + exp;
+        if (this.active)
+        {
+            tile.setActiveEngimonLevel(this.level);
+        }
     }
     public void setLevel(int lv)
     {
         this.level = lv;
+        if (this.active)
+        {
+            tile.setActiveEngimonLevel(this.level);
+        }
     }
 
     public void setName(String name)

@@ -11,6 +11,14 @@ public class tile {
     private Boolean isPlayer  = false;
     private Boolean isActivePokemon  = false;
 
+    public tileListener listener;
+
+    private static Integer activeEngimonLevel = 30;
+
+    public static void setActiveEngimonLevel(Integer activeEngimonLevel) {
+        tile.activeEngimonLevel = activeEngimonLevel;
+    }
+
     public tile(int x, int y, String type)
     {
         this.x = x;
@@ -114,9 +122,27 @@ public class tile {
     {
         return this.tileEngimon;
     }
+
+    public String getTile_type() {
+        return tile_type;
+    }
+
+    public void setListener(tileListener listener) {
+        this.listener = listener;
+    }
+
     public void setSymbol(char symbol)
+
     {
         this.symbol = symbol;
+        if (this.listener != null)
+        {
+            listener.tileChangedCharacter(this.symbol, this.tileEngimon);
+        }
+    }
+
+    public char getSymbol() {
+        return symbol;
     }
 
     public void playerIsHere()
@@ -124,6 +150,7 @@ public class tile {
         this.isPlayer = true;
         this.setSymbol('P');
     }
+
     public void playerIsNotHere()
     {
         this.isPlayer = false;
@@ -139,8 +166,20 @@ public class tile {
         this.isActivePokemon = true;
         this.setSymbol('X');
     }
+
+    public void activeEngimonIsHere(engimon e)
+    {
+        this.isActivePokemon = true;
+        this.tileEngimon = e;
+        this.setSymbol('X');
+    }
+
     public void activeEngimonIsNotHere()
     {
+        if (this.isActivePokemon)
+        {
+            this.tileEngimon = null;
+        }
         this.isActivePokemon = false;
         this.updateCharacter();
     }
@@ -153,43 +192,43 @@ public class tile {
     {
         if (tile_type.equals("mountains") && this.tileEngimon == null)
         {
-            this.symbol = ('^');
+            this.setSymbol('^');
         }
         else if (tile_type.equals("sea") && this.tileEngimon == null)
         {
-            this.symbol = ('o');
+            this.setSymbol('o');
         }
         else if (tile_type.equals("grassland") && this.tileEngimon == null)
         {
-            this.symbol = ('-');
+            this.setSymbol('-');
         }
         else if (tile_type.equals("tundra") && this.tileEngimon == null)
         {
-            this.symbol = ('.');
+            this.setSymbol('.');
         }
         else if (("Fire".equals(this.tileEngimon.getElmt1()) && "Electric".equals(this.tileEngimon.getElmt2())) ||
                 ("Electric".equals(this.tileEngimon.getElmt1()) && "Fire".equals(this.tileEngimon.getElmt2())))
         {
-            if (this.tileEngimon.getLevel() > wild_engimon.playerHighestPokemon)
+            if (this.tileEngimon.getLevel() > tile.activeEngimonLevel)
             {
-                this.symbol = 'L';
+                this.setSymbol('L');
             }
             else
             {
-                this.symbol = 'l';
+                this.setSymbol('l');
             }
 
         }
         else if (("Water".equals(this.tileEngimon.getElmt1()) && "Ice".equals(this.tileEngimon.getElmt2())) ||
                 ("Ice".equals(this.tileEngimon.getElmt1()) && "Water".equals(this.tileEngimon.getElmt2())))
         {
-            if (this.tileEngimon.getLevel() > wild_engimon.playerHighestPokemon)
+            if (this.tileEngimon.getLevel() > tile.activeEngimonLevel)
             {
-                this.symbol = 'S';
+                this.setSymbol('S');
             }
             else
             {
-                this.symbol = 's';
+                this.setSymbol('s');
             }
 
         }
@@ -197,79 +236,79 @@ public class tile {
         else if (("Water".equals(this.tileEngimon.getElmt1()) && "Ground".equals(this.tileEngimon.getElmt2())) ||
                 ("Ground".equals(this.tileEngimon.getElmt1()) && "Water".equals(this.tileEngimon.getElmt2())))
         {
-            if (this.tileEngimon.getLevel() > wild_engimon.playerHighestPokemon)
+            if (this.tileEngimon.getLevel() > tile.activeEngimonLevel)
             {
-                this.symbol = 'N';
+                this.setSymbol('N');
             }
             else
             {
-                this.symbol = 'n';
+                this.setSymbol('n');
             }
 
         }
 
         else if ("Fire".equals( this.tileEngimon.getElmt1()))
         {
-            if (this.tileEngimon.getLevel() > wild_engimon.playerHighestPokemon)
+            if (this.tileEngimon.getLevel() > tile.activeEngimonLevel)
             {
-                this.symbol = 'F';
+                this.setSymbol('F');
             }
             else
             {
-                this.symbol = 'f';
+                this.setSymbol('f');
             }
 
         }
         else if ("Water".equals( this.tileEngimon.getElmt1()))
         {
-            if (this.tileEngimon.getLevel() > wild_engimon.playerHighestPokemon)
+            if (this.tileEngimon.getLevel() > tile.activeEngimonLevel)
             {
-                this.symbol = 'W';
+                this.setSymbol('W');
             }
             else
             {
-                this.symbol = 'w';
+                this.setSymbol('w');
             }
 
         }
         else if ("Electric".equals( this.tileEngimon.getElmt1()))
         {
-            if (this.tileEngimon.getLevel() > wild_engimon.playerHighestPokemon)
+            if (this.tileEngimon.getLevel() > tile.activeEngimonLevel)
             {
-                this.symbol = 'E';
+                this.setSymbol('E');
             }
             else
             {
-                this.symbol = 'e';
+                this.setSymbol('e');
             }
         }
 
         else if ("Ground".equals( this.tileEngimon.getElmt1()))
         {
-            if (this.tileEngimon.getLevel() > wild_engimon.playerHighestPokemon)
+            if (this.tileEngimon.getLevel() > tile.activeEngimonLevel)
             {
-                this.symbol = 'G';
+                this.setSymbol('G');
             }
             else
             {
-                this.symbol = 'g';
+                this.setSymbol('g');
             }
         }
 
         else if ("Ice".equals( this.tileEngimon.getElmt1()))
         {
-            if (this.tileEngimon.getLevel() > wild_engimon.playerHighestPokemon)
+            if (this.tileEngimon.getLevel() > tile.activeEngimonLevel)
             {
-                this.symbol = 'I';
+                this.setSymbol('I');
             }
             else
             {
-                this.symbol = 'i';
+                this.setSymbol('i');
             }
         }
         else
         {
-            this.symbol = '?';
+            this.setSymbol('?');
         }
     }
 

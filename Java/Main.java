@@ -21,6 +21,7 @@ public class Main   {
     static void resolveMove(player P, gameMap g, player tempP)
     {
         Integer winBattle;
+        wild_engimon.setPlayerHighestPokemon(P.getHighestLevelEngimon());
         if (g.isTileOccupied(P.getPlayerPosX(),P.getPlayerPosY()))
         {
             System.out.println("Battle");
@@ -44,7 +45,7 @@ public class Main   {
 
         try
         {
-            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
+            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY(), P);
         }
         catch(Exception e)
         {
@@ -149,9 +150,9 @@ public class Main   {
         System.out.println(P.getName()+ ", you are now ready, step in to the world of engimon");
         try
         {
-            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
+            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY(), P);
             g.generateEngimon();
-            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY());
+            g.updateMap(P.getPlayerPosX(),P.getPlayerPosY(),P.getActivePetPosX(),P.getActivePetPosY(), P);
             g.printMap();
         }
         catch(Exception e)
@@ -161,6 +162,7 @@ public class Main   {
             return;
         }
 
+        map_visualizer m = new map_visualizer(g);
         Scanner sc = new Scanner(System.in);
         userInput = sc.nextLine();
         while (userInput !="exit")

@@ -11,6 +11,8 @@ public class player{
 	protected engimonInventory engimon_inventory;
 	protected skillInventory skill_inventory;
 
+
+
 	public player()
 	{
 		this.name = "null";
@@ -302,6 +304,8 @@ public class player{
 		}
 
 		this.engimon_inventory.getContents().get(index).setActive();
+		tile.setActiveEngimonLevel(this.getActiveEngimon().getLevel());
+
 	}
 
 	public void switchOutEngimon()

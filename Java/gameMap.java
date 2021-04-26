@@ -264,6 +264,12 @@ public class gameMap {
 
     }
 
+    public void updateMap(int player_x, int player_y, int active_x, int active_y, player P) throws Exception
+    {
+        this.updateMap(player_x, player_y, active_x, active_y);
+        this.tile_map.elementAt(active_y).elementAt(active_x).activeEngimonIsHere(P.getActiveEngimon());
+    }
+
     public void deleteTileEngimon(int x, int y)
     {
         if (!(tile_map.elementAt(y).elementAt(x).isPlayerHere() || tile_map.elementAt(y).elementAt(x).isactiveEngimonHere())
@@ -309,7 +315,10 @@ public class gameMap {
         }
 
     }
-    public Boolean isTileOccupied(int x, int y){ return tile_map.elementAt(y).elementAt(x).haveWildEngimon(); }
+    public Boolean isTileOccupied(int x, int y)
+    {
+        return (tile_map.elementAt(y).elementAt(x).haveWildEngimon() && !tile_map.elementAt(y).elementAt(x).getEngimon().isActive());
+    }
 
     public int getMapLength(){ return this.mapLength; }
     public int getMapWidth(){ return this.mapWidth; }
